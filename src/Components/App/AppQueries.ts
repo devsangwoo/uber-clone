@@ -8,6 +8,10 @@ export const IS_LOGGED_IN = gql`
 	}
 `;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 58f39ad... [#1] router enviroment setting
 export const GET_CURRENT_USER = gql`
 	query {
 		GetCurrentUser {
@@ -20,6 +24,11 @@ export const GET_CURRENT_USER = gql`
 	}
 `;
 
+<<<<<<< HEAD
+=======
+>>>>>>> 37ade45... [#1] dev env setting
+=======
+>>>>>>> 58f39ad... [#1] router enviroment setting
 export const USER_LOG_OUT = gql`
 	mutation logOut {
 		userLogOut @client

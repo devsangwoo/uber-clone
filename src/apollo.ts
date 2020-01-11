@@ -39,7 +39,15 @@ const client = new ApolloClient({
 			}
 		});
 	},
+<<<<<<< HEAD
+<<<<<<< HEAD
 	uri: "http://localhost:4000/graphql"
+=======
+	uri: "https://localhost:4000/graphql"
+>>>>>>> 37ade45... [#1] dev env setting
+=======
+	uri: "http://localhost:4000/graphql"
+>>>>>>> 58f39ad... [#1] router enviroment setting
 });
 
 export default client;
