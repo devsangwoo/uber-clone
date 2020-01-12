@@ -24,6 +24,11 @@
     "styled-reset": "^4.0.9",
     "typescript": "~3.7.2"
   },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "./scripts/add_issue_number_into_commit.sh $HUSKY_GIT_PARAMS"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

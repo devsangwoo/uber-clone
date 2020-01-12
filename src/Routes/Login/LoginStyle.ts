@@ -28,7 +28,21 @@ export const Logo = styled.div`
 	font-size: 25px;
 `;
 
-export const PhoneLoginDiv = styled.div`
+export const Title = styled.h1``;
+
+export const Footer = styled.div``;
+
+export const SubTitle = styled.h2`
+	font-size: 30px;
+`;
+
+export const FakeInput = styled.div`
+	margin: 50px 0px;
+	font-size: 25px;
+	font-weight: 300;
+`;
+
+export const PhoneLogin = styled.div`
 	padding: 20px;
 	cursor: pointer;
 `;
@@ -39,10 +53,12 @@ export const SocialLink = styled.span`
 	cursor: pointer;
 `;
 
-export const Title = styled.h1``;
+export const Grey = styled.span`
+	color: ${props => props.theme.greyColor};
+	margin-left: 10px;
+`;
 
-export const Footer = styled.div``;
-
-export const SubTitle = styled.h2`
-	font-size: 30px;
+export const SocialLogin = styled.div`
+	border-top: 1px solid ${props => props.theme.greyColor};
+	padding: 30px 20px;
 `;

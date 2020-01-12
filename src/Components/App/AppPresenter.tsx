@@ -11,7 +11,7 @@ import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import AddPlace from "../../Routes/AddPlace";
 import EditAccount from "../../Routes/EditAccount";
 import Home from "../../Routes/Home";
-import OutHome from "../../Routes/OutHome";
+import Login from "../../Routes/Login";
 import PhoneLogin from "../../Routes/PhoneLogin";
 import Places from "../../Routes/Places";
 import Ride from "../../Routes/Ride";
@@ -48,7 +48,7 @@ const AppPresenter: React.FC<IProps> = ({ isLoggedIn }) => {
 
 const LoggedOutRoutes: React.FC = () => (
 	<Switch>
-		<Route path={"/"} exact component={OutHome} />
+		<Route path={"/"} exact component={Login} />
 		<Route path={"/phone-login"} exact component={PhoneLogin} />
 		<Route path={"/verify-phone/:number"} exact component={VerifyPhone} />
 		<Route path={"/social-login"} exact component={SocialLogin} />
