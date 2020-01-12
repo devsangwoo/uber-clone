@@ -35,7 +35,6 @@ interface IProps {
 <<<<<<< HEAD
 const AppPresenter: React.FC<IProps> = ({ isLoggedIn }) => {
 	// const [logOut, { data, error, client }] = useMutation(USER_LOG_OUT);
-
 	return (
 		<BrowserRouter>
 			{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}

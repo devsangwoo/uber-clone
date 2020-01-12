@@ -3,11 +3,9 @@ import "styled-components";
 // and extend them!
 declare module "styled-components" {
 	export interface DefaultTheme {
-		borderRadius: string;
-
-		colors: {
-			main: string;
-			secondary: string;
-		};
+		blueColor: string;
+		greyColor: string;
+		yellowColor: string;
+		greenColor: string;
 	}
 }
