@@ -20,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "src", "src/Components/.Form"
+    "src", "src/Components/Form"
   ]
 }

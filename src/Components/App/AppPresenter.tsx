@@ -20,12 +20,17 @@ import VerifyPhone from "../../Routes/VerifyPhone";
 import SocialLogin from "../../Routes/SocialLogin";
 import FindAddress from "../../Routes/FindAddress";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { useMutation } from "@apollo/react-hooks";
 import { USER_LOG_OUT } from "./AppQueries";
 >>>>>>> 37ade45... [#1] dev env setting
 =======
 >>>>>>> 58f39ad... [#1] router enviroment setting
+=======
+import { useMutation } from "@apollo/react-hooks";
+import { USER_LOG_OUT } from "./AppQueries.local";
+>>>>>>> d32f194... [#4]Verification Done
 
 interface IProps {
 	isLoggedIn: boolean;
@@ -34,15 +39,14 @@ interface IProps {
 <<<<<<< HEAD
 <<<<<<< HEAD
 const AppPresenter: React.FC<IProps> = ({ isLoggedIn }) => {
-	// const [logOut, { data, error, client }] = useMutation(USER_LOG_OUT);
+	const [logOut, { data, error, client }] = useMutation(USER_LOG_OUT);
 	return (
 		<BrowserRouter>
 			{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+			<div>
+				{isLoggedIn && <button onClick={() => logOut()}>logout</button>}
+			</div>
 		</BrowserRouter>
-		// <div>
-		// 	<div>You are {isLoggedIn ? "In" : "Out"}</div>
-		// 	{isLoggedIn && <button onClick={() => logOut()}>logout</button>}
-		// </div>
 	);
 };
 

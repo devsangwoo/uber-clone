@@ -20,8 +20,8 @@ export const IS_LOGGED_IN = gql`
 // 	}
 // `;
 
-// export const USER_LOG_OUT = gql`
-// 	mutation logOut {
-// 		userLogOut @client
-// 	}
-// `;
+export const USER_LOG_OUT = gql`
+	mutation userLogOut {
+		userLogOut @client
+	}
+`;

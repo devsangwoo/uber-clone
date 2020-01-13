@@ -7,22 +7,28 @@ import { useTitle } from "../../hooks";
 interface IProps {
 	value: string;
 	onChange: (event: React.ChangeEvent<Element>) => any;
-	onSubmit: (event: React.FormEvent<Element>) => void;
+	submitFn: any;
+	loading: boolean;
 }
 
 const VerifyPhonePresenter: React.FC<IProps> = ({
 	value,
 	onChange,
-	onSubmit
+	submitFn,
+	loading
 }) => {
 	useTitle("Verify Phone | Nuber");
 	return (
 		<S.Container>
 			<Header backTo="/phone-login" title={"Verify Phone Number"} />
-			<S.Form onSubmit={onSubmit}>
+			<S.FormExtended submitFn={submitFn}>
 				<S.InputExtended value={value} onChange={onChange} />
-				<Button value={"submit"} onClick={onSubmit} />
-			</S.Form>
+				<Button
+					value={loading ? "verifying..." : "submit"}
+					onClick={submitFn}
+					disabled={loading}
+				/>
+			</S.FormExtended>
 		</S.Container>
 	);
 };
