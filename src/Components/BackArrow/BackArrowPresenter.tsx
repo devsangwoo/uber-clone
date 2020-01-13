@@ -1,8 +1,7 @@
 import React from "react";
 import * as S from "./BackArrowStyle";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import BackArrow from "../../icons/BackArrow";
+import { ReactComponent as BackArrow } from "../../assets/icons/backArrow.svg";
 
 interface IProps {
 	backTo: string;
@@ -17,10 +16,6 @@ const BackArrowPresenter: React.FC<IProps> = ({ backTo, className }) => {
 			</Link>
 		</S.Container>
 	);
-};
-
-BackArrowPresenter.propTypes = {
-	backTo: PropTypes.string.isRequired
 };
 
 export default BackArrowPresenter;

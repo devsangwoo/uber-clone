@@ -50,7 +50,7 @@ const LoggedOutRoutes: React.FC = () => (
 	<Switch>
 		<Route path={"/"} exact component={Login} />
 		<Route path={"/phone-login"} exact component={PhoneLogin} />
-		<Route path={"/verify-phone/:number"} exact component={VerifyPhone} />
+		<Route path={"/verify-phone"} exact component={VerifyPhone} />
 		<Route path={"/social-login"} exact component={SocialLogin} />
 		<Redirect path={"*"} to={"/"} />
 	</Switch>
