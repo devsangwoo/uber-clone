@@ -1,48 +1,40 @@
-import React, { ReactEventHandler } from "react";
-import PhoneLoginPresenter from "./PhoneLoginPresenter";
-import { useInput } from "../../hooks";
-import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
-import { VERIFY_PHONE } from "./PhoneLoginQueries";
-import { PhoneVerification, PhoneVerificationVariables } from "../../types/api";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { MutationUpdaterFn } from "apollo-boost";
+import { toast } from "react-toastify";
+import { useInput } from "../../hooks";
+import { PhoneVerification, PhoneVerificationVariables } from "../../types/api";
+import PhoneLoginPresenter from "./PhoneLoginPresenter";
+import { VERIFY_PHONE } from "./PhoneLoginQueries";
 
 const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
 	const [phoneNumber, onInputChange] = useInput("", /^[0-9]*$/);
 	const [countryCode, onSelectChange] = useInput("+33");
+	const phoneNumberWithCode = `${countryCode}${phoneNumber}`;
+
 	const [verifyPhoneMutation, { loading }] = useMutation<
 		PhoneVerification,
 		PhoneVerificationVariables
-	>(VERIFY_PHONE);
-
-	const fullPhoneNumber = `${countryCode}${phoneNumber}`;
-	const onSubmitUpdate: MutationUpdaterFn = (_, result: any) => {
-		const data: PhoneVerification = result.data;
-		const { res, error } = data.PhoneVerification;
-		if (res) {
-			toast.success("SMS has been sent with verification code", {
-				autoClose: 1900
-			});
-			setTimeout(() => {
-				history.push({
-					pathname: "/verify-phone",
-					state: { phoneNumber: fullPhoneNumber }
+	>(VERIFY_PHONE, {
+		onCompleted: ({ PhoneVerification: PhoneVerificationResult }) => {
+			const { res, error } = PhoneVerificationResult;
+			if (res) {
+				toast.success("SMS has been sent with verification code", {
+					autoClose: 1900
 				});
-			}, 2000);
-		} else {
-			toast.error(error);
-		}
-	};
-
-	const onSubmit: ReactEventHandler<HTMLFormElement> = event => {
-		event.preventDefault();
-		const fullPhoneNumber = `${countryCode}${phoneNumber}`;
-		verifyPhoneMutation({
-			variables: { phoneNumber: fullPhoneNumber },
-			update: onSubmitUpdate
-		});
-	};
+				setTimeout(() => {
+					history.push({
+						pathname: "/verify-phone",
+						state: { phoneNumber: phoneNumberWithCode }
+					});
+				}, 2000);
+			} else {
+				toast.error(error);
+				history.push("/phone-login");
+			}
+		},
+		variables: { phoneNumber: phoneNumberWithCode }
+	});
 
 	return (
 		<PhoneLoginPresenter
@@ -50,7 +42,7 @@ const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
 			phoneNumber={phoneNumber}
 			onInputChange={onInputChange}
 			onSelectChange={onSelectChange}
-			onSubmit={onSubmit}
+			onSubmit={verifyPhoneMutation}
 			loading={loading}
 		/>
 	);

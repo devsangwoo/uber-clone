@@ -1,6 +1,6 @@
 import React from "react";
-import * as S from "./HeaderStyle";
 import BackArrow from "../BackArrow";
+import * as S from "./HeaderStyle";
 
 interface IProps {
 	title: string;

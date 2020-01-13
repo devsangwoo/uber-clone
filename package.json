@@ -20,6 +20,7 @@
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-sidebar": "^3.0.2",
     "react-toastify": "^5.5.0",
     "styled-components": "^4.4.1",
     "styled-reset": "^4.0.9",
@@ -54,6 +55,10 @@
     ]
   },
   "devDependencies": {
+    "@types/react-facebook-login": "^4.1.1",
+    "@types/react-sidebar": "^3.0.0",
+    "react-facebook-login": "^4.1.1",
+    "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.1.0"
   }

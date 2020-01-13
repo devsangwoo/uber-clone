@@ -1,13 +1,31 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
-// import * as S from "./HomeStyle";
+import SideBar from "react-sidebar";
+import * as S from "./HomeStyle";
 
-interface IProps extends RouteComponentProps {}
+interface IProps {
+	openStatus: boolean;
+	toggleSideBar: () => void;
+}
 
-const HomePresenter: React.FC<IProps> = () => {
-	return <div>HomePresenter</div>;
+const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
+	return (
+		<S.Contaier>
+			<SideBar
+				sidebar={<h1>sidebar</h1>}
+				open={openStatus}
+				onSetOpen={toggleSideBar}
+				styles={{
+					sidebar: {
+						backgroundColor: "white",
+						width: "80%",
+						zIndex: "10"
+					}
+				}}
+			>
+				<button onClick={toggleSideBar}>close</button>
+			</SideBar>
+		</S.Contaier>
+	);
 };
-
-HomePresenter.propTypes = {};
 
 export default HomePresenter;

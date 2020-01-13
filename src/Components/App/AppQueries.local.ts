@@ -7,21 +7,3 @@ export const IS_LOGGED_IN = gql`
 		}
 	}
 `;
-
-// export const GET_CURRENT_USER = gql`
-// 	query {
-// 		GetCurrentUser {
-// 			res
-// 			error
-// 			user {
-// 				fullName
-// 			}
-// 		}
-// 	}
-// `;
-
-export const USER_LOG_OUT = gql`
-	mutation userLogOut {
-		userLogOut @client
-	}
-`;

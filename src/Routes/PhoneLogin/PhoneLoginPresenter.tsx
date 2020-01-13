@@ -1,10 +1,11 @@
 import React from "react";
+import { ReactComponent as Loading } from "../../assets/icons/loading.svg";
+import { ReactComponent as NextArrow } from "../../assets/icons/nextArrow.svg";
+import Form from "../../Components/Form";
 import Input from "../../Components/Input";
 import countries from "../../countries";
-import * as S from "./PhoneLoginStyle";
-import { ReactComponent as NextArrow } from "../../assets/icons/nextArrow.svg";
-import { ReactComponent as Loading } from "../../assets/icons/loading.svg";
 import { useTitle } from "../../hooks";
+import * as S from "./PhoneLoginStyle";
 
 interface IProps {
 	countryCode: string;
@@ -15,7 +16,7 @@ interface IProps {
 	onSelectChange: (
 		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => void;
-	onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+	onSubmit: any;
 	loading: boolean;
 }
 
@@ -43,7 +44,7 @@ const PhoneLoginPresenter: React.FC<IProps> = ({
 					</S.CountryOption>
 				))}
 			</S.CountrySelect>
-			<S.Form onSubmit={onSubmit}>
+			<Form submitFn={onSubmit}>
 				<Input
 					placeholder={"06 52 36 03 78"}
 					value={phoneNumber}
@@ -51,7 +52,7 @@ const PhoneLoginPresenter: React.FC<IProps> = ({
 					onChange={onInputChange}
 				/>
 				<S.Button>{loading ? <Loading /> : <NextArrow />}</S.Button>
-			</S.Form>
+			</Form>
 		</S.Container>
 	);
 };

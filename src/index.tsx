@@ -1,8 +1,8 @@
+import { ApolloProvider } from "@apollo/react-hooks";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./Components/App";
-import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./apollo";
+import App from "./Components/App";
 import GlobalStyle from "./globalStyle";
 
 ReactDOM.render(

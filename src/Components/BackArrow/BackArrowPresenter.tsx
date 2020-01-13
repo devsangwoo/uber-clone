@@ -1,7 +1,7 @@
 import React from "react";
-import * as S from "./BackArrowStyle";
 import { Link } from "react-router-dom";
 import { ReactComponent as BackArrow } from "../../assets/icons/backArrow.svg";
+import * as S from "./BackArrowStyle";
 
 interface IProps {
 	backTo: string;

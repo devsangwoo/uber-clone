@@ -1,4 +1,4 @@
-import { useEffect, useState, ReactEventHandler } from "react";
+import { ReactEventHandler, useEffect, useState } from "react";
 
 export const useTitle = (initialTitle: string) => {
 	const [title, setTitle] = useState(initialTitle);
@@ -15,7 +15,7 @@ export const useTitle = (initialTitle: string) => {
 
 export const useInput = (
 	initialValue: string,
-	validator?: Function | RegExp
+	validator?: ((arg: string) => boolean) | RegExp
 ): [string, (event: React.ChangeEvent) => any] => {
 	const [value, setValue] = useState(initialValue);
 
@@ -23,23 +23,21 @@ export const useInput = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
 		const {
-			target: { value }
+			target: { value: inputValue }
 		} = event;
 
-		let isValidValue = true;
+		let isValidValue: boolean = true;
 		if (validator) {
 			if (typeof validator === "function") {
-				isValidValue = validator(value);
+				isValidValue = validator(inputValue);
 			} else {
-				isValidValue = validator.test(value);
+				isValidValue = validator.test(inputValue);
 			}
 		}
 		if (isValidValue) {
-			setValue(value);
+			setValue(inputValue);
 		}
 	};
-
-	// const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {};
 
 	return [value, onChange];
 };

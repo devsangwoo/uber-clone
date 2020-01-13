@@ -1,3 +1,3 @@
-import HeaderPresenter from './HeaderPresenter'
+import HeaderPresenter from "./HeaderPresenter";
 
-export default HeaderPresenter
+export default HeaderPresenter;

@@ -1,25 +1,25 @@
-import React from "react";
-import VerifyPhonePresenter from "./VerifyPhonePresenter";
-import { RouteComponentProps } from "react-router-dom";
-import { useInput } from "../../hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { VALIDATE_PHONE_VERIFICATION } from "./VerifyPhoneQueries";
+import React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useInput } from "../../hooks";
+import { USER_LOG_IN } from "../../SharedQueries.local";
 import {
 	ValidatePhoneVerification,
 	ValidatePhoneVerificationVariables
 } from "../../types/api";
-import { toast } from "react-toastify";
-import { USER_LOG_IN } from "../../SharedQueries";
+import VerifyPhonePresenter from "./VerifyPhonePresenter";
+import { VALIDATE_PHONE_VERIFICATION } from "./VerifyPhoneQueries";
 
 interface IProps extends RouteComponentProps {}
 
 const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
+	if (!location.state.phoneNumber) {
+		history.push("/phone-login");
+	}
 	const {
 		state: { phoneNumber }
 	} = location;
-	if (!phoneNumber) {
-		history.push("/phone-login");
-	}
 
 	const [code, setCode] = useInput("");
 
@@ -28,43 +28,26 @@ const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
 		ValidatePhoneVerification,
 		ValidatePhoneVerificationVariables
 	>(VALIDATE_PHONE_VERIFICATION, {
-		variables: {
-			phoneNumber,
-			key: code
-		},
 		onCompleted: ({ ValidatePhoneVerification: { res, error, token } }) => {
 			if (res) {
-				toast.success("verfied");
-				console.log(token);
-				// if (token) {
-				userLogInMutation({ variables: { token } });
-				// }
-				// if (token) {
-				// 	localStorage.setItem("X-JWT", token);
-				// 	// cache.writeData({
-				// 	// 	data: {
-				// 	// 		auth: {
-				// 	// 			__typename: "Auth",
-				// 	// 			isLoggedIn: true
-				// 	// 		}
-				// 	// 	}
-				// 	// });
-				// }
+				if (token) {
+					toast.success("verified");
+					userLogInMutation({ variables: { token } });
+				} else {
+					toast.error("verified, but no user found");
+					history.push({
+						pathname: "/phone-login"
+					});
+				}
 			} else {
 				toast.error(error);
 			}
+		},
+		variables: {
+			key: code,
+			phoneNumber
 		}
 	});
-
-	// const submitFn: React.FormEventHandler = event => {
-	// 	event.preventDefault();
-	// 	validateMutation({
-	// 		variables: {
-	// 			phoneNumber,
-	// 			key: code
-	// 		}
-	// 	});
-	// };
 
 	return (
 		<VerifyPhonePresenter

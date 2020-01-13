@@ -1,7 +1,7 @@
 import React from "react";
-import { RouteComponentProps, Link } from "react-router-dom";
-import * as S from "./LoginStyle";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { useTitle } from "../../hooks";
+import * as S from "./LoginStyle";
 
 interface IProps extends RouteComponentProps {}
 
