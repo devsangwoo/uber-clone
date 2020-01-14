@@ -1,29 +1,36 @@
 import React from "react";
 import SideBar from "react-sidebar";
+import Menu from "../../Components/Menu";
+import { GetCurrentUser_GetCurrentUser_user } from "../../types/api";
 import * as S from "./HomeStyle";
 
 interface IProps {
+	user?: GetCurrentUser_GetCurrentUser_user;
 	openStatus: boolean;
 	toggleSideBar: () => void;
 }
 
-const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
+const HomePresenter: React.FC<IProps> = ({
+	user,
+	openStatus,
+	toggleSideBar
+}) => {
 	return (
 		<S.Contaier>
-			{/* <SideBar
-				sidebar={<h1>sidebar</h1>}
+			<SideBar
+				sidebar={<Menu />}
 				open={openStatus}
 				onSetOpen={toggleSideBar}
 				styles={{
 					sidebar: {
 						backgroundColor: "white",
-						width: "80%",
-						zIndex: "10"
+						width: "70%"
+						// zIndex: "10"
 					}
 				}}
 			>
-				<button onClick={toggleSideBar}>close</button>
-			</SideBar> */}
+				<button onClick={toggleSideBar}>sidebar</button>
+			</SideBar>
 		</S.Contaier>
 	);
 };

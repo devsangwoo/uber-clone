@@ -3,6 +3,24 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ToggleDrivingMode
+// ====================================================
+
+export interface ToggleDrivingMode_ToggleDrivingMode {
+	__typename: "ToggleDrivingModeResponse";
+	res: boolean;
+	error: string | null;
+}
+
+export interface ToggleDrivingMode {
+	ToggleDrivingMode: ToggleDrivingMode_ToggleDrivingMode;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: PhoneVerification
 // ====================================================
 
@@ -69,6 +87,37 @@ export interface ValidatePhoneVerification {
 export interface ValidatePhoneVerificationVariables {
 	phoneNumber: string;
 	key: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetCurrentUser
+// ====================================================
+
+export interface GetCurrentUser_GetCurrentUser_user {
+	__typename: "User";
+	fullName: string | null;
+	isDriving: boolean;
+	email: string | null;
+	verifiedEmail: boolean;
+	lastName: string;
+	phoneNumber: string | null;
+	verifiedPhoneNumber: boolean;
+	profilePhoto: string | null;
+}
+
+export interface GetCurrentUser_GetCurrentUser {
+	__typename: "GetCurrentUserResponse";
+	res: boolean;
+	error: string | null;
+	user: GetCurrentUser_GetCurrentUser_user | null;
+}
+
+export interface GetCurrentUser {
+	GetCurrentUser: GetCurrentUser_GetCurrentUser;
 }
 
 /* tslint:disable */

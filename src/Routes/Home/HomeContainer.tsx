@@ -1,13 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
+import { GET_CURRENT_USER } from "../../SharedQueries";
 import HomePresenter from "./HomePresenter";
-import { GET_CURRENT_USER } from "./HomeQueries";
 
 interface IProps {}
 
 const HomeContainer: React.FC = () => {
-	const { data } = useQuery(GET_CURRENT_USER);
-	console.log(data);
+	const { data, loading } = useQuery(GET_CURRENT_USER);
 	const [isSideOpen, setIsSideOpen] = useState(false);
 
 	const toggleSideBar = () => {
@@ -15,7 +14,11 @@ const HomeContainer: React.FC = () => {
 	};
 
 	return (
-		<HomePresenter openStatus={isSideOpen} toggleSideBar={toggleSideBar} />
+		<HomePresenter
+			user={loading ? null : data.GetCurrentUser.user}
+			openStatus={isSideOpen}
+			toggleSideBar={toggleSideBar}
+		/>
 	);
 };
 

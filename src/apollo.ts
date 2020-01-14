@@ -21,6 +21,7 @@ const client = new ApolloClient({
 							}
 						}
 					});
+					console.log(cache);
 				},
 				userLogOut: (_, __, { cache }) => {
 					localStorage.removeItem("X-JWT");
@@ -32,6 +33,7 @@ const client = new ApolloClient({
 							}
 						}
 					});
+					console.log(cache);
 				}
 			}
 		}

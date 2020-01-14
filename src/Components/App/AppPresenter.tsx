@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 <<<<<<< HEAD
 import PropTypes from "prop-types";
@@ -40,8 +39,11 @@ import { USER_LOG_OUT } from "./AppQueries.local";
 >>>>>>> d32f194... [#4]Verification Done
 =======
 import VerifyPhone from "../../Routes/VerifyPhone";
+<<<<<<< HEAD
 import { USER_LOG_OUT } from "../../SharedQueries.local";
 >>>>>>> c002051... [#4] refactored with lint
+=======
+>>>>>>> 2814b30... [#4]sidebar done
 
 interface IProps {
 	isLoggedIn: boolean;
@@ -50,20 +52,9 @@ interface IProps {
 <<<<<<< HEAD
 <<<<<<< HEAD
 const AppPresenter: React.FC<IProps> = ({ isLoggedIn }) => {
-	const [logOut, { data, error, client }] = useMutation(USER_LOG_OUT);
 	return (
 		<BrowserRouter>
 			{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
-			<div>
-				{isLoggedIn && (
-					<button
-						style={{ marginTop: "20px", width: "100%" }}
-						onClick={() => logOut()}
-					>
-						logout
-					</button>
-				)}
-			</div>
 		</BrowserRouter>
 	);
 };
