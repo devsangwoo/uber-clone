@@ -34,9 +34,10 @@ const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
 					toast.success("verified");
 					userLogInMutation({ variables: { token } });
 				} else {
-					toast.error("verified, but no user found");
+					toast.success("verified, but should sign up first");
 					history.push({
-						pathname: "/phone-login"
+						pathname: "/sign-up",
+						state: { phoneNumber }
 					});
 				}
 			} else {

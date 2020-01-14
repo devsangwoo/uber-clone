@@ -10,7 +10,7 @@ interface IProps {
 const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
 	return (
 		<S.Contaier>
-			<SideBar
+			{/* <SideBar
 				sidebar={<h1>sidebar</h1>}
 				open={openStatus}
 				onSetOpen={toggleSideBar}
@@ -23,7 +23,7 @@ const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
 				}}
 			>
 				<button onClick={toggleSideBar}>close</button>
-			</SideBar>
+			</SideBar> */}
 		</S.Contaier>
 	);
 };

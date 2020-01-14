@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.input`
+export const Input = styled.input`
 	border: none;
 	border-bottom: 2px solid ${props => props.theme.greyColor};
 	font-size: 20px;
 	width: 100%;
-	padding-bottom: 10px;
+	padding: 20px 0px 3px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-weight: 500;
 	transition: border-bottom 0.1s linear;
 	&:-webkit-autofill {

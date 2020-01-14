@@ -20,7 +20,7 @@ const InputPresenter: React.SFC<IProps> = ({
 	onChange,
 	className
 }) => (
-	<S.Container
+	<S.Input
 		className={className}
 		onChange={onChange}
 		name={name}
