@@ -7,6 +7,7 @@ export const EDIT_USER = gql`
 		$email: String
 		$password: String
 		$phoneNumber: String
+		$profilePhoto: String
 	) {
 		UpdateCurrentUser(
 			firstName: $firstName
@@ -14,6 +15,7 @@ export const EDIT_USER = gql`
 			email: $email
 			password: $password
 			phoneNumber: $phoneNumber
+			profilePhoto: $profilePhoto
 		) {
 			res
 			error

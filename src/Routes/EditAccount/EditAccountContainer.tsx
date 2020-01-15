@@ -9,6 +9,7 @@ import {
 	UpdateCurrentUser,
 	UpdateCurrentUserVariables
 } from "../../types/api";
+import { fileUploader } from "../../utils/fileUploader";
 import EditAccountPresenter from "./EditAccountPresenter";
 import { EDIT_USER } from "./EditAccountQueries";
 
@@ -21,8 +22,11 @@ export interface IUserProps {
 interface IProps extends RouteComponentProps {}
 
 const EditAccountContainer: React.FC<IProps> = ({ history }) => {
-	const { data, loading } = useQuery<GetCurrentUser>(GET_CURRENT_USER);
+	const { data, loading } = useQuery<GetCurrentUser>(GET_CURRENT_USER, {
+		fetchPolicy: "cache-and-network"
+	});
 	const userProps: IUserProps[] = [
+		{ key: "profilePhoto", label: "photo" },
 		{ key: "firstName", label: "First Name" },
 		{ key: "lastName", label: "Last Name" },
 		{ key: "email", label: "Email" },
@@ -41,25 +45,25 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 	});
 	// useState way
 	const [inputState, setInputState] = useState(initialState);
+	const [uploading, setUploading] = useState(false);
 
-	// useReducer way
-	// const [userInput, setUserInput] = useReducer(
-	// 	(state, newState) => ({...state, ...newState}),
-	// 	{
-	// 	firstName: '',
-	// 	lastName: '',
-	// 	phoneNumber: '',
-	// 	}
-	//   );
-	const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleChange = async (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const {
-			target: { value: newValue, name: nameOfInput }
+			target: { value: newValue, name: nameOfInput, files }
 		} = event;
-
-		// useState way
-		setInputState({ ...inputState, [nameOfInput]: newValue });
-		// useReducer way
-		// setUserInput({[nameOfInput]: newValue});
+		if (files) {
+			setUploading(true);
+			const photoUrl = await fileUploader(files);
+			if (photoUrl) {
+				setUploading(false);
+				setInputState({ ...inputState, profilePhoto: photoUrl });
+			}
+		} else {
+			// useState way
+			setInputState({ ...inputState, [nameOfInput]: newValue });
+		}
 	};
 
 	// for initialize the input
@@ -67,13 +71,20 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 		if (data && data.GetCurrentUser && data.GetCurrentUser.user) {
 			const userData: GetCurrentUser_GetCurrentUser_user =
 				data.GetCurrentUser.user;
-			const { firstName, lastName, email, phoneNumber } = userData;
+			const {
+				firstName,
+				lastName,
+				email,
+				phoneNumber,
+				profilePhoto
+			} = userData;
 			setInputState({
 				...inputState,
 				email: email || "",
 				firstName,
 				lastName,
-				phoneNumber: phoneNumber || ""
+				phoneNumber: phoneNumber || "",
+				profilePhoto: profilePhoto || ""
 			});
 		}
 	}, [data, loading]);
@@ -91,43 +102,17 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 				toast.error(error);
 			}
 		},
-		// update: async (caches, { data }) => {
-		// 	if (data) {
-		// 		const mutationResult: UpdateCurrentUser_UpdateCurrentUser =
-		// 			data.UpdateCurrentUser;
-		// 		const { res, error } = mutationResult;
-		// 		if (res) {
-		// 			const queryInCaches: any = caches.readQuery({
-		// 				query: GET_CURRENT_USER
-		// 			});
-		// 			console.log(queryInCaches);
-		// 			if (
-		// 				queryInCaches &&
-		// 				queryInCaches.GetCurrentUser &&
-		// 				queryInCaches.GetCurrentUser.user
-		// 			) {
-		// 				queryInCaches.GetCurrentUser.user.isDriving = !queryInCaches
-		// 					.GetCurrentUser.user.isDriving;
-		// 			}
-		// 			await caches.writeQuery({
-		// 				data: queryInCaches,
-		// 				query: GET_CURRENT_USER
-		// 			});
-		// 			history.push("/");
-		// 			console.log(caches);
-		// 		} else {
-		// 			toast.error(error);
-		// 		}
-		// 	}
-		// }
 		refetchQueries: () => [{ query: GET_CURRENT_USER }]
 	});
 
 	const submitFn = () => {
+		// should fix
 		if (
-			inputState.password &&
-			inputState.passwordConfirm &&
-			inputState.password !== inputState.passwordConfirm
+			(!inputState.password && inputState.passwordConfirm) ||
+			(inputState.password && !inputState.passwordConfirm) ||
+			(inputState.password &&
+				inputState.passwordConfirm &&
+				inputState.password !== inputState.passwordConfirm)
 		) {
 			toast.error("You typed different password, please check again");
 			return;
@@ -147,6 +132,7 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 			userProps={userProps}
 			inputProps={inputState}
 			onChangeHandler={onHandleChange}
+			uploading={uploading}
 		/>
 	);
 };

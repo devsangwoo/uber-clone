@@ -17,13 +17,14 @@ const MenuContainer: React.FC = () => {
 		{
 			// refetchQueries: () => [{ query: GET_CURRENT_USER }]
 			// much safer below, I don't know yet
-			update: (caches, { data }) => {
-				if (data) {
-					const mutationResult: ToggleDrivingMode_ToggleDrivingMode =
-						data.ToggleDrivingMode;
+			update: (cache, { data: ToggleDrivingModeResult }) => {
+				if (ToggleDrivingModeResult) {
+					const {
+						ToggleDrivingMode: mutationResult
+					} = ToggleDrivingModeResult;
 					const { res, error } = mutationResult;
 					if (res) {
-						const queryInCaches: any = caches.readQuery({
+						const queryInCaches: any = cache.readQuery({
 							query: GET_CURRENT_USER
 						});
 						if (
@@ -34,7 +35,7 @@ const MenuContainer: React.FC = () => {
 							queryInCaches.GetCurrentUser.user.isDriving = !queryInCaches
 								.GetCurrentUser.user.isDriving;
 						}
-						caches.writeQuery({
+						cache.writeQuery({
 							data: queryInCaches,
 							query: GET_CURRENT_USER
 						});
