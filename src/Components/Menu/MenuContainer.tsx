@@ -12,14 +12,12 @@ import { TOGGLE_DRIVING_MODE } from "./MenuQueries";
 
 const MenuContainer: React.FC = () => {
 	const { data, loading } = useQuery(GET_CURRENT_USER);
-
 	const [toggleDrivingMutation] = useMutation<ToggleDrivingMode>(
 		TOGGLE_DRIVING_MODE,
 		{
 			// refetchQueries: () => [{ query: GET_CURRENT_USER }]
 			// much safer below, I don't know yet
 			update: (caches, { data }) => {
-				console.log(caches);
 				if (data) {
 					const mutationResult: ToggleDrivingMode_ToggleDrivingMode =
 						data.ToggleDrivingMode;

@@ -25,7 +25,6 @@ const VerifyPhonePresenter: React.FC<IProps> = ({
 				<S.InputExtended value={value} onChange={onChange} />
 				<Button
 					value={loading ? "verifying..." : "submit"}
-					onClick={submitFn}
 					disabled={loading}
 				/>
 			</S.FormExtended>

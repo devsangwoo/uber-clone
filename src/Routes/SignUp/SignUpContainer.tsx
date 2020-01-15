@@ -29,8 +29,7 @@ const SignUpContainer: React.FC<IProps> = ({ history, location }) => {
 		EmailSignUp,
 		EmailSignUpVariables
 	>(EMAIL_SIGN_UP, {
-		onCompleted: ({ EmailSignUp: EmailSignUpResult }) => {
-			const { res, error, token } = EmailSignUpResult;
+		onCompleted: ({ EmailSignUp: { res, error, token } }) => {
 			if (res) {
 				if (token) {
 					toast.success(`Welcome ${firstName}`);
@@ -38,6 +37,8 @@ const SignUpContainer: React.FC<IProps> = ({ history, location }) => {
 				} else {
 					toast.error("something went wrong!");
 				}
+			} else {
+				toast.error(error);
 			}
 		},
 		variables: {

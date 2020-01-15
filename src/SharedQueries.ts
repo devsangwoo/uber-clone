@@ -6,6 +6,8 @@ export const GET_CURRENT_USER = gql`
 			res
 			error
 			user {
+				firstName
+				lastName
 				fullName
 				isDriving
 				email

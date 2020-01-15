@@ -16,7 +16,11 @@ export const useTitle = (initialTitle: string) => {
 export const useInput = (
 	initialValue: string,
 	validator?: ((arg: string) => boolean) | RegExp
-): [string, (event: React.ChangeEvent) => any] => {
+): [
+	string,
+	(event: React.ChangeEvent) => any,
+	React.Dispatch<React.SetStateAction<string>>
+] => {
 	const [value, setValue] = useState(initialValue);
 
 	const onChange: ReactEventHandler = (
@@ -39,5 +43,5 @@ export const useInput = (
 		}
 	};
 
-	return [value, onChange];
+	return [value, onChange, setValue];
 };

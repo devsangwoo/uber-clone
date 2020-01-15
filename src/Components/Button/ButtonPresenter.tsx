@@ -3,7 +3,7 @@ import * as S from "./ButtonStyle";
 
 interface IProps {
 	value: string;
-	onClick: any;
+	onClick?: any;
 	disabled?: boolean;
 	className?: string;
 }

@@ -21,6 +21,32 @@ export interface ToggleDrivingMode {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UpdateCurrentUser
+// ====================================================
+
+export interface UpdateCurrentUser_UpdateCurrentUser {
+	__typename: "UpdateCurrentUserRespone";
+	res: boolean;
+	error: string | null;
+}
+
+export interface UpdateCurrentUser {
+	UpdateCurrentUser: UpdateCurrentUser_UpdateCurrentUser;
+}
+
+export interface UpdateCurrentUserVariables {
+	firstName?: string | null;
+	lastName?: string | null;
+	email?: string | null;
+	password?: string | null;
+	phoneNumber?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: PhoneVerification
 // ====================================================
 
@@ -99,11 +125,12 @@ export interface ValidatePhoneVerificationVariables {
 
 export interface GetCurrentUser_GetCurrentUser_user {
 	__typename: "User";
+	firstName: string;
+	lastName: string;
 	fullName: string | null;
 	isDriving: boolean;
 	email: string | null;
 	verifiedEmail: boolean;
-	lastName: string;
 	phoneNumber: string | null;
 	verifiedPhoneNumber: boolean;
 	profilePhoto: string | null;

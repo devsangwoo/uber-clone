@@ -5,16 +5,11 @@ import { GetCurrentUser_GetCurrentUser_user } from "../../types/api";
 import * as S from "./HomeStyle";
 
 interface IProps {
-	user?: GetCurrentUser_GetCurrentUser_user;
 	openStatus: boolean;
 	toggleSideBar: () => void;
 }
 
-const HomePresenter: React.FC<IProps> = ({
-	user,
-	openStatus,
-	toggleSideBar
-}) => {
+const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
 	return (
 		<S.Contaier>
 			<SideBar

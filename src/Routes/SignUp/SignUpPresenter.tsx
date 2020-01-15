@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../Components/Button";
 import Container from "../../Components/Container";
 import Header from "../../Components/Header";
@@ -59,10 +59,7 @@ const SignUpPresenter: React.FC<IProps> = ({
 					password,
 					passwordConfirm
 				])}
-				<Button
-					value={loading ? "In Progress" : "SignUp"}
-					onClick={submitFn}
-				/>
+				<Button value={loading ? "In Progress" : "SignUp"} />
 			</S.FromExtend>
 		</Container>
 	);
