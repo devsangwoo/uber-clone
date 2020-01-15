@@ -2,8 +2,9 @@ import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useInput } from "../../hooks";
+import Routes from "..";
 import { PhoneVerification, PhoneVerificationVariables } from "../../types/api";
+import { useInput } from "../../utils/hooks";
 import PhoneLoginPresenter from "./PhoneLoginPresenter";
 import { VERIFY_PHONE } from "./PhoneLoginQueries";
 
@@ -24,13 +25,13 @@ const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
 				});
 				setTimeout(() => {
 					history.push({
-						pathname: "/verify-phone",
+						pathname: Routes.VERIFY_PHONE,
 						state: { phoneNumber: phoneNumberWithCode }
 					});
 				}, 2000);
 			} else {
 				toast.error(error);
-				history.push("/phone-login");
+				history.push(Routes.PHONE_LOGIN);
 			}
 		},
 		variables: { phoneNumber: phoneNumberWithCode }

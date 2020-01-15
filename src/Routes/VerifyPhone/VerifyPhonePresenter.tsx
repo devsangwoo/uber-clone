@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../Components/Button";
 import Header from "../../Components/Header";
-import { useTitle } from "../../hooks";
+import { useTitle } from "../../utils/hooks";
 import * as S from "./VerifyPhoneStyle";
 
 interface IProps {

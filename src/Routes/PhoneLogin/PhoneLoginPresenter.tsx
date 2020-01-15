@@ -3,8 +3,8 @@ import { ReactComponent as Loading } from "../../assets/icons/loading.svg";
 import { ReactComponent as NextArrow } from "../../assets/icons/nextArrow.svg";
 import Form from "../../Components/Form";
 import Input from "../../Components/Input";
-import countries from "../../countries";
-import { useTitle } from "../../hooks";
+import countries from "../../utils/countries";
+import { useTitle } from "../../utils/hooks";
 import * as S from "./PhoneLoginStyle";
 
 interface IProps {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Routes from "../../Routes";
 import { GetCurrentUser_GetCurrentUser_user } from "../../types/api";
-
 import * as S from "./MenuStyle";
 
 interface IProps {
@@ -21,7 +21,7 @@ const MenuPresenter: React.FC<IProps> = ({
 				<React.Fragment>
 					<S.Header>
 						<S.Grid>
-							<Link to={"/edit-account"}>
+							<Link to={Routes.EDIT_ACCOUNT}>
 								<S.Image
 									src={
 										user.profilePhoto ||
@@ -35,8 +35,8 @@ const MenuPresenter: React.FC<IProps> = ({
 							</S.Text>
 						</S.Grid>
 					</S.Header>
-					<S.LinkExtend to="/trips">Your Trips</S.LinkExtend>
-					<S.LinkExtend to="/settings">Settings</S.LinkExtend>
+					<S.LinkExtend to={Routes.PLACES}>Your Trips</S.LinkExtend>
+					<S.LinkExtend to={Routes.SETTING}>Settings</S.LinkExtend>
 					<S.ToggleDriving
 						onClick={toggleDrivingFn}
 						isDriving={user.isDriving}

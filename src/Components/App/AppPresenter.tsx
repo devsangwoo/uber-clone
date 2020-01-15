@@ -11,7 +11,11 @@ import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
 =======
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+<<<<<<< HEAD
 >>>>>>> c002051... [#4] refactored with lint
+=======
+import Routes from "../../Routes";
+>>>>>>> 71fda50... [#4]refactactored
 import AddPlace from "../../Routes/AddPlace";
 import EditAccount from "../../Routes/EditAccount";
 import FindAddress from "../../Routes/FindAddress";
@@ -61,24 +65,24 @@ const AppPresenter: React.FC<IProps> = ({ isLoggedIn }) => {
 
 const LoggedOutRoutes: React.FC = () => (
 	<Switch>
-		<Route path={"/"} exact={true} component={Login} />
-		<Route path={"/phone-login"} component={PhoneLogin} />
-		<Route path={"/verify-phone"} component={VerifyPhone} />
-		<Route path={"/sign-up"} component={SignUp} />
-		<Route path={"/social-login"} component={SocialLogin} />
+		<Route paht={Routes.HOME} excat={true} component={Login} />
+		<Route paht={Routes.PHONE_LOGIN} component={PhoneLogin} />
+		<Route paht={Routes.VERIFY_PHONE} component={VerifyPhone} />
+		<Route paht={Routes.SIGN_UP} component={SignUp} />
+		<Route paht={Routes.SOCIAL_LOGIN} component={SocialLogin} />
 		<Redirect path={"*"} to={"/"} />
 	</Switch>
 );
 
 const LoggedInRoutes: React.FC = () => (
 	<Switch>
-		<Route path={"/"} exact={true} component={Home} />
-		<Route path={"/ride"} component={Ride} />
-		<Route path={"/edit-account"} component={EditAccount} />
-		<Route path={"/setting"} component={Settings} />
-		<Route path={"/places"} component={Places} />
-		<Route path={"/add-place"} component={AddPlace} />
-		<Route path={"/find-address"} component={FindAddress} />
+		<Route paht={Routes.HOME} excat={true} component={Home} />
+		<Route paht={Routes.RIDE} component={Ride} />
+		<Route paht={Routes.EDIT_ACCOUNT} component={EditAccount} />
+		<Route paht={Routes.SETTING} component={Settings} />
+		<Route paht={Routes.PLACES} component={Places} />
+		<Route paht={Routes.ADD_PLACE} component={AddPlace} />
+		<Route paht={Routes.FIND_ADDRESS} component={FindAddress} />
 		<Redirect path={"*"} to={"/"} />
 	</Switch>
 );

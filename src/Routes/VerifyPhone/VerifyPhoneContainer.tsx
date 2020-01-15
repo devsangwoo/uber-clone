@@ -2,12 +2,13 @@ import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useInput } from "../../hooks";
+import Routes from "..";
 import { USER_LOG_IN } from "../../SharedQueries.local";
 import {
 	ValidatePhoneVerification,
 	ValidatePhoneVerificationVariables
 } from "../../types/api";
+import { useInput } from "../../utils/hooks";
 import VerifyPhonePresenter from "./VerifyPhonePresenter";
 import { VALIDATE_PHONE_VERIFICATION } from "./VerifyPhoneQueries";
 
@@ -15,7 +16,7 @@ interface IProps extends RouteComponentProps {}
 
 const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
 	if (!location.state.phoneNumber) {
-		history.push("/phone-login");
+		history.push(Routes.PHONE_LOGIN);
 	}
 	const {
 		state: { phoneNumber }
@@ -36,7 +37,7 @@ const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
 				} else {
 					toast.success("verified, but should sign up first");
 					history.push({
-						pathname: "/sign-up",
+						pathname: Routes.SIGN_UP,
 						state: { phoneNumber }
 					});
 				}

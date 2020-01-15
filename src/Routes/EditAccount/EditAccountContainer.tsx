@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useEffect, useReducer, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
+import Routes from "..";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetCurrentUser,
@@ -97,7 +98,7 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 			const { res, error } = UpdateCurrentUserResult;
 			if (res) {
 				toast.success("Your accout info has been updated");
-				history.push("/");
+				history.push(Routes.HOME);
 			} else {
 				toast.error(error);
 			}

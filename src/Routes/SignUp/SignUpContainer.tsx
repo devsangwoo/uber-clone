@@ -2,9 +2,10 @@ import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useInput } from "../../hooks";
+import Routes from "..";
 import { USER_LOG_IN } from "../../SharedQueries.local";
 import { EmailSignUp, EmailSignUpVariables } from "../../types/api";
+import { useInput } from "../../utils/hooks";
 import SignUpPresenter from "./SignUpPresenter";
 import { EMAIL_SIGN_UP } from "./SignUpQueries";
 
@@ -12,7 +13,7 @@ interface IProps extends RouteComponentProps {}
 
 const SignUpContainer: React.FC<IProps> = ({ history, location }) => {
 	if (!location.state && !location.state.phoneNumber) {
-		history.push("/");
+		history.push(Routes.HOME);
 	}
 
 	const [firstName, setFirstName] = useInput("");
