@@ -21,6 +21,29 @@ export interface ToggleDrivingMode {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: EditPlace
+// ====================================================
+
+export interface EditPlace_EditPlace {
+	__typename: "EditPlaceResponse";
+	res: boolean;
+	error: string | null;
+}
+
+export interface EditPlace {
+	EditPlace: EditPlace_EditPlace | null;
+}
+
+export interface EditPlaceVariables {
+	id: number;
+	isFav?: boolean | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UpdateCurrentUser
 // ====================================================
 
@@ -40,6 +63,7 @@ export interface UpdateCurrentUserVariables {
 	email?: string | null;
 	password?: string | null;
 	phoneNumber?: string | null;
+	profilePhoto?: string | null;
 }
 
 /* tslint:disable */
@@ -62,6 +86,33 @@ export interface PhoneVerification {
 
 export interface PhoneVerificationVariables {
 	phoneNumber: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetPlaces
+// ====================================================
+
+export interface GetPlaces_GetMyPlaces_places {
+	__typename: "Place";
+	id: number;
+	address: string;
+	isFav: boolean;
+	name: string;
+}
+
+export interface GetPlaces_GetMyPlaces {
+	__typename: "GetMyPlacesResponse";
+	res: boolean;
+	error: string | null;
+	places: (GetPlaces_GetMyPlaces_places | null)[] | null;
+}
+
+export interface GetPlaces {
+	GetMyPlaces: GetPlaces_GetMyPlaces | null;
 }
 
 /* tslint:disable */

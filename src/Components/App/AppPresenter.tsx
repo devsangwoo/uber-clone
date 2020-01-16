@@ -65,25 +65,25 @@ const AppPresenter: React.FC<IProps> = ({ isLoggedIn }) => {
 
 const LoggedOutRoutes: React.FC = () => (
 	<Switch>
-		<Route paht={Routes.HOME} excat={true} component={Login} />
-		<Route paht={Routes.PHONE_LOGIN} component={PhoneLogin} />
-		<Route paht={Routes.VERIFY_PHONE} component={VerifyPhone} />
-		<Route paht={Routes.SIGN_UP} component={SignUp} />
-		<Route paht={Routes.SOCIAL_LOGIN} component={SocialLogin} />
-		<Redirect path={"*"} to={"/"} />
+		<Route path={Routes.HOME} exact={true} component={Login} />
+		<Route path={Routes.PHONE_LOGIN} component={PhoneLogin} />
+		<Route path={Routes.VERIFY_PHONE} component={VerifyPhone} />
+		<Route path={Routes.SIGN_UP} component={SignUp} />
+		<Route path={Routes.SOCIAL_LOGIN} component={SocialLogin} />
+		<Redirect path={"*"} to={Routes.HOME} />
 	</Switch>
 );
 
 const LoggedInRoutes: React.FC = () => (
 	<Switch>
-		<Route paht={Routes.HOME} excat={true} component={Home} />
-		<Route paht={Routes.RIDE} component={Ride} />
-		<Route paht={Routes.EDIT_ACCOUNT} component={EditAccount} />
-		<Route paht={Routes.SETTING} component={Settings} />
-		<Route paht={Routes.PLACES} component={Places} />
-		<Route paht={Routes.ADD_PLACE} component={AddPlace} />
-		<Route paht={Routes.FIND_ADDRESS} component={FindAddress} />
-		<Redirect path={"*"} to={"/"} />
+		<Route path={Routes.HOME} exact={true} component={Home} />
+		<Route path={Routes.RIDE} component={Ride} />
+		<Route path={Routes.EDIT_ACCOUNT} component={EditAccount} />
+		<Route path={Routes.SETTING} component={Settings} />
+		<Route path={Routes.PLACES} component={Places} />
+		<Route path={Routes.ADD_PLACE} component={AddPlace} />
+		<Route path={Routes.FIND_ADDRESS} component={FindAddress} />
+		<Redirect path={"*"} to={Routes.HOME} />
 	</Switch>
 );
 
