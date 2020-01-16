@@ -19,10 +19,10 @@ import Routes from "../../Routes";
 import AddPlace from "../../Routes/AddPlace";
 import EditAccount from "../../Routes/EditAccount";
 import FindAddress from "../../Routes/FindAddress";
+import GetPlaces from "../../Routes/GetPlaces";
 import Home from "../../Routes/Home";
 import Login from "../../Routes/Login";
 import PhoneLogin from "../../Routes/PhoneLogin";
-import Places from "../../Routes/Places";
 import Ride from "../../Routes/Ride";
 import Settings from "../../Routes/Settings";
 import SignUp from "../../Routes/SignUp";
@@ -80,7 +80,7 @@ const LoggedInRoutes: React.FC = () => (
 		<Route path={Routes.RIDE} component={Ride} />
 		<Route path={Routes.EDIT_ACCOUNT} component={EditAccount} />
 		<Route path={Routes.SETTING} component={Settings} />
-		<Route path={Routes.PLACES} component={Places} />
+		<Route path={Routes.PLACES} component={GetPlaces} />
 		<Route path={Routes.ADD_PLACE} component={AddPlace} />
 		<Route path={Routes.FIND_ADDRESS} component={FindAddress} />
 		<Redirect path={"*"} to={Routes.HOME} />

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../Components/Header";
 import Place from "../../Components/Place";
 import { GetPlaces_GetMyPlaces_places } from "../../types/api";
-import * as S from "./PlacesStyle";
+import * as S from "./GetPlacesStyle";
 
 interface IProps {
 	loading: boolean;

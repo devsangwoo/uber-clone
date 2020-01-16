@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import React from "react";
-import { GET_PLACES } from "../../Routes/Places/PlacesQueries";
+import { GET_PLACES } from "../../Routes/GetPlaces/GetPlacesQueries";
 import PlacePresenter from "./PlacePresenter";
 import { EDIT_PLACE } from "./PlaceQueries";
 
