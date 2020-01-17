@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ThemeProvider } from "styled-components";
@@ -16,7 +16,6 @@ const AppContainer: React.FC = () => {
 	if (error) {
 		return <p>Error :(</p>;
 	}
-
 	console.log(data);
 
 	return (

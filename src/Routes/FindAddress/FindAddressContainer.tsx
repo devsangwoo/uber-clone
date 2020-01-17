@@ -1,8 +1,14 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { RouteComponentProps } from "react-router-dom";
+import { toast } from "react-toastify";
+import { GOOGLE_MAP_API_KEY } from "../../keys";
 import { useInput } from "../../utils/hooks";
-// import { geoCode, reverseGeoCode } from "../../mapHelpers";
+import {
+	getAddress,
+	getGeoCode,
+	loadGoogleMapApi
+} from "../../utils/mapHelpers";
 import FindAddressPresenter from "./FindAddressPresenter";
 
 interface ICoords {
@@ -15,15 +21,16 @@ interface IProps extends RouteComponentProps<any> {
 }
 const FindAddressContainer: React.FC = () => {
 	const mapRef = useRef();
-	const [address, onChangeAddress] = useInput("");
+	const [address, onChangeAddress, setAddress] = useInput("");
 	const [coords, setCoords] = useState<ICoords>({ lat: 0, lng: 0 });
 	const [map, setMap] = useState<google.maps.Map>();
 
 	useEffect(() => {
-		navigator.geolocation.getCurrentPosition(
-			handleGeoSucces,
-			handleGeoError
-		);
+		if (!window.google) {
+			loadGoogleMapApi(getCurrentLocation);
+		} else {
+			getCurrentLocation();
+		}
 	}, []);
 
 	useEffect(() => {
@@ -38,19 +45,16 @@ const FindAddressContainer: React.FC = () => {
 		}
 	}, [map]); // when map is initialized as undefined, and after then componenet did mount update map as instance of Map
 
-	const handleGeoSucces: PositionCallback = (positon: Position) => {
-		const {
-			coords: { latitude, longitude }
-		} = positon;
-		setCoords({ lat: latitude, lng: longitude });
-
-		console.log(coords);
-		loadMap(latitude, longitude);
-		// this.reverseGeocodeAddress(latitude, longitude);
-	};
-
-	const handleGeoError: PositionErrorCallback = () => {
-		console.log("No location");
+	const getCurrentLocation = () => {
+		navigator.geolocation.getCurrentPosition(
+			position => {
+				const {
+					coords: { latitude, longitude }
+				} = position;
+				loadMap(latitude, longitude);
+			},
+			() => toast.error("Cannot find your location")
+		);
 	};
 
 	const loadMap = (lat: number, lng: number) => {
@@ -64,13 +68,28 @@ const FindAddressContainer: React.FC = () => {
 		setMap(new google.maps.Map(mapNode as Element, mapConfig));
 	};
 
+	const onPickHandler = async () => {
+		const { lat, lng } = coords;
+		const addressResult = await getAddress(lat, lng);
+		if (addressResult) {
+			setAddress(addressResult);
+		}
+	};
+
+	const submitFn = async () => {
+		const { lat, lng } = await getGeoCode(address, coords.lat, coords.lng);
+		if (lat && lng && map) {
+			map.panTo({ lat, lng });
+		}
+	};
+
 	return (
 		<FindAddressPresenter
 			mapRef={mapRef}
 			address={address}
 			onInputChange={onChangeAddress}
-			onInputBlur={() => {}}
-			onPickPlace={() => {}}
+			submitFn={submitFn}
+			onPickPlace={onPickHandler}
 		/>
 	);
 };
