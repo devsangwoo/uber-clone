@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import { GOOGLE_MAP_API_KEY } from "../../keys";
 import { useInput } from "../../utils/hooks";
 import {
 	getAddress,
@@ -53,7 +52,8 @@ const FindAddressContainer: React.FC = () => {
 				} = position;
 				loadMap(latitude, longitude);
 			},
-			() => toast.error("Cannot find your location")
+			() => toast.error("Cannot find your location"),
+			{ enableHighAccuracy: true }
 		);
 	};
 
@@ -63,7 +63,7 @@ const FindAddressContainer: React.FC = () => {
 			center: { lat, lng },
 			disableDefaultUI: true,
 			minZoom: 8,
-			zoom: 13
+			zoom: 15
 		};
 		setMap(new google.maps.Map(mapNode as Element, mapConfig));
 	};

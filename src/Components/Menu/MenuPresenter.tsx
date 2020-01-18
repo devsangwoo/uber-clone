@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Routes from "../../Routes";
-import { GetCurrentUser_GetCurrentUser_user } from "../../types/api";
 import * as S from "./MenuStyle";
 
 interface IProps {

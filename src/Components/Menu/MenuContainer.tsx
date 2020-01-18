@@ -3,10 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import { USER_LOG_OUT } from "../../SharedQueries.local";
-import {
-	ToggleDrivingMode,
-	ToggleDrivingMode_ToggleDrivingMode
-} from "../../types/api";
+import { ToggleDrivingMode } from "../../types/api";
 import MenuPresenter from "./MenuPresenter";
 import { TOGGLE_DRIVING_MODE } from "./MenuQueries";
 

@@ -1,15 +1,26 @@
 import React from "react";
 import SideBar from "react-sidebar";
+import { ReactComponent as AddIcon } from "../../assets/icons/add.svg";
+import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
+import AddressBar from "../../Components/AddressBar";
+import IconButton from "../../Components/IconButton";
+import Maps from "../../Components/Maps";
 import Menu from "../../Components/Menu";
-import { GetCurrentUser_GetCurrentUser_user } from "../../types/api";
 import * as S from "./HomeStyle";
 
 interface IProps {
 	openStatus: boolean;
 	toggleSideBar: () => void;
+	address: string;
+	onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
+const HomePresenter: React.FC<IProps> = ({
+	openStatus,
+	toggleSideBar,
+	address,
+	onInputChange
+}) => {
 	return (
 		<S.Contaier>
 			<SideBar
@@ -19,13 +30,30 @@ const HomePresenter: React.FC<IProps> = ({ openStatus, toggleSideBar }) => {
 				styles={{
 					sidebar: {
 						backgroundColor: "white",
-						width: "70%"
-						// zIndex: "10"
+						width: "70%",
+						zIndex: "2"
 					}
 				}}
+			/>
+			<IconButton
+				onClick={toggleSideBar}
+				style={{ top: "15px", left: "1vw" }}
 			>
-				<button onClick={toggleSideBar}>sidebar</button>
-			</SideBar>
+				<MenuIcon />
+			</IconButton>
+			<IconButton
+				onClick={toggleSideBar}
+				style={{ top: "15px", right: "1vw" }}
+			>
+				<AddIcon />
+			</IconButton>
+			<AddressBar
+				name={""}
+				value={address}
+				onBlur={() => {}}
+				onChange={onInputChange}
+			/>
+			<Maps />
 		</S.Contaier>
 	);
 };

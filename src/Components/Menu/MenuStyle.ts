@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import BackArrow from "../BackArrow";
 import Button from "../Button";
 
 export const Container = styled.div`
 	height: 100%;
 `;
 
+export const BackArrowExtend = styled(BackArrow)`
+	position: absolute;
+	top: 20px;
+	left: 20px;
+`;
 export const Header = styled.div`
 	background-color: black;
 	height: 20%;

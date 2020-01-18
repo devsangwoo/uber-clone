@@ -1,6 +1,6 @@
 import axios from "axios";
-import { GOOGLE_MAP_API_KEY } from "../keys";
 import { toast } from "react-toastify";
+import { GOOGLE_MAP_API_KEY } from "../keys";
 
 export const loadGoogleMapApi = (onLoadSuccess: () => any) => {
 	const script = document.createElement(`script`);
