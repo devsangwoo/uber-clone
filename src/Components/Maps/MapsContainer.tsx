@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { toast } from "react-toastify";
+import { ICoords } from "../../Routes/Home/HomeContainer";
 import { loadGoogleMapApi } from "../../utils/mapHelpers";
 import MapsPresenter from "./MapsPresenter";
 
-interface ICoords {
-	lat: number;
-	lng: number;
+interface IProps {
+	map: google.maps.Map<Element> | undefined;
+	setMap: React.Dispatch<
+		React.SetStateAction<google.maps.Map<Element> | undefined>
+	>;
+	userCoords: ICoords;
 }
 
-const MapsContainer: React.FC = () => {
+const MapsContainer: React.FC<IProps> = ({ map, setMap, userCoords }) => {
 	const mapRef = useRef();
-	const [coords, setCoords] = useState<ICoords>({ lat: 0, lng: 0 });
-	const [map, setMap] = useState<google.maps.Map>();
 
 	useEffect(() => {
 		if (!window.google) {
@@ -21,18 +23,6 @@ const MapsContainer: React.FC = () => {
 			getCurrentLocation();
 		}
 	}, []);
-
-	useEffect(() => {
-		if (map) {
-			map.addListener("dragend", () =>
-				setCoords({
-					lat: map.getCenter().lat(),
-					lng: map.getCenter().lng()
-				})
-			);
-			map.addListener("rightclick", () => console.log("rightClicked!"));
-		}
-	}, [map]); // when map is initialized as undefined, and after then componenet did mount update map as instance of Map
 
 	const getCurrentLocation = () => {
 		navigator.geolocation.getCurrentPosition(

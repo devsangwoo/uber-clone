@@ -6,11 +6,7 @@ interface IProps {
 }
 
 const MapsPresenter: React.FC<IProps> = ({ mapRef }) => {
-	return (
-		<div>
-			<S.Map ref={mapRef} />
-		</div>
-	);
+	return <S.Map ref={mapRef} />;
 };
 
 export default MapsPresenter;

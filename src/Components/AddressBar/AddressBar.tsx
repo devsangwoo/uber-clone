@@ -3,8 +3,8 @@ import * as S from "./AddressStyles";
 
 interface IProps {
 	value: string;
-	onBlur: any;
-	name: string;
+	onBlur?: any;
+	name?: string;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

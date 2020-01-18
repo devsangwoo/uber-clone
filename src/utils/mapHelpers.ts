@@ -36,3 +36,25 @@ export const getGeoCode = async (address: string, lat: number, lng: number) => {
 		toast.error(data.error_message);
 	}
 };
+
+export const generateMarker = (
+	map: google.maps.Map,
+	lat: number,
+	lng: number,
+	setter: React.Dispatch<
+		React.SetStateAction<google.maps.Marker | undefined>
+	>,
+	icon?: any
+) => {
+	const markerConfig: google.maps.MarkerOptions = {
+		position: { lat, lng }
+	};
+	if (icon) {
+		markerConfig.icon = icon;
+	}
+	const marker = new google.maps.Marker(markerConfig);
+	if (marker) {
+		marker.setMap(map);
+		setter(marker);
+	}
+};
