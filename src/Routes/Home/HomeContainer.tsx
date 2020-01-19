@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetCurrentUser,
 	GetNearbyDrivers,
@@ -9,16 +10,19 @@ import {
 	RequestRide,
 	RequestRideVariables
 } from "../../types/api";
-import { generateMarker, getAddress, getGeoCode } from "../../utils/mapHelpers";
-import { ICoords } from "../../utils/mapHelpers";
+import { useInput } from "../../utils/hooks";
+import {
+	generateMarker,
+	getAddress,
+	getGeoCode,
+	ICoords
+} from "../../utils/mapHelpers";
 import HomePresenter from "./HomePresenter";
 import {
 	GET_NEARBY_DRIVERS,
 	REPORT_MOVEMENT,
 	REQUEST_RIDE
 } from "./HomeQueries";
-import { useInput } from "../../utils/hooks";
-import { GET_CURRENT_USER } from "../../SharedQueries";
 
 interface IRideVariables {
 	distance: string;
@@ -109,6 +113,7 @@ const HomeContainer: React.FC = () => {
 						coords: { latitude: lat, longitude: lng }
 					} = position;
 					userMarker.setPosition({ lat, lng });
+					setUserCoords({ lat, lng });
 					reportMovementMutation();
 				},
 				() => {
@@ -149,7 +154,7 @@ const HomeContainer: React.FC = () => {
 			} else {
 				generateMarker(map, targetGeoCode, setPlaceMarker);
 			}
-
+			setPlaceCoords(targetGeoCode);
 			const bounds = new google.maps.LatLngBounds();
 			bounds.extend(userCoords);
 			bounds.extend(targetGeoCode);
