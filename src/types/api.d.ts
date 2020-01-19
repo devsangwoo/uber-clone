@@ -36,7 +36,7 @@ export interface EditPlace {
 
 export interface EditPlaceVariables {
 	id: number;
-	isFav?: boolean | null;
+	isFav: boolean;
 }
 
 /* tslint:disable */
@@ -71,28 +71,6 @@ export interface UpdateCurrentUserVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: PhoneVerification
-// ====================================================
-
-export interface PhoneVerification_PhoneVerification {
-	__typename: "PhoneVerificationResponse";
-	res: boolean;
-	error: string | null;
-}
-
-export interface PhoneVerification {
-	PhoneVerification: PhoneVerification_PhoneVerification;
-}
-
-export interface PhoneVerificationVariables {
-	phoneNumber: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL query operation: GetPlaces
 // ====================================================
 
@@ -113,6 +91,113 @@ export interface GetPlaces_GetMyPlaces {
 
 export interface GetPlaces {
 	GetMyPlaces: GetPlaces_GetMyPlaces | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: RequestRide
+// ====================================================
+
+export interface RequestRide_RequestRide_ride {
+	__typename: "Ride";
+	id: number;
+}
+
+export interface RequestRide_RequestRide {
+	__typename: "RequestRideResponse";
+	res: boolean;
+	error: string | null;
+	ride: RequestRide_RequestRide_ride | null;
+}
+
+export interface RequestRide {
+	RequestRide: RequestRide_RequestRide;
+}
+
+export interface RequestRideVariables {
+	pickUpAddress: string;
+	pickUpLat: number;
+	pickUpLng: number;
+	dropOffAddress: string;
+	dropOffLat: number;
+	dropOffLng: number;
+	duration: string;
+	distance: string;
+	price: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: ReportMovement
+// ====================================================
+
+export interface ReportMovement_ReportMovement {
+	__typename: "ReportMovementResponse";
+	res: boolean;
+	error: string | null;
+}
+
+export interface ReportMovement {
+	ReportMovement: ReportMovement_ReportMovement;
+}
+
+export interface ReportMovementVariables {
+	lastLng: number;
+	lastLat: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetNearbyDrivers
+// ====================================================
+
+export interface GetNearbyDrivers_GetNearbyDrivers_drivers {
+	__typename: "User";
+	id: number;
+	fullName: string | null;
+	profilePhoto: string | null;
+}
+
+export interface GetNearbyDrivers_GetNearbyDrivers {
+	__typename: "GetNearbyDriversResponse";
+	res: boolean;
+	error: string | null;
+	drivers: (GetNearbyDrivers_GetNearbyDrivers_drivers | null)[] | null;
+}
+
+export interface GetNearbyDrivers {
+	GetNearbyDrivers: GetNearbyDrivers_GetNearbyDrivers;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: PhoneVerification
+// ====================================================
+
+export interface PhoneVerification_PhoneVerification {
+	__typename: "PhoneVerificationResponse";
+	res: boolean;
+	error: string | null;
+}
+
+export interface PhoneVerification {
+	PhoneVerification: PhoneVerification_PhoneVerification;
+}
+
+export interface PhoneVerificationVariables {
+	phoneNumber: string;
 }
 
 /* tslint:disable */

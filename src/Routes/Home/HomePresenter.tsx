@@ -8,40 +8,44 @@ import Form from "../../Components/Form";
 import IconButton from "../../Components/IconButton";
 import Maps from "../../Components/Maps";
 import Menu from "../../Components/Menu";
-import { ICoords } from "./HomeContainer";
+import { GetCurrentUser } from "../../types/api";
 import * as S from "./HomeStyle";
 
 interface IProps {
+	userData?: GetCurrentUser;
 	openStatus: boolean;
 	toggleSideBar: () => void;
-	address: string;
-	onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	map: google.maps.Map<Element> | undefined;
 	setMap: React.Dispatch<
 		React.SetStateAction<google.maps.Map<Element> | undefined>
 	>;
+	address: string;
+	onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	findAddressByInput: any;
 	onClickHandlerByAddMode: any;
 	addMode: boolean;
-	userCoords: ICoords;
+	reqButtonShow: boolean;
+	price: number;
+	requestRideMutation: any;
 }
 
 const HomePresenter: React.FC<IProps> = ({
+	userData: { GetCurrentUser: { user = {} } = {} } = {},
 	openStatus,
 	toggleSideBar,
+	setMap,
 	address,
 	onInputChange,
-	map,
-	setMap,
 	findAddressByInput,
 	addMode,
 	onClickHandlerByAddMode,
-	userCoords
+	reqButtonShow,
+	price,
+	requestRideMutation
 }) => {
 	const sidebarStyle = {
 		backgroundColor: "white",
 		width: "70%",
-		zIndex: "2"
+		zIndex: "3"
 	};
 	const menuIconStyle = { top: "15px", left: "1vw" };
 	const addIconStyle = { top: "15px", right: "1vw" };
@@ -58,14 +62,27 @@ const HomePresenter: React.FC<IProps> = ({
 					<MenuIcon />
 				</IconButton>
 			</SideBar>
-			<IconButton onClick={onClickHandlerByAddMode} style={addIconStyle}>
-				{addMode ? <AddIcon /> : <AddEmptyIcon />}
-			</IconButton>
-			<Form submitFn={findAddressByInput}>
-				<AddressBar value={address} onChange={onInputChange} />
-			</Form>
-			{addMode && <S.Center>📍</S.Center>}
-			<Maps map={map} setMap={setMap} userCoords={userCoords} />
+			{user && !user.isDriving && (
+				<React.Fragment>
+					<IconButton
+						onClick={onClickHandlerByAddMode}
+						style={addIconStyle}
+					>
+						{addMode ? <AddIcon /> : <AddEmptyIcon />}
+					</IconButton>
+					<Form submitFn={findAddressByInput}>
+						<AddressBar value={address} onChange={onInputChange} />
+					</Form>
+					{addMode && <S.Center>📍</S.Center>}
+					{reqButtonShow && (
+						<S.RequestButton
+							onClick={requestRideMutation}
+							value={`Request a Ride($${price})`}
+						/>
+					)}
+				</React.Fragment>
+			)}
+			<Maps setMap={setMap} />
 		</S.Contaier>
 	);
 };

@@ -1,18 +1,20 @@
 import ApolloClient, { Operation } from "apollo-boost";
 
+// localstroage ->  sessionStorage
+// b/c shared local storage between incognito and not
 const AUTH = "Auth";
 const client = new ApolloClient({
 	clientState: {
 		defaults: {
 			auth: {
 				__typename: AUTH,
-				isLoggedIn: Boolean(localStorage.getItem("X-JWT"))
+				isLoggedIn: Boolean(sessionStorage.getItem("X-JWT"))
 			}
 		},
 		resolvers: {
 			Mutation: {
 				userLogIn: (_, { token }, { cache }) => {
-					localStorage.setItem("X-JWT", token);
+					sessionStorage.setItem("X-JWT", token);
 					cache.writeData({
 						data: {
 							auth: {
@@ -23,7 +25,7 @@ const client = new ApolloClient({
 					});
 				},
 				userLogOut: (_, __, { cache }) => {
-					localStorage.removeItem("X-JWT");
+					sessionStorage.removeItem("X-JWT");
 					cache.writeData({
 						data: {
 							auth: {
@@ -39,7 +41,7 @@ const client = new ApolloClient({
 	request: async (operation: Operation) => {
 		operation.setContext({
 			headers: {
-				"X-JWT": localStorage.getItem("X-JWT") || ""
+				"X-JWT": sessionStorage.getItem("X-JWT") || ""
 			}
 		});
 	},

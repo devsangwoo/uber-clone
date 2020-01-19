@@ -69,15 +69,14 @@ const FindAddressContainer: React.FC = () => {
 	};
 
 	const onPickHandler = async () => {
-		const { lat, lng } = coords;
-		const addressResult = await getAddress(lat, lng);
+		const addressResult = await getAddress(coords);
 		if (addressResult) {
 			setAddress(addressResult);
 		}
 	};
 
 	const submitFn = async () => {
-		const { lat, lng } = await getGeoCode(address, coords.lat, coords.lng);
+		const { lat, lng } = await getGeoCode(address);
 		if (lat && lng && map) {
 			map.panTo({ lat, lng });
 		}
