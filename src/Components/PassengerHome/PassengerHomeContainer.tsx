@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
 	GetNearbyDrivers,
 	RequestRide,
@@ -37,7 +37,9 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 		[]
 	);
 	const [reqButtonShow, setReqButtonShow] = useState(false);
+	const [rideRequested, setrideRequested] = useState(false);
 	const [address, onChangeAddress, setAddressInput] = useInput("");
+	const [pickUpAddress, _, setPickUpAddress] = useInput("");
 	const [rideVariables, setRideVariables] = useState<IRideVariables>({
 		distance: "",
 		duration: "",
@@ -50,6 +52,15 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 		fetchPolicy: "cache-and-network",
 		onCompleted: ({ GetNearbyDrivers: { drivers = [] } }) => {
 			if (drivers && drivers.length > 0 && map) {
+				if (driverMarkers.length > drivers.length) {
+					while (driverMarkers.length > 0) {
+						const marker = driverMarkers.pop();
+						if (marker) {
+							marker.setMap(null);
+						}
+					}
+					setDriverMarkers(driverMarkers);
+				}
 				for (const driver of drivers) {
 					if (driver) {
 						const existedDriver = driverMarkers.find(
@@ -86,13 +97,16 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 		RequestRide,
 		RequestRideVariables
 	>(REQUEST_RIDE, {
-		onCompleted: ({ RequestRide }) => {},
+		onCompleted: ({ RequestRide }) => {
+			setReqButtonShow(false);
+			setrideRequested(true);
+		},
 		variables: {
 			...rideVariables,
 			dropOffAddress: address,
 			dropOffLat: placeCoords.lat,
 			dropOffLng: placeCoords.lng,
-			pickUpAddress: "home",
+			pickUpAddress,
 			pickUpLat: userCoords.lat,
 			pickUpLng: userCoords.lng
 		}
@@ -109,6 +123,10 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 
 	const findAddressByGeoCode = async () => {
 		if (window.google && google && map) {
+			const userAddresss = await getAddress(userCoords);
+			if (userAddresss) {
+				setPickUpAddress(userAddresss);
+			}
 			const targetGeoCode = {
 				lat: map.getCenter().lat(),
 				lng: map.getCenter().lng()
@@ -207,6 +225,7 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 			reqButtonShow={reqButtonShow}
 			price={rideVariables.price}
 			requestRideMutation={requestRideMutation}
+			rideRequested={rideRequested}
 		/>
 	);
 };

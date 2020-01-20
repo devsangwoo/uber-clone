@@ -30,16 +30,14 @@ const HomeContainer: React.FC = () => {
 		ReportMovement,
 		ReportMovementVariables
 	>(REPORT_MOVEMENT, {
+		onCompleted: ({ ReportMovement: { res, error } }) => {
+			if (!res) {
+				toast.error(error);
+			}
+		},
 		variables: {
 			lastLat: userCoords.lat,
 			lastLng: userCoords.lng
-		},
-		onCompleted: ({ ReportMovement }) => {
-			console.log({
-				lastLat: userCoords.lat,
-				lastLng: userCoords.lng
-			});
-			console.log(ReportMovement);
 		}
 	});
 

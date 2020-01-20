@@ -13,6 +13,7 @@ interface IProps {
 	onClickHandlerByAddMode: any;
 	addMode: boolean;
 	reqButtonShow: boolean;
+	rideRequested: boolean;
 	price: number;
 	requestRideMutation: any;
 }
@@ -24,6 +25,7 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 	addMode,
 	onClickHandlerByAddMode,
 	reqButtonShow,
+	rideRequested,
 	price,
 	requestRideMutation
 }) => {
@@ -41,6 +43,12 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 				<S.RequestButton
 					onClick={requestRideMutation}
 					value={`Request a Ride($${price})`}
+				/>
+			)}
+			{rideRequested && (
+				<S.RequestButton
+					onClick={() => {}}
+					value={`waiting for a driver...`}
 				/>
 			)}
 		</React.Fragment>

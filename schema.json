@@ -118,7 +118,7 @@
             "deprecationReason": null
           },
           {
-            "name": "GetNearbyRide",
+            "name": "GetNearbyRides",
             "description": "",
             "args": [],
             "type": {
@@ -126,7 +126,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "GetNearbyRideResponse",
+                "name": "GetNearbyRidesResponse",
                 "ofType": null
               }
             },
@@ -1587,7 +1587,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "GetNearbyRideResponse",
+        "name": "GetNearbyRidesResponse",
         "description": "",
         "fields": [
           {
@@ -1619,13 +1619,17 @@
             "deprecationReason": null
           },
           {
-            "name": "ride",
+            "name": "rides",
             "description": "",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Ride",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Ride",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

@@ -4,6 +4,7 @@ import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import IconButton from "../../Components/IconButton";
 import Maps from "../../Components/Maps";
 import Menu from "../../Components/Menu";
+import DriverHome from "../../Components/DriverHome";
 import PassengerHome from "../../Components/PassengerHome";
 import { GetCurrentUser } from "../../types/api";
 import { ICoords } from "../../utils/mapHelpers";
@@ -35,6 +36,7 @@ const HomePresenter: React.FC<IProps> = ({
 		width: "70%",
 		zIndex: "3"
 	};
+
 	const menuIconStyle = { top: "15px", left: "1vw" };
 
 	return (
@@ -50,7 +52,11 @@ const HomePresenter: React.FC<IProps> = ({
 				</IconButton>
 			</SideBar>
 			{user!.isDriving ? (
-				<div>driver</div>
+				<DriverHome
+					map={map}
+					userMarker={userMarker}
+					userCoords={userCoords}
+				/>
 			) : (
 				<PassengerHome
 					map={map}
