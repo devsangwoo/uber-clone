@@ -21,7 +21,7 @@ const PhotoInputPresenter: React.FC<IProps> = ({
 		/>
 		<S.Image htmlFor="photo">
 			{uploading && "..."}
-			{!uploading && <img src={fileUrl} />}
+			{!uploading && <img src={fileUrl} alt={fileUrl} />}
 		</S.Image>
 	</S.Container>
 );

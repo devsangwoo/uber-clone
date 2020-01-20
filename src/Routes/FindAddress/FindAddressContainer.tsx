@@ -25,6 +25,18 @@ const FindAddressContainer: React.FC = () => {
 	const [map, setMap] = useState<google.maps.Map>();
 
 	useEffect(() => {
+		const getCurrentLocation = () => {
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					const {
+						coords: { latitude, longitude }
+					} = position;
+					loadMap(latitude, longitude);
+				},
+				() => toast.error("Cannot find your location"),
+				{ enableHighAccuracy: true }
+			);
+		};
 		if (!window.google) {
 			loadGoogleMapApi(getCurrentLocation);
 		} else {
@@ -43,19 +55,6 @@ const FindAddressContainer: React.FC = () => {
 			map.addListener("rightclick", () => console.log("rightClicked!"));
 		}
 	}, [map]); // when map is initialized as undefined, and after then componenet did mount update map as instance of Map
-
-	const getCurrentLocation = () => {
-		navigator.geolocation.getCurrentPosition(
-			position => {
-				const {
-					coords: { latitude, longitude }
-				} = position;
-				loadMap(latitude, longitude);
-			},
-			() => toast.error("Cannot find your location"),
-			{ enableHighAccuracy: true }
-		);
-	};
 
 	const loadMap = (lat: number, lng: number) => {
 		const mapNode = ReactDOM.findDOMNode(mapRef.current);

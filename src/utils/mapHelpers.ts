@@ -46,9 +46,6 @@ export const getGeoCode = async (address: string) => {
 export const generateMarker = (
 	map: google.maps.Map,
 	coords: ICoords,
-	setter: React.Dispatch<
-		React.SetStateAction<google.maps.Marker | undefined>
-	>,
 	icon?: any
 ) => {
 	const markerConfig: google.maps.MarkerOptions = {
@@ -60,6 +57,8 @@ export const generateMarker = (
 	const marker = new google.maps.Marker(markerConfig);
 	if (marker) {
 		marker.setMap(map);
-		setter(marker);
+		return marker;
+	} else {
+		return false;
 	}
 };

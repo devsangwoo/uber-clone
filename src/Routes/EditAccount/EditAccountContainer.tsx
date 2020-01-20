@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
 import Routes from "..";
@@ -23,9 +23,6 @@ export interface IUserProps {
 interface IProps extends RouteComponentProps {}
 
 const EditAccountContainer: React.FC<IProps> = ({ history }) => {
-	const { data, loading } = useQuery<GetCurrentUser>(GET_CURRENT_USER, {
-		fetchPolicy: "cache-and-network"
-	});
 	const userProps: IUserProps[] = [
 		{ key: "profilePhoto", label: "photo" },
 		{ key: "firstName", label: "First Name" },
@@ -48,6 +45,51 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 	const [inputState, setInputState] = useState(initialState);
 	const [uploading, setUploading] = useState(false);
 
+	useQuery<GetCurrentUser>(GET_CURRENT_USER, {
+		fetchPolicy: "cache-and-network",
+		onCompleted: ({ GetCurrentUser: { user = {} } = {} }) => {
+			if (user) {
+				// const {
+				// 	firstName,
+				// 	lastName,
+				// 	email,
+				// 	phoneNumber,
+				// 	profilePhoto
+				// } = user;
+				// setInputState({
+				// 	firstName: firstName || "",
+				// 	lastName: lastName || "",
+				// 	email: email || "",
+				// 	phoneNumber: phoneNumber || "",
+				// 	profilePhoto: profilePhoto || ""
+				// });
+				// for (const key in user) {
+				// 	initialState.key = user[key];
+				// }
+				// userProps.forEach(props => {
+				// 	if (props.key && user[props.key])
+				// 	initialState[props.key] =
+				// })
+			}
+		}
+	});
+
+	const [updateUserMutaion] = useMutation<
+		UpdateCurrentUser,
+		UpdateCurrentUserVariables
+	>(EDIT_USER, {
+		onCompleted: ({ UpdateCurrentUser: UpdateCurrentUserResult }) => {
+			const { res, error } = UpdateCurrentUserResult;
+			if (res) {
+				toast.success("Your accout info has been updated");
+				history.push(Routes.HOME);
+			} else {
+				toast.error(error);
+			}
+		},
+		refetchQueries: () => [{ query: GET_CURRENT_USER }]
+	});
+
 	const onHandleChange = async (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
@@ -66,45 +108,6 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 			setInputState({ ...inputState, [nameOfInput]: newValue });
 		}
 	};
-
-	// for initialize the input
-	useEffect(() => {
-		if (data && data.GetCurrentUser && data.GetCurrentUser.user) {
-			const userData: GetCurrentUser_GetCurrentUser_user =
-				data.GetCurrentUser.user;
-			const {
-				firstName,
-				lastName,
-				email,
-				phoneNumber,
-				profilePhoto
-			} = userData;
-			setInputState({
-				...inputState,
-				email: email || "",
-				firstName,
-				lastName,
-				phoneNumber: phoneNumber || "",
-				profilePhoto: profilePhoto || ""
-			});
-		}
-	}, [data, loading]);
-
-	const [updateUserMutaion] = useMutation<
-		UpdateCurrentUser,
-		UpdateCurrentUserVariables
-	>(EDIT_USER, {
-		onCompleted: ({ UpdateCurrentUser: UpdateCurrentUserResult }) => {
-			const { res, error } = UpdateCurrentUserResult;
-			if (res) {
-				toast.success("Your accout info has been updated");
-				history.push(Routes.HOME);
-			} else {
-				toast.error(error);
-			}
-		},
-		refetchQueries: () => [{ query: GET_CURRENT_USER }]
-	});
 
 	const submitFn = () => {
 		// should fix

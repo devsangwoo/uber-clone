@@ -24,20 +24,3 @@ const SocialLoginPresenter: React.FC<IProps> = ({ a }) => {
 };
 
 export default SocialLoginPresenter;
-
-{
-	/* <FacebookLogin
-				appId="1718196768212364"
-				autoLoad={false}
-				fields="name,first_name,last_name,email"
-				// callback={loginCallback}
-				render={(renderProps: ReactFacebookLoginProps) => {
-					return (<S.Link onClick={renderProps.onClick}>
-						<S.Icon>
-							<FaceBookIcon />
-						</S.Icon>
-						Facebook
-					</S.Link>)
-				}}
-			/> */
-}

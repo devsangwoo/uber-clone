@@ -9,15 +9,8 @@ interface IProps {
 	data?: any;
 }
 
-const placeRender = (places: Array<GetPlaces_GetMyPlaces_places | null>) => {
-	if (places) {
-		return places.map(place => {
-			if (place) {
-				return <Place key={place.id} {...place} />;
-			}
-		});
-	}
-	return <div>You have no place</div>;
+const placeRender = (places: GetPlaces_GetMyPlaces_places[]) => {
+	return places.map(place => place && <Place key={place.id} {...place} />);
 };
 
 const PlacesPresenter: React.FC<IProps> = ({
@@ -28,7 +21,7 @@ const PlacesPresenter: React.FC<IProps> = ({
 		<React.Fragment>
 			<Header title={"Places"} backTo={"/"} />
 			<S.Container>
-				{!loading && placeRender(places)}
+				{!loading && places && placeRender(places)}
 				<S.LinkExtend to={"/add-place"}>Add some places!</S.LinkExtend>
 			</S.Container>
 		</React.Fragment>

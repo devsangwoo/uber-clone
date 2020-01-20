@@ -29,7 +29,7 @@ const FindAddressPresenter: React.FC<IProps> = ({
 				/>
 			</Form>
 			<S.ExtendedButton value={"Pick this place"} onClick={onPickPlace} />
-			<S.Center>📍</S.Center>
+			{/* <S.Center>📍</S.Center> */}
 			<S.Map ref={mapRef} />
 		</div>
 	);
