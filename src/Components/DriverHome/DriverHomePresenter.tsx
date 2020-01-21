@@ -1,11 +1,38 @@
-import React from 'react';
-import * as S from './DriverHomeStyle';
+import React from "react";
+import Container from "../Container";
+import PopUp from "../PopUp";
+import { IRequest } from "./DriverHomeContainer";
 
-interface IProps{}
+import * as S from "./DriverHomeStyle";
 
-const DriverHomePresenter: React.FC<IProps> = () => {
-	return <div>DriverHomePresenter</div>;
+interface IProps {
+	ride?: IRequest;
+	onCancelHandler: () => void;
+	onAcceptHandler: (rideId: number) => void;
+}
+
+const DriverHomePresenter: React.FC<IProps> = ({
+	ride,
+	onCancelHandler,
+	onAcceptHandler
+}) => {
+	return (
+		<Container>
+			{ride && ride.price && ride.distance && ride.duration && (
+				<PopUp
+					isDriver={true}
+					pickUpAddress={ride.pickUpAddress}
+					dropOffAddress={ride.dropOffAddress}
+					price={ride.price}
+					distance={ride.distance}
+					duration={ride.duration}
+					id={ride.id}
+					onCancelHandler={onCancelHandler}
+					onAcceptHandler={() => onAcceptHandler(ride.id)}
+				/>
+			)}
+		</Container>
+	);
 };
 
 export default DriverHomePresenter;
-

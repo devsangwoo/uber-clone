@@ -1,10 +1,17 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import Routes from "../../Routes";
 import {
 	GetNearbyDrivers,
+	GetRideById,
+	GetRideByIdVariables,
 	RequestRide,
-	RequestRideVariables
+	RequestRideVariables,
+	UpdateRideStatus,
+	UpdateRideStatusVariables
 } from "../../types/api";
+import history from "../../utils/history";
 import { useInput } from "../../utils/hooks";
 import {
 	generateMarker,
@@ -13,7 +20,12 @@ import {
 	ICoords
 } from "../../utils/mapHelpers";
 import PassengerHomePresenter from "./PassengerHomePresenter";
-import { GET_NEARBY_DRIVERS, REQUEST_RIDE } from "./PassengerHomeQueries";
+import {
+	GET_NEARBY_DRIVERS,
+	GET_RIDE_BY_ID,
+	REQUEST_RIDE,
+	UPDATE_RIDE
+} from "./PassengerHomeQueries";
 
 interface IProps {
 	map?: google.maps.Map<Element>;
@@ -21,7 +33,7 @@ interface IProps {
 	userCoords: ICoords;
 }
 
-interface IRideVariables {
+export interface IRideVariables {
 	distance: string;
 	duration: string;
 	price: number;
@@ -47,6 +59,35 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 	});
 	const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
 	const [addMode, setAddMode] = useState(false);
+	const [rideId, setRideId] = useState<number>();
+
+	const [fetchRideStatus, { stopPolling }] = useLazyQuery<
+		GetRideById,
+		GetRideByIdVariables
+	>(GET_RIDE_BY_ID, {
+		fetchPolicy: "cache-and-network",
+		onCompleted: ({ GetRideById }) => {
+			console.log(GetRideById);
+			const { res, error, ride } = GetRideById;
+			if (res && ride) {
+				if (ride.status === "ACCEPTED") {
+					history.push(Routes.RIDE, {
+						rideId
+					});
+				}
+			} else {
+				if (error === "not existed ride") {
+					stopPolling();
+				} else {
+					toast.error(error);
+				}
+			}
+		},
+		pollInterval: 500,
+		variables: {
+			rideId: rideId || -1
+		}
+	});
 
 	useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
 		fetchPolicy: "cache-and-network",
@@ -98,6 +139,11 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 		RequestRideVariables
 	>(REQUEST_RIDE, {
 		onCompleted: ({ RequestRide }) => {
+			const { ride } = RequestRide;
+			if (ride) {
+				setRideId(ride.id);
+				fetchRideStatus();
+			}
 			setReqButtonShow(false);
 			setrideRequested(true);
 		},
@@ -112,8 +158,22 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 		}
 	});
 
+	const [cancelRideMutation] = useMutation<
+		UpdateRideStatus,
+		UpdateRideStatusVariables
+	>(UPDATE_RIDE, {
+		onCompleted: () => {
+			setRideId(undefined);
+			setReqButtonShow(false);
+		}
+	});
+
 	const findAddressByInput = async () => {
 		if (window.google && google && map) {
+			const userAddresss = await getAddress(userCoords);
+			if (userAddresss) {
+				setPickUpAddress(userAddresss);
+			}
 			const geoCode = await getGeoCode(address);
 			if (geoCode) {
 				renderPlaceMarker(geoCode);
@@ -157,16 +217,6 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 			renderPath(targetGeoCode);
 		}
 	};
-
-	// const renderDriverMaker = (targetGeoCode: ICoords) => {
-	// 	if (map) {
-	// 		if (placeMarker) {
-	// 			placeMarker.setPosition({ ...targetGeoCode });
-	// 		} else {
-	// 			generateMarker(map, targetGeoCode);
-	// 		}
-	// 	}
-	// };
 
 	const renderPath = (targetGeoCode: ICoords) => {
 		const renderOption: google.maps.DirectionsRendererOptions = {
@@ -223,9 +273,13 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 			findAddressByInput={findAddressByInput}
 			addMode={addMode}
 			reqButtonShow={reqButtonShow}
-			price={rideVariables.price}
 			requestRideMutation={requestRideMutation}
 			rideRequested={rideRequested}
+			rideVariables={rideVariables}
+			pickUpAddress={pickUpAddress}
+			rideId={rideId}
+			stopPolling={stopPolling}
+			cancelRideMutation={cancelRideMutation}
 		/>
 	);
 };

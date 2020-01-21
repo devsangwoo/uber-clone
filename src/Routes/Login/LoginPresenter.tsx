@@ -4,9 +4,7 @@ import Routes from "..";
 import { useTitle } from "../../utils/hooks";
 import * as S from "./LoginStyle";
 
-interface IProps extends RouteComponentProps {}
-
-const LoginPresenter: React.FC<IProps> = () => {
+const LoginPresenter: React.FC = () => {
 	useTitle("Login | Nuber");
 	return (
 		<S.Container>

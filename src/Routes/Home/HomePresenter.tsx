@@ -1,10 +1,10 @@
 import React from "react";
 import SideBar from "react-sidebar";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
+import DriverHome from "../../Components/DriverHome";
 import IconButton from "../../Components/IconButton";
 import Maps from "../../Components/Maps";
 import Menu from "../../Components/Menu";
-import DriverHome from "../../Components/DriverHome";
 import PassengerHome from "../../Components/PassengerHome";
 import { GetCurrentUser } from "../../types/api";
 import { ICoords } from "../../utils/mapHelpers";
@@ -52,11 +52,7 @@ const HomePresenter: React.FC<IProps> = ({
 				</IconButton>
 			</SideBar>
 			{user!.isDriving ? (
-				<DriverHome
-					map={map}
-					userMarker={userMarker}
-					userCoords={userCoords}
-				/>
+				<DriverHome />
 			) : (
 				<PassengerHome
 					map={map}

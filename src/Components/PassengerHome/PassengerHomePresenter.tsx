@@ -4,6 +4,8 @@ import { ReactComponent as AddEmptyIcon } from "../../assets/icons/addEmpty.svg"
 import AddressBar from "../../Components/AddressBar";
 import Form from "../../Components/Form";
 import IconButton from "../../Components/IconButton";
+import PopUp from "../../Components/PopUp";
+import { IRideVariables } from "./PassengerHomeContainer";
 import * as S from "./PassengerHomeStyle";
 
 interface IProps {
@@ -14,8 +16,12 @@ interface IProps {
 	addMode: boolean;
 	reqButtonShow: boolean;
 	rideRequested: boolean;
-	price: number;
 	requestRideMutation: any;
+	rideVariables: IRideVariables;
+	pickUpAddress: string;
+	rideId?: number;
+	cancelRideMutation: any;
+	stopPolling: any;
 }
 
 const PassengerHomePresenter: React.FC<IProps> = ({
@@ -26,8 +32,12 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 	onClickHandlerByAddMode,
 	reqButtonShow,
 	rideRequested,
-	price,
-	requestRideMutation
+	requestRideMutation,
+	rideVariables: { price, duration, distance },
+	pickUpAddress,
+	rideId,
+	cancelRideMutation,
+	stopPolling
 }) => {
 	const addIconStyle = { top: "15px", right: "1vw" };
 	return (
@@ -45,10 +55,24 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 					value={`Request a Ride($${price})`}
 				/>
 			)}
-			{rideRequested && (
-				<S.RequestButton
-					onClick={() => {}}
-					value={`waiting for a driver...`}
+			{rideRequested && rideId && (
+				<PopUp
+					price={price}
+					duration={duration}
+					distance={distance}
+					dropOffAddress={address}
+					pickUpAddress={pickUpAddress}
+					onCancelHandler={() => {
+						stopPolling();
+						cancelRideMutation({
+							variables: {
+								rideId,
+								status: "CANCELED"
+							}
+						});
+					}}
+					isDriver={false}
+					id={rideId}
 				/>
 			)}
 		</React.Fragment>

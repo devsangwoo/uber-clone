@@ -37,3 +37,12 @@ export const RIDE_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const TAKE_REQUESTED_RIDE = gql`
+	mutation TakeRequestedRide($rideId: Int!) {
+		TakeRequestedRide(rideId: $rideId) {
+			res
+			error
+		}
+	}
+`;
