@@ -1,19 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as BackArrow } from "../../assets/icons/backArrow.svg";
+import IconButton from "../IconButton";
 import * as S from "./BackArrowStyle";
 
 interface IProps {
-	backTo: string;
+	backTo?: string;
+	backFn?: () => void;
 	className?: string;
 }
 
-const BackArrowPresenter: React.FC<IProps> = ({ backTo, className }) => {
+const BackArrowPresenter: React.FC<IProps> = ({
+	backFn,
+	backTo,
+	className
+}) => {
 	return (
 		<S.Container className={className}>
-			<Link to={backTo}>
-				<BackArrow />
-			</Link>
+			{backFn && (
+				<S.IconButtonExtend onClick={backFn}>
+					<BackArrow />
+				</S.IconButtonExtend>
+			)}
+			{backTo && (
+				<Link to={backTo}>
+					<BackArrow />
+				</Link>
+			)}
 		</S.Container>
 	);
 };

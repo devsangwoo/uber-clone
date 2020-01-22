@@ -21,6 +21,6 @@
     "noImplicitAny": true
   },
   "include": [
-    "src", "src/Components/Form", "src/Routes/VerifyPhone/.VerifyPhoneQueries.ts"
+    "src"
   ]
 }

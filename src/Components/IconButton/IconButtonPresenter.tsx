@@ -23,7 +23,7 @@ const IconButtonPresenter: React.FC<IProps> = ({
 	children: icon
 }) => {
 	return (
-		<S.Button onClick={onClick} style={style}>
+		<S.Button className={className} onClick={onClick} style={style}>
 			{icon}
 		</S.Button>
 	);

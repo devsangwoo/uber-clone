@@ -17,6 +17,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Routes from "../../Routes";
 >>>>>>> 71fda50... [#4]refactactored
 import AddPlace from "../../Routes/AddPlace";
+import Chat from "../../Routes/Chat";
 import EditAccount from "../../Routes/EditAccount";
 import FindAddress from "../../Routes/FindAddress";
 import GetPlaces from "../../Routes/GetPlaces";
@@ -77,12 +78,13 @@ const LoggedOutRoutes: React.FC = () => (
 const LoggedInRoutes: React.FC = () => (
 	<Switch>
 		<Route path={Routes.HOME} exact={true} component={Home} />
-		<Route path={Routes.RIDE} component={Ride} />
+		<Route path={Routes.RIDE_FORM} component={Ride} />
 		<Route path={Routes.EDIT_ACCOUNT} component={EditAccount} />
 		<Route path={Routes.SETTING} component={Settings} />
 		<Route path={Routes.PLACES} component={GetPlaces} />
 		<Route path={Routes.ADD_PLACE} component={AddPlace} />
 		<Route path={Routes.FIND_ADDRESS} component={FindAddress} />
+		<Route path={Routes.CHAT_FORM} component={Chat} />
 		<Redirect path={"*"} to={Routes.HOME} />
 	</Switch>
 );

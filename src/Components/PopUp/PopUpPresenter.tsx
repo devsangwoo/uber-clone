@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 
 import * as S from "./PopUpStyle";
@@ -42,7 +42,7 @@ const PopUpPresenter: React.FC<IProps> = ({
 		return () => {
 			clearTimeout(timer);
 		};
-	});
+	}, [dots]);
 	return (
 		<S.PopUpContainer>
 			<S.Header>RIDE</S.Header>
@@ -63,10 +63,7 @@ const PopUpPresenter: React.FC<IProps> = ({
 						value={"Accept"}
 					/>
 				) : (
-					<Button
-						onClick={() => {}}
-						value={`Finding a driver${dots}`}
-					/>
+					<Button value={`Finding a driver${dots}`} />
 				)}
 				<S.ButtonOnCancel
 					onClick={onCancelHandler}

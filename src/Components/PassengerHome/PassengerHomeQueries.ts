@@ -48,15 +48,6 @@ export const GET_NEARBY_DRIVERS = gql`
 	}
 `;
 
-export const UPDATE_RIDE = gql`
-	mutation UpdateRideStatus($rideId: Int!, $status: StatusOptions!) {
-		UpdateRideStatus(rideId: $rideId, status: $status) {
-			res
-			error
-		}
-	}
-`;
-
 export const GET_RIDE_BY_ID = gql`
 	query GetRideById($rideId: Int!) {
 		GetRideById(rideId: $rideId) {

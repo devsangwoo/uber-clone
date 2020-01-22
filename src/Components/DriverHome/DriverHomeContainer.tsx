@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useSubscription } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import Routes from "../../Routes";
 import {
@@ -10,8 +10,6 @@ import {
 	TakeRequestedRide,
 	TakeRequestedRideVariables
 } from "../../types/api";
-import history from "../../utils/history";
-import { ICoords } from "../../utils/mapHelpers";
 import DriverHomePresenter from "./DriverHomePresenter";
 import {
 	GET_NEARBY_RIDES,
@@ -19,22 +17,11 @@ import {
 	TAKE_REQUESTED_RIDE
 } from "./DriverHomeQueries";
 
-// interface IProps extends RouteComponentProps {
-// map?: google.maps.Map<Element>;
-// userMarker?: google.maps.Marker;
-// userCoords: ICoords;
-// }
+interface IProps extends RouteComponentProps {}
 
 export interface IRequest extends RideSubscription_RideSubscription {}
 
-const DriverHomeContainer: React.FC = (
-	{
-		// map,
-		// userMarker,
-		// userCoords,
-		// history
-	}
-) => {
+const DriverHomeContainer: React.FC<IProps> = ({ history }) => {
 	// array state how to add, delete contentes
 	const [rideQueue] = useState<IRequest[]>([]);
 	const [currentRide, setCurrentRide] = useState<IRequest>();
@@ -83,11 +70,6 @@ const DriverHomeContainer: React.FC = (
 		TakeRequestedRideVariables
 	>(TAKE_REQUESTED_RIDE);
 
-	useEffect(() => {
-		console.log(currentRide);
-		console.log("has been updated");
-	}, [currentRide]);
-	// work as queue, unshift first item;
 	const onCancelHandler = () => {
 		if (rideQueue) {
 			rideQueue.shift();
@@ -97,7 +79,7 @@ const DriverHomeContainer: React.FC = (
 
 	const onAcceptHandler = (rideId: number) => {
 		takeRequestMutation({ variables: { rideId } });
-		history.push(Routes.RIDE, { rideId });
+		history.push(`${Routes.RIDE}${rideId}`);
 	};
 
 	// even ride queue updated, it still showing ride popup
@@ -110,4 +92,4 @@ const DriverHomeContainer: React.FC = (
 	);
 };
 
-export default DriverHomeContainer;
+export default withRouter(DriverHomeContainer);

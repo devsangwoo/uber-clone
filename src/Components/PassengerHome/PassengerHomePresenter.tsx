@@ -5,6 +5,7 @@ import AddressBar from "../../Components/AddressBar";
 import Form from "../../Components/Form";
 import IconButton from "../../Components/IconButton";
 import PopUp from "../../Components/PopUp";
+import { StatusOptions } from "../../types/enums"; // import enum from declaration file cause fater error, kind of bug
 import { IRideVariables } from "./PassengerHomeContainer";
 import * as S from "./PassengerHomeStyle";
 
@@ -67,7 +68,7 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 						cancelRideMutation({
 							variables: {
 								rideId,
-								status: "CANCELED"
+								status: StatusOptions.CANCELED
 							}
 						});
 					}}

@@ -1,7 +1,9 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import Routes from "../../Routes";
+import { UPDATE_RIDE } from "../../SharedQueries";
 import {
 	GetNearbyDrivers,
 	GetRideById,
@@ -11,7 +13,6 @@ import {
 	UpdateRideStatus,
 	UpdateRideStatusVariables
 } from "../../types/api";
-import history from "../../utils/history";
 import { useInput } from "../../utils/hooks";
 import {
 	generateMarker,
@@ -23,11 +24,10 @@ import PassengerHomePresenter from "./PassengerHomePresenter";
 import {
 	GET_NEARBY_DRIVERS,
 	GET_RIDE_BY_ID,
-	REQUEST_RIDE,
-	UPDATE_RIDE
+	REQUEST_RIDE
 } from "./PassengerHomeQueries";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
 	map?: google.maps.Map<Element>;
 	userMarker?: google.maps.Marker;
 	userCoords: ICoords;
@@ -42,7 +42,8 @@ export interface IRideVariables {
 const PassengerHomeContainer: React.FC<IProps> = ({
 	map,
 	userMarker,
-	userCoords
+	userCoords,
+	history
 }) => {
 	const [placeMarker, setPlaceMarker] = useState<google.maps.Marker>();
 	const [driverMarkers, setDriverMarkers] = useState<google.maps.Marker[]>(
@@ -67,15 +68,14 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 	>(GET_RIDE_BY_ID, {
 		fetchPolicy: "cache-and-network",
 		onCompleted: ({ GetRideById }) => {
-			console.log(GetRideById);
 			const { res, error, ride } = GetRideById;
 			if (res && ride) {
 				if (ride.status === "ACCEPTED") {
-					history.push(Routes.RIDE, {
-						rideId
-					});
+					stopPolling();
+					history.push(`${Routes.RIDE}${rideId}`);
 				}
 			} else {
+				// [fix]
 				if (error === "not existed ride") {
 					stopPolling();
 				} else {
@@ -284,4 +284,4 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 	);
 };
 
-export default PassengerHomeContainer;
+export default withRouter(PassengerHomeContainer);

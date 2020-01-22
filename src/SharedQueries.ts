@@ -6,6 +6,7 @@ export const GET_CURRENT_USER = gql`
 			res
 			error
 			user {
+				id
 				firstName
 				lastName
 				fullName
@@ -17,6 +18,15 @@ export const GET_CURRENT_USER = gql`
 				verifiedPhoneNumber
 				profilePhoto
 			}
+		}
+	}
+`;
+
+export const UPDATE_RIDE = gql`
+	mutation UpdateRideStatus($rideId: Int!, $status: StatusOptions!) {
+		UpdateRideStatus(rideId: $rideId, status: $status) {
+			res
+			error
 		}
 	}
 `;
