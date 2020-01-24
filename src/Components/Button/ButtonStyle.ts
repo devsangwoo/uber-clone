@@ -22,4 +22,10 @@ export const Container = styled.input`
 		opacity: 0.8;
 		cursor: not-allowed;
 	}
+
+	&:hover {
+		filter: brightness(85%);
+	}
+
+	/* &: */
 `;

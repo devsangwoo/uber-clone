@@ -21,6 +21,13 @@ interface IProps {
 	isDriver: boolean;
 	onDriverButton: (status: StatusOptions) => void;
 	history: any;
+	buttonArgs: (
+		isDriver: boolean,
+		ride?: GetRideByIdRide_GetRideById_ride | undefined
+	) => {
+		value: string;
+		onClick?: any | undefined;
+	};
 }
 
 const RidePresenter: React.FC<IProps> = ({
@@ -28,28 +35,9 @@ const RidePresenter: React.FC<IProps> = ({
 	ride,
 	isDriver,
 	onDriverButton,
-	history
+	history,
+	buttonArgs
 }) => {
-	const buttonArgs = () => {
-		if (isDriver && ride) {
-			if (ride.status === StatusOptions.ACCEPTED) {
-				return {
-					onClick: () => onDriverButton(StatusOptions.ONROUTE),
-					value: "PICKED UP"
-				};
-			} else {
-				return {
-					onClick: () => onDriverButton(StatusOptions.FINISHED),
-					value: "FINISHED"
-				};
-			}
-		} else {
-			return {
-				value: "ENJOY YOUR RIDE WITH NUBER"
-			};
-		}
-	};
-
 	return (
 		<S.Container>
 			<Header title={"Ride"} backTo={Routes.HOME} />
@@ -91,7 +79,7 @@ const RidePresenter: React.FC<IProps> = ({
 						<S.Data>{ride.status}</S.Data>
 					</S.Info>
 					<S.Buttons>
-						<Button {...buttonArgs()} />
+						<Button {...buttonArgs(isDriver, ride)} />
 						{ride.status !== StatusOptions.ONROUTE && (
 							<S.ButtonOnCancel
 								onClick={() =>

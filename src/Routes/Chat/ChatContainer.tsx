@@ -1,4 +1,4 @@
-import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery, useSubscription } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,17 +8,17 @@ import {
 	GetChatById,
 	GetChatByIdVariables,
 	GetCurrentUser,
+	MessageSubscription,
 	SendMessage,
-	SendMessageVariables,
-	MessageSubscription
+	SendMessageVariables
 } from "../../types/api";
+import { useInput } from "../../utils/hooks";
 import ChatPresenter from "./ChatPresenter";
 import {
 	GET_CHAT_BY_ID,
 	MESSAGE_SUBSCRIPTION,
 	SEND_MESSAGE
 } from "./ChatQueries";
-import { useInput } from "../../utils/hooks";
 
 interface IRouteParams {
 	chatId: string;
@@ -39,9 +39,7 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 	useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
 		onCompleted: ({ GetChatById }) => {
 			const { res, error, chat } = GetChatById;
-			console.log(res, error, chat);
 			if (res && chat && chat.rideId && chat.messages && userData) {
-				console.log(chat.rideId);
 				setRideId(chat.rideId);
 				const messages = chat.messages.map(message => {
 					if (message) {
@@ -55,7 +53,6 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 				});
 				setMessages(messages);
 			} else {
-				console.log(error);
 				toast.error(error);
 			}
 		},
@@ -70,7 +67,6 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 		},
 		onSubscriptionData: ({ subscriptionData }) => {
 			const { data } = subscriptionData;
-			console.log(data);
 			if (data && messages && userData) {
 				const { MessageSubscription } = data;
 				if (MessageSubscription) {
@@ -83,13 +79,6 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 								MessageSubscription.userId
 						}
 					]);
-					// messages.push({
-					// 	...MessageSubscription,
-					// 	mine:
-					// 		userData.GetCurrentUser.user?.id ===
-					// 		MessageSubscription.userId
-					// });
-					// setMessages(messages);
 				}
 			}
 		}
@@ -102,10 +91,6 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 		onCompleted: ({ SendChatMessage }) => {
 			const { res, error, message } = SendChatMessage;
 			if (res && message && messages && userData) {
-				// messages.push({
-				// 	...message,
-				// 	mine: userData.GetCurrentUser.user?.id === message.userId
-				// });
 				setMessages([
 					...messages,
 					{

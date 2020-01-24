@@ -45,7 +45,10 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 		onCompleted: ({ GetRideById }) => {
 			const { res, ride } = GetRideById;
 			if (res && ride && ride.status) {
-				if (ride.status === StatusOptions.CANCELED) {
+				if (
+					ride.status === StatusOptions.CANCELED ||
+					ride.status === StatusOptions.FINISHED
+				) {
 					stopPolling();
 					history.push("/");
 				}
@@ -92,6 +95,32 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 		});
 	};
 
+	const buttonArgs = (
+		isDriver: boolean,
+		ride?: GetRideByIdRide_GetRideById_ride
+	): { value: string; onClick?: any } => {
+		if (isDriver && ride) {
+			if (ride.status === StatusOptions.ACCEPTED) {
+				return {
+					onClick: () => onDriverButton(StatusOptions.ONROUTE),
+					value: "PICKED UP"
+				};
+			} else {
+				return {
+					onClick: () => {
+						onDriverButton(StatusOptions.FINISHED);
+						history.push("/");
+					},
+					value: "FINISHED"
+				};
+			}
+		} else {
+			return {
+				value: "ENJOY YOUR RIDE WITH NUBER"
+			};
+		}
+	};
+
 	return (
 		<RidePresenter
 			profile={profile}
@@ -99,6 +128,7 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 			isDriver={isDriver}
 			onDriverButton={onDriverButton}
 			history={history}
+			buttonArgs={buttonArgs}
 		/>
 	);
 };
