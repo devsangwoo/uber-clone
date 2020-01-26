@@ -33,7 +33,7 @@ const MapsContainer: React.FC<IProps> = ({ setMap }) => {
 					loadMap({ lat: latitude, lng: longitude });
 				},
 				() => toast.error("Cannot find your location"),
-				{ enableHighAccuracy: true, timeout: 10000 }
+				{ enableHighAccuracy: true }
 			);
 		};
 		if (!window.google) {

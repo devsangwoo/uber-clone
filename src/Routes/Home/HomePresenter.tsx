@@ -34,7 +34,7 @@ const HomePresenter: React.FC<IProps> = ({
 	const sidebarStyle = {
 		backgroundColor: "white",
 		width: "70%",
-		zIndex: "5"
+		zIndex: "10"
 	};
 
 	const menuIconStyle = { top: "15px", left: "1vw" };

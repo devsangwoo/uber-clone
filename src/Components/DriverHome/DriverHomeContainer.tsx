@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useSubscription } from "@apollo/react-hooks";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import Routes from "../../Routes";

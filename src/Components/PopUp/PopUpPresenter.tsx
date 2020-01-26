@@ -42,7 +42,7 @@ const PopUpPresenter: React.FC<IProps> = ({
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [dots]);
+	}, [isDriver, dots]);
 	return (
 		<S.PopUpContainer>
 			<S.Header>RIDE</S.Header>

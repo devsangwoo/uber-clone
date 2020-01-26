@@ -1,9 +1,11 @@
 import React from "react";
+import Routes from "..";
 import Button from "../../Components/Button";
 import Container from "../../Components/Container";
 import Header from "../../Components/Header";
 import Label from "../../Components/Label";
 import PhotoInput from "../../Components/PhotoInput";
+import forceHistory from "../../utils/history";
 import { IUserProps } from "./EditAccountContainer";
 import * as S from "./EditAccountStyle";
 
@@ -46,7 +48,10 @@ const EditAccountPresenter: React.FC<IProps> = ({
 }) => {
 	return (
 		<Container>
-			<Header title={"Edit Account"} backTo={"/"} />
+			<Header
+				title={"Edit Account"}
+				backFn={() => forceHistory.push(Routes.HOME)}
+			/>
 			<S.Container>
 				<PhotoInput
 					uploading={uploading}

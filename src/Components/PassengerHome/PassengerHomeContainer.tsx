@@ -51,8 +51,8 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 	);
 	const [reqButtonShow, setReqButtonShow] = useState(false);
 	const [rideRequested, setrideRequested] = useState(false);
+	const [pickUpAddress, setPickUpAddress] = useState("");
 	const [address, onChangeAddress, setAddressInput] = useInput("");
-	const [pickUpAddress, _, setPickUpAddress] = useInput("");
 	const [rideVariables, setRideVariables] = useState<IRideVariables>({
 		distance: "",
 		duration: "",

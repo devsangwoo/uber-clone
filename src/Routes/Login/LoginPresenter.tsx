@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Routes from "..";
 import { useTitle } from "../../utils/hooks";
 import * as S from "./LoginStyle";
@@ -32,7 +32,5 @@ const LoginPresenter: React.FC = () => {
 		</S.Container>
 	);
 };
-
-LoginPresenter.propTypes = {};
 
 export default LoginPresenter;

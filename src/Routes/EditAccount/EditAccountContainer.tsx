@@ -1,16 +1,16 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
 import Routes from "..";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetCurrentUser,
-	GetCurrentUser_GetCurrentUser_user,
 	UpdateCurrentUser,
 	UpdateCurrentUserVariables
 } from "../../types/api";
 import { fileUploader } from "../../utils/fileUploader";
+import forceHistory from "../../utils/history";
 import EditAccountPresenter from "./EditAccountPresenter";
 import { EDIT_USER } from "./EditAccountQueries";
 
@@ -49,27 +49,22 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 		fetchPolicy: "cache-and-network",
 		onCompleted: ({ GetCurrentUser: { user = {} } = {} }) => {
 			if (user) {
-				// const {
-				// 	firstName,
-				// 	lastName,
-				// 	email,
-				// 	phoneNumber,
-				// 	profilePhoto
-				// } = user;
-				// setInputState({
-				// 	firstName: firstName || "",
-				// 	lastName: lastName || "",
-				// 	email: email || "",
-				// 	phoneNumber: phoneNumber || "",
-				// 	profilePhoto: profilePhoto || ""
-				// });
-				// for (const key in user) {
-				// 	initialState.key = user[key];
-				// }
-				// userProps.forEach(props => {
-				// 	if (props.key && user[props.key])
-				// 	initialState[props.key] =
-				// })
+				const {
+					firstName,
+					lastName,
+					email,
+					phoneNumber,
+					profilePhoto
+				} = user;
+				setInputState({
+					email: email || "",
+					firstName: firstName || "",
+					lastName: lastName || "",
+					password: "",
+					passwordConfirm: "",
+					phoneNumber: phoneNumber || "",
+					profilePhoto: profilePhoto || ""
+				});
 			}
 		}
 	});
@@ -82,7 +77,7 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 			const { res, error } = UpdateCurrentUserResult;
 			if (res) {
 				toast.success("Your accout info has been updated");
-				history.push(Routes.HOME);
+				forceHistory.push(Routes.HOME);
 			} else {
 				toast.error(error);
 			}

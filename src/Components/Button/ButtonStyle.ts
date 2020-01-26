@@ -17,7 +17,8 @@ export const Container = styled.input`
 	&:focus {
 		outline: none;
 	}
-
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	&:disabled {
 		opacity: 0.8;
 		cursor: not-allowed;

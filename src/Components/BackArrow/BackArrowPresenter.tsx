@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as BackArrow } from "../../assets/icons/backArrow.svg";
-import IconButton from "../IconButton";
 import * as S from "./BackArrowStyle";
 
 interface IProps {

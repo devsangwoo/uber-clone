@@ -12,7 +12,7 @@ export const PopUpContainer = styled.div`
 	right: 0;
 	width: 80%;
 	height: 70%;
-	z-index: 10;
+	z-index: 5;
 	padding: 50px 20px;
 	border-radius: 5px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);

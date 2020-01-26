@@ -45,7 +45,8 @@
     "eject": "react-scripts eject",
     "codegen": "apollo codegen:generate src/types/api.d.ts --queries='src/**/!(*.local).ts' --addTypename --endpoint=http://localhost:4000/graphql --target typescript --outputFlat",
     "predeploy" : "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "postdeploy": "rm -rf build"
   },
   "eslintConfig": {
     "extends": "react-app"

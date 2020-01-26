@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
+import Routes from "..";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetCurrentUser,
@@ -15,15 +17,22 @@ import { REPORT_MOVEMENT } from "./HomeQueries";
 // This is a no-op, but it indicates a memory leak in your application.
 // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
 //     in HomeContainer (created by Context.Consumer)
+interface IProps extends RouteComponentProps {}
 
-const HomeContainer: React.FC = () => {
+const HomeContainer: React.FC<IProps> = ({ history }) => {
 	const [map, setMap] = useState<google.maps.Map>();
 	const [userMarker, setUserMarker] = useState<google.maps.Marker>();
 	const [isSideOpen, setIsSideOpen] = useState(false);
 	const [userCoords, setUserCoords] = useState<ICoords>({ lat: 0, lng: 0 });
 
 	const { data: userData } = useQuery<GetCurrentUser>(GET_CURRENT_USER, {
-		fetchPolicy: "network-only"
+		fetchPolicy: "network-only",
+		onCompleted: ({ GetCurrentUser }) => {
+			const { res, user } = GetCurrentUser;
+			if (res && user && user.currentRideId) {
+				history.push(Routes.RIDE + `${user.currentRideId}`);
+			}
+		}
 	});
 
 	const [reportMovementMutation] = useMutation<

@@ -523,6 +523,7 @@ export interface GetCurrentUser_GetCurrentUser_user {
 	phoneNumber: string | null;
 	verifiedPhoneNumber: boolean;
 	profilePhoto: string | null;
+	currentRideId: number | null;
 }
 
 export interface GetCurrentUser_GetCurrentUser {

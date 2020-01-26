@@ -2,7 +2,6 @@ import { useMutation, useQuery, useSubscription } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import Routes from "..";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetChatById,
