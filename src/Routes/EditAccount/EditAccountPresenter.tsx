@@ -5,7 +5,7 @@ import Container from "../../Components/Container";
 import Header from "../../Components/Header";
 import Label from "../../Components/Label";
 import PhotoInput from "../../Components/PhotoInput";
-import forceHistory from "../../utils/history";
+import { forceHistory } from "../../utils/forceHistory";
 import { IUserProps } from "./EditAccountContainer";
 import * as S from "./EditAccountStyle";
 

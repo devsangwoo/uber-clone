@@ -8,6 +8,7 @@ import {
 	ValidatePhoneVerification,
 	ValidatePhoneVerificationVariables
 } from "../../types/api";
+import { forceHistory } from "../../utils/forceHistory";
 import { useInput } from "../../utils/hooks";
 import VerifyPhonePresenter from "./VerifyPhonePresenter";
 import { VALIDATE_PHONE_VERIFICATION } from "./VerifyPhoneQueries";
@@ -34,6 +35,7 @@ const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
 				if (token) {
 					toast.success("verified");
 					userLogInMutation({ variables: { token } });
+					forceHistory.push(Routes.HOME);
 				} else {
 					toast.success("verified, but should sign up first");
 					history.push({

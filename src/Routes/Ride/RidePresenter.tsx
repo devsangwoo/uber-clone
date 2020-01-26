@@ -3,7 +3,6 @@ import Routes from "..";
 import { ReactComponent as ChatIcon } from "../../assets/icons/chat.svg";
 import Button from "../../Components/Button";
 import Header from "../../Components/Header";
-import Loading from "../../Components/Loading";
 import {
 	GetRideByIdRide_GetRideById_ride,
 	GetRideByIdRide_GetRideById_ride_driver,
@@ -29,7 +28,6 @@ interface IProps {
 		value: string;
 		onClick?: any | undefined;
 	};
-	loading: boolean;
 }
 
 const RidePresenter: React.FC<IProps> = ({
@@ -38,8 +36,7 @@ const RidePresenter: React.FC<IProps> = ({
 	isDriver,
 	onDriverButton,
 	history,
-	buttonArgs,
-	loading
+	buttonArgs
 }) => {
 	return (
 		<S.Container>

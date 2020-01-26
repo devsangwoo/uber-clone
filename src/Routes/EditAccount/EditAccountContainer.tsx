@@ -10,7 +10,7 @@ import {
 	UpdateCurrentUserVariables
 } from "../../types/api";
 import { fileUploader } from "../../utils/fileUploader";
-import forceHistory from "../../utils/history";
+import { forceHistory } from "../../utils/forceHistory";
 import EditAccountPresenter from "./EditAccountPresenter";
 import { EDIT_USER } from "./EditAccountQueries";
 

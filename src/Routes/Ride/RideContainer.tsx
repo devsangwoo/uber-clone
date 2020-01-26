@@ -14,7 +14,7 @@ import {
 	UpdateRideStatusVariables
 } from "../../types/api";
 import { StatusOptions } from "../../types/enums"; // import enum from declaration file cause fater error, kind of bug
-import forceHistory from "../../utils/history";
+import { forceHistory } from "../../utils/forceHistory";
 import RidePresenter from "./RidePresenter";
 import { GET_RIDE_BY_ID_RIDE } from "./RideQueries";
 
@@ -37,7 +37,7 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 		fetchPolicy: "network-only"
 	});
 
-	const { data: rideData, loading: rideLoading, stopPolling } = useQuery<
+	const { data: rideData, stopPolling } = useQuery<
 		GetRideByIdRide,
 		GetRideByIdRideVariables
 	>(GET_RIDE_BY_ID_RIDE, {
@@ -123,7 +123,6 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 
 	return (
 		<RidePresenter
-			loading={rideLoading}
 			profile={profile}
 			ride={ride}
 			isDriver={isDriver}

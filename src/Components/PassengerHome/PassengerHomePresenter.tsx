@@ -49,7 +49,13 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 			<Form submitFn={findAddressByInput}>
 				<AddressBar value={address} onChange={onInputChange} />
 			</Form>
-			{addMode && <S.Center>📍</S.Center>}
+			{addMode && (
+				<S.Center>
+					<span role="img" aria-label="pin">
+						📍
+					</span>
+				</S.Center>
+			)}
 			{reqButtonShow && (
 				<S.RequestButton
 					onClick={requestRideMutation}

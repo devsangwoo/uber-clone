@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Routes from "..";
 import { USER_LOG_IN } from "../../SharedQueries.local";
 import { EmailSignUp, EmailSignUpVariables } from "../../types/api";
+import { forceHistory } from "../../utils/forceHistory";
 import { useInput } from "../../utils/hooks";
 import SignUpPresenter from "./SignUpPresenter";
 import { EMAIL_SIGN_UP } from "./SignUpQueries";
@@ -35,6 +36,7 @@ const SignUpContainer: React.FC<IProps> = ({ history, location }) => {
 				if (token) {
 					toast.success(`Welcome ${firstName}`);
 					userLogInMutation({ variables: { token } });
+					forceHistory.push(Routes.HOME);
 				} else {
 					toast.error("something went wrong!");
 				}

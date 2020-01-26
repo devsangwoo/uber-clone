@@ -81,7 +81,7 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 				() => {
 					toast.error("Cannot track your location");
 				},
-				{ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+				{ enableHighAccuracy: true }
 			);
 		}
 	}, [map, userMarker, setUserCoords, reportMovementMutation]);

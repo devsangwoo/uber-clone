@@ -48,6 +48,8 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 								userData.GetCurrentUser.user?.id ===
 								message.userId
 						};
+					} else {
+						return null;
 					}
 				});
 				setMessages(messages);

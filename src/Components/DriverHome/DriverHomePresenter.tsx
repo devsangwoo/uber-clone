@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "../Container";
 import PopUp from "../PopUp";
 import { IRequest } from "./DriverHomeContainer";
 
@@ -17,7 +16,7 @@ const DriverHomePresenter: React.FC<IProps> = ({
 	onAcceptHandler
 }) => {
 	return (
-		<Container>
+		<S.Container>
 			{ride && ride.price && ride.distance && ride.duration && (
 				<PopUp
 					isDriver={true}
@@ -31,7 +30,7 @@ const DriverHomePresenter: React.FC<IProps> = ({
 					onAcceptHandler={() => onAcceptHandler(ride.id)}
 				/>
 			)}
-		</Container>
+		</S.Container>
 	);
 };
 
