@@ -17,9 +17,7 @@ const BackArrowPresenter: React.FC<IProps> = ({
 	return (
 		<S.Container className={className}>
 			{backFn && (
-				<S.IconButtonExtend onClick={backFn}>
-					<BackArrow />
-				</S.IconButtonExtend>
+				<BackArrow onClick={backFn} style={{ cursor: "pointer" }} />
 			)}
 			{backTo && (
 				<Link to={backTo}>
