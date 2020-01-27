@@ -16,10 +16,6 @@ export const GET_CHAT_BY_ID = gql`
 	}
 `;
 
-// type Subscription {
-// 	MessageSubscription: Message
-// }
-
 export const MESSAGE_SUBSCRIPTION = gql`
 	subscription MessageSubscription {
 		MessageSubscription {

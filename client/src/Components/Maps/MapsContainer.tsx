@@ -9,9 +9,10 @@ interface IProps {
 	setMap: React.Dispatch<
 		React.SetStateAction<google.maps.Map<Element> | undefined>
 	>;
+	isHome: boolean;
 }
 
-const MapsContainer: React.FC<IProps> = ({ setMap }) => {
+const MapsContainer: React.FC<IProps> = ({ setMap, isHome }) => {
 	const mapRef = useRef();
 
 	useEffect(() => {
@@ -43,7 +44,7 @@ const MapsContainer: React.FC<IProps> = ({ setMap }) => {
 		}
 	}, [setMap]);
 
-	return <MapsPresenter mapRef={mapRef} />;
+	return <MapsPresenter mapRef={mapRef} isHome={isHome} />;
 };
 
 export default MapsContainer;

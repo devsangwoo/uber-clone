@@ -49,7 +49,7 @@ const SignUpPresenter: React.FC<IProps> = ({
 	loading
 }) => {
 	return (
-		<Container>
+		<S.Container>
 			<Header title={"SignUp"} backTo={"/"} />
 			<S.FromExtend submitFn={submitFn}>
 				{renderInputs([
@@ -61,7 +61,7 @@ const SignUpPresenter: React.FC<IProps> = ({
 				])}
 				<Button value={loading ? "In Progress" : "SignUp"} />
 			</S.FromExtend>
-		</Container>
+		</S.Container>
 	);
 };
 

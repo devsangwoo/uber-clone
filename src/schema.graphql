@@ -10,9 +10,11 @@ type Query {
   GetMyPlaces: GetMyPlacesResponse
   GetNearbyRides: GetNearbyRidesResponse!
   GetRideById(rideId: Int!): GetRideByIdResponse!
+  GetRideHistory(isDriver: Boolean!, paging: Int!): GetRideHistoryResponse!
   GetCurrentUser: GetCurrentUserResponse!
   GetNearbyDrivers: GetNearbyDriversResponse!
   GetUserById(userId: Int!): GetUserByIdResponse!
+  GetUserWithRideHistory: GetUserWithRideHistoryResponse!
   users: [User]
 }
 
@@ -126,6 +128,12 @@ type GetRideByIdResponse {
   ride: Ride
 }
 
+type GetRideHistoryResponse {
+  res: Boolean!
+  error: String
+  rides: [Ride]
+}
+
 type RequestRideResponse {
   res: Boolean!
   error: String
@@ -219,6 +227,12 @@ type GetNearbyDriversResponse {
 }
 
 type GetUserByIdResponse {
+  res: Boolean!
+  error: String
+  user: User
+}
+
+type GetUserWithRideHistoryResponse {
   res: Boolean!
   error: String
   user: User

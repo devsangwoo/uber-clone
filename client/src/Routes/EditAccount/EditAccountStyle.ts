@@ -3,6 +3,7 @@ import Form from "../../Components/Form";
 import Input from "../../Components/Input";
 
 export const Container = styled.div`
+	margin-top: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -14,7 +15,6 @@ export const FromExtend = styled(Form)`
 `;
 
 export const InputExtend = styled(Input)`
-	/* padding: 0 0 40px 0; */
 	margin-bottom: 35px;
 `;
 

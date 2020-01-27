@@ -60,7 +60,7 @@ const HomePresenter: React.FC<IProps> = ({
 					userCoords={userCoords}
 				/>
 			)}
-			<Maps setMap={setMap} />
+			<Maps setMap={setMap} isHome={true} />
 		</S.Contaier>
 	);
 };

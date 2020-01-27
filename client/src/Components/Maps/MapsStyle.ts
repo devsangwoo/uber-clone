@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import Button from "../Button";
 
-export const Map = styled.div`
-	position: absolute;
+interface IProps {
+	isHome: boolean;
+}
+
+export const Map = styled.div<IProps>`
+	position: ${props => props.isHome && "absolute"};
 	top: 0;
 	left: 0;
 	height: 100%;

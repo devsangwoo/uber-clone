@@ -24,6 +24,7 @@ interface IRouteParams {
 }
 interface IProps extends RouteComponentProps<IRouteParams> {}
 
+// refactor with refetch form like places
 const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 	const {
 		params: { chatId }

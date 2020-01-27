@@ -1,4 +1,4 @@
-export const typeDefs = ["type GetChatByIdResponse {\n  res: Boolean!\n  error: String\n  chat: Chat\n}\n\ntype Query {\n  GetChatById(chatId: Int!): GetChatByIdResponse!\n  FindPlace(name: String!, lat: Float!, lng: Float!): FindPlaceResponse!\n  GetMyPlaces: GetMyPlacesResponse\n  GetNearbyRides: GetNearbyRidesResponse!\n  GetRideById(rideId: Int!): GetRideByIdResponse!\n  GetCurrentUser: GetCurrentUserResponse!\n  GetNearbyDrivers: GetNearbyDriversResponse!\n  GetUserById(userId: Int!): GetUserByIdResponse!\n  users: [User]\n}\n\ntype Subscription {\n  MessageSubscription: Message\n  RideStatusSubscription: Ride\n  RideSubscription: Ride\n  DriverSubscription: User\n}\n\ntype SendChatMessageResponse {\n  res: Boolean!\n  error: String\n  message: Message\n}\n\ntype Mutation {\n  SendChatMessage(chatId: Int!, text: String!): SendChatMessageResponse!\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  DeletePlace(id: Int!): DeletePlaceResponse\n  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse\n  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, duration: String!, distance: String!, price: Float!): RequestRideResponse!\n  TakeRequestedRide(rideId: Int!): TakeRequestedRideResponse!\n  UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!\n  UpdateCurrentUser(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int, phoneNumber: String): UpdateCurrentUserRespone!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!): EmailSignUpResponse!\n  EmailVerification: EmailVerificationResponse!\n  ValidateEmailVerification(key: String!): ValidateEmailVerificationResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  PhoneVerification(phoneNumber: String!): PhoneVerificationResponse!\n  ValidatePhoneVerification(phoneNumber: String!, key: String!): ValidatePhoneVerificationResponse!\n  ReportMovement(lastLng: Float, lastLat: Float, lastOrientation: Float): ReportMovementResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n}\n\ntype Chat {\n  id: Int!\n  messages: [Message]\n  driverId: Int\n  driver: User\n  passengerId: Int\n  passenger: User\n  ride: Ride\n  rideId: Int\n  createAt: String!\n  updateAt: String!\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chatId: Int\n  chat: Chat!\n  userId: Int\n  user: User!\n  createAt: String!\n  updateAt: String!\n}\n\ntype AddPlaceResponse {\n  res: Boolean!\n  error: String\n}\n\ntype DeletePlaceResponse {\n  res: Boolean!\n  error: String\n}\n\ntype EditPlaceResponse {\n  res: Boolean!\n  error: String\n}\n\ntype FindPlaceResponse {\n  res: Boolean!\n  error: String\n  place: Place\n}\n\ntype GetMyPlacesResponse {\n  res: Boolean!\n  error: String\n  places: [Place]\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFav: Boolean!\n  userId: Int!\n  placeId: String\n  user: User!\n  createAt: String!\n  updateAt: String!\n}\n\ntype GetNearbyRidesResponse {\n  res: Boolean!\n  error: String\n  rides: [Ride]\n}\n\ntype GetRideByIdResponse {\n  res: Boolean!\n  error: String\n  ride: Ride\n}\n\ntype RequestRideResponse {\n  res: Boolean!\n  error: String\n  ride: Ride\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float\n  distance: String\n  duration: String\n  driver: User!\n  passenger: User!\n  passengerId: Int!\n  driverId: Int!\n  chat: Chat\n  chatId: Int\n  createAt: String!\n  updateAt: String!\n}\n\ntype TakeRequestedRideResponse {\n  res: Boolean!\n  error: String\n}\n\ntype UpdateRideStatusResponse {\n  res: Boolean!\n  error: String\n}\n\nenum StatusOptions {\n  ACCEPTED\n  FINISHED\n  CANCELED\n  REQUESTED\n  ONROUTE\n}\n\ntype GetCurrentUserResponse {\n  res: Boolean!\n  error: String\n  user: User\n}\n\ntype UpdateCurrentUserRespone {\n  res: Boolean!\n  error: String\n}\n\ntype EmailSignInResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailVerificationResponse {\n  res: Boolean!\n  error: String\n}\n\ntype ValidateEmailVerificationResponse {\n  res: Boolean!\n  error: String\n}\n\ntype FacebookConnectResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype GetNearbyDriversResponse {\n  res: Boolean!\n  error: String\n  drivers: [User]\n}\n\ntype GetUserByIdResponse {\n  res: Boolean!\n  error: String\n  user: User\n}\n\ntype PhoneVerificationResponse {\n  res: Boolean!\n  error: String\n}\n\ntype ValidatePhoneVerificationResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype ReportMovementResponse {\n  res: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  fbId: String\n  age: Int\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  fullName: String\n  isDriving: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chatAsDriver: [Chat]\n  chatAsPassenger: [Chat]\n  messages: [Message]\n  rideAsDriver: [Ride]\n  rideAsPassenger: [Ride]\n  places: [Place]\n  createAt: String!\n  updateAt: String\n}\n\ntype ToggleDrivingModeResponse {\n  res: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createAt: String!\n  updateAt: String!\n}\n"];
+export const typeDefs = ["type GetChatByIdResponse {\n  res: Boolean!\n  error: String\n  chat: Chat\n}\n\ntype Query {\n  GetChatById(chatId: Int!): GetChatByIdResponse!\n  FindPlace(name: String!, lat: Float!, lng: Float!): FindPlaceResponse!\n  GetMyPlaces: GetMyPlacesResponse\n  GetNearbyRides: GetNearbyRidesResponse!\n  GetRideById(rideId: Int!): GetRideByIdResponse!\n  GetRideHistory(isDriver: Boolean!, paging: Int!): GetRideHistoryResponse!\n  GetCurrentUser: GetCurrentUserResponse!\n  GetNearbyDrivers: GetNearbyDriversResponse!\n  GetUserById(userId: Int!): GetUserByIdResponse!\n  GetUserWithRideHistory: GetUserWithRideHistoryResponse!\n  users: [User]\n}\n\ntype Subscription {\n  MessageSubscription: Message\n  RideStatusSubscription: Ride\n  RideSubscription: Ride\n  DriverSubscription: User\n}\n\ntype SendChatMessageResponse {\n  res: Boolean!\n  error: String\n  message: Message\n}\n\ntype Mutation {\n  SendChatMessage(chatId: Int!, text: String!): SendChatMessageResponse!\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  DeletePlace(id: Int!): DeletePlaceResponse\n  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse\n  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, duration: String!, distance: String!, price: Float!): RequestRideResponse!\n  TakeRequestedRide(rideId: Int!): TakeRequestedRideResponse!\n  UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!\n  UpdateCurrentUser(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int, phoneNumber: String): UpdateCurrentUserRespone!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!): EmailSignUpResponse!\n  EmailVerification: EmailVerificationResponse!\n  ValidateEmailVerification(key: String!): ValidateEmailVerificationResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  PhoneVerification(phoneNumber: String!): PhoneVerificationResponse!\n  ValidatePhoneVerification(phoneNumber: String!, key: String!): ValidatePhoneVerificationResponse!\n  ReportMovement(lastLng: Float, lastLat: Float, lastOrientation: Float): ReportMovementResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n}\n\ntype Chat {\n  id: Int!\n  messages: [Message]\n  driverId: Int\n  driver: User\n  passengerId: Int\n  passenger: User\n  ride: Ride\n  rideId: Int\n  createAt: String!\n  updateAt: String!\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chatId: Int\n  chat: Chat!\n  userId: Int\n  user: User!\n  createAt: String!\n  updateAt: String!\n}\n\ntype AddPlaceResponse {\n  res: Boolean!\n  error: String\n}\n\ntype DeletePlaceResponse {\n  res: Boolean!\n  error: String\n}\n\ntype EditPlaceResponse {\n  res: Boolean!\n  error: String\n}\n\ntype FindPlaceResponse {\n  res: Boolean!\n  error: String\n  place: Place\n}\n\ntype GetMyPlacesResponse {\n  res: Boolean!\n  error: String\n  places: [Place]\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFav: Boolean!\n  userId: Int!\n  placeId: String\n  user: User!\n  createAt: String!\n  updateAt: String!\n}\n\ntype GetNearbyRidesResponse {\n  res: Boolean!\n  error: String\n  rides: [Ride]\n}\n\ntype GetRideByIdResponse {\n  res: Boolean!\n  error: String\n  ride: Ride\n}\n\ntype GetRideHistoryResponse {\n  res: Boolean!\n  error: String\n  rides: [Ride]\n}\n\ntype RequestRideResponse {\n  res: Boolean!\n  error: String\n  ride: Ride\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float\n  distance: String\n  duration: String\n  driver: User\n  passenger: User\n  passengerId: Int\n  driverId: Int\n  chat: Chat\n  chatId: Int\n  currentUsers: [User]\n  createAt: String!\n  updateAt: String!\n}\n\ntype TakeRequestedRideResponse {\n  res: Boolean!\n  error: String\n}\n\ntype UpdateRideStatusResponse {\n  res: Boolean!\n  error: String\n}\n\nenum StatusOptions {\n  ACCEPTED\n  FINISHED\n  CANCELED\n  REQUESTED\n  ONROUTE\n}\n\ntype GetCurrentUserResponse {\n  res: Boolean!\n  error: String\n  user: User\n}\n\ntype UpdateCurrentUserRespone {\n  res: Boolean!\n  error: String\n}\n\ntype EmailSignInResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailVerificationResponse {\n  res: Boolean!\n  error: String\n}\n\ntype ValidateEmailVerificationResponse {\n  res: Boolean!\n  error: String\n}\n\ntype FacebookConnectResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype GetNearbyDriversResponse {\n  res: Boolean!\n  error: String\n  drivers: [User]\n}\n\ntype GetUserByIdResponse {\n  res: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserWithRideHistoryResponse {\n  res: Boolean!\n  error: String\n  user: User\n}\n\ntype PhoneVerificationResponse {\n  res: Boolean!\n  error: String\n}\n\ntype ValidatePhoneVerificationResponse {\n  res: Boolean!\n  error: String\n  token: String\n}\n\ntype ReportMovementResponse {\n  res: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  fbId: String\n  age: Int\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  fullName: String\n  isDriving: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chatAsDriver: [Chat]\n  chatAsPassenger: [Chat]\n  messages: [Message]\n  rideAsDriver: [Ride]\n  rideAsPassenger: [Ride]\n  places: [Place]\n  currentRide: Ride\n  currentRideId: Int\n  createAt: String!\n  updateAt: String\n}\n\ntype ToggleDrivingModeResponse {\n  res: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createAt: String!\n  updateAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -7,9 +7,11 @@ export interface Query {
   GetMyPlaces: GetMyPlacesResponse | null;
   GetNearbyRides: GetNearbyRidesResponse;
   GetRideById: GetRideByIdResponse;
+  GetRideHistory: GetRideHistoryResponse;
   GetCurrentUser: GetCurrentUserResponse;
   GetNearbyDrivers: GetNearbyDriversResponse;
   GetUserById: GetUserByIdResponse;
+  GetUserWithRideHistory: GetUserWithRideHistoryResponse;
   users: Array<User> | null;
 }
 
@@ -25,6 +27,11 @@ export interface FindPlaceQueryArgs {
 
 export interface GetRideByIdQueryArgs {
   rideId: number;
+}
+
+export interface GetRideHistoryQueryArgs {
+  isDriver: boolean;
+  paging: number;
 }
 
 export interface GetUserByIdQueryArgs {
@@ -85,6 +92,8 @@ export interface User {
   rideAsDriver: Array<Ride> | null;
   rideAsPassenger: Array<Ride> | null;
   places: Array<Place> | null;
+  currentRide: Ride | null;
+  currentRideId: number | null;
   createAt: string;
   updateAt: string | null;
 }
@@ -101,12 +110,13 @@ export interface Ride {
   price: number | null;
   distance: string | null;
   duration: string | null;
-  driver: User;
-  passenger: User;
-  passengerId: number;
-  driverId: number;
+  driver: User | null;
+  passenger: User | null;
+  passengerId: number | null;
+  driverId: number | null;
   chat: Chat | null;
   chatId: number | null;
+  currentUsers: Array<User> | null;
   createAt: string;
   updateAt: string;
 }
@@ -149,6 +159,12 @@ export interface GetRideByIdResponse {
   ride: Ride | null;
 }
 
+export interface GetRideHistoryResponse {
+  res: boolean;
+  error: string | null;
+  rides: Array<Ride> | null;
+}
+
 export interface GetCurrentUserResponse {
   res: boolean;
   error: string | null;
@@ -162,6 +178,12 @@ export interface GetNearbyDriversResponse {
 }
 
 export interface GetUserByIdResponse {
+  res: boolean;
+  error: string | null;
+  user: User | null;
+}
+
+export interface GetUserWithRideHistoryResponse {
   res: boolean;
   error: string | null;
   user: User | null;

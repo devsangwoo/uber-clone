@@ -35,7 +35,14 @@ const MenuPresenter: React.FC<IProps> = ({
 						</S.Grid>
 					</S.Header>
 					<S.LinkExtend to={Routes.PLACES}>Places</S.LinkExtend>
-					<S.LinkExtend to={Routes.RIDE}>Trips</S.LinkExtend>
+					<S.LinkExtend
+						to={{
+							pathname: Routes.RIDE_HISTORY,
+							state: { isDriver: user.isDriving }
+						}}
+					>
+						Trips
+					</S.LinkExtend>
 					<S.LinkExtend to={Routes.SETTING}>Settings</S.LinkExtend>
 					<S.ToggleDriving
 						onClick={toggleDrivingFn}

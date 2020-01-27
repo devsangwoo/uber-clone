@@ -432,8 +432,8 @@ export interface GetRideByIdRide_GetRideById_ride {
 	price: number | null;
 	distance: string | null;
 	duration: string | null;
-	driver: GetRideByIdRide_GetRideById_ride_driver;
-	passenger: GetRideByIdRide_GetRideById_ride_passenger;
+	driver: GetRideByIdRide_GetRideById_ride_driver | null;
+	passenger: GetRideByIdRide_GetRideById_ride_passenger | null;
 	chatId: number | null;
 }
 
@@ -450,6 +450,43 @@ export interface GetRideByIdRide {
 
 export interface GetRideByIdRideVariables {
 	rideId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetRideHistory
+// ====================================================
+
+export interface GetRideHistory_GetRideHistory_rides {
+	__typename: "Ride";
+	pickUpAddress: string;
+	dropOffAddress: string;
+	price: number | null;
+	updateAt: string;
+	pickUpLat: number;
+	pickUpLng: number;
+	dropOffLat: number;
+	dropOffLng: number;
+	status: string;
+}
+
+export interface GetRideHistory_GetRideHistory {
+	__typename: "GetRideHistoryResponse";
+	res: boolean;
+	error: string | null;
+	rides: (GetRideHistory_GetRideHistory_rides | null)[] | null;
+}
+
+export interface GetRideHistory {
+	GetRideHistory: GetRideHistory_GetRideHistory;
+}
+
+export interface GetRideHistoryVariables {
+	isDriver: boolean;
+	paging: number;
 }
 
 /* tslint:disable */

@@ -9,6 +9,7 @@ export default {
 	PLACES: "/places",
 	RIDE: "/ride/",
 	RIDE_FORM: "/ride/:rideId",
+	RIDE_HISTORY: "/ride-history",
 	SETTING: "/setting",
 	SIGN_UP: "/sign-up",
 	SOCIAL_LOGIN: "/social-login",

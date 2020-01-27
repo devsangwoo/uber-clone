@@ -25,6 +25,7 @@ import Home from "../../Routes/Home";
 import Login from "../../Routes/Login";
 import PhoneLogin from "../../Routes/PhoneLogin";
 import Ride from "../../Routes/Ride";
+import RideHistory from "../../Routes/RideHistory";
 import Settings from "../../Routes/Settings";
 import SignUp from "../../Routes/SignUp";
 import SocialLogin from "../../Routes/SocialLogin";
@@ -85,6 +86,7 @@ const LoggedInRoutes: React.FC = () => (
 		<Route path={Routes.ADD_PLACE} component={AddPlace} />
 		<Route path={Routes.FIND_ADDRESS} component={FindAddress} />
 		<Route path={Routes.CHAT_FORM} component={Chat} />
+		<Route path={Routes.RIDE_HISTORY} component={RideHistory} />
 		<Redirect path={"*"} to={Routes.HOME} />
 	</Switch>
 );

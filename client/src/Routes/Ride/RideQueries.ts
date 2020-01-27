@@ -34,12 +34,3 @@ export const GET_RIDE_BY_ID_RIDE = gql`
 		}
 	}
 `;
-
-export const RIDE_STATUS_SUBSCRIPTION = gql`
-	subscription MessageSubscription {
-		MessageSubscription {
-			text
-			userId
-		}
-	}
-`;

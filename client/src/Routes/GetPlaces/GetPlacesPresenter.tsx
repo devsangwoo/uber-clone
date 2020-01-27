@@ -18,13 +18,13 @@ const PlacesPresenter: React.FC<IProps> = ({
 	loading
 }) => {
 	return (
-		<React.Fragment>
+		<S.Container>
 			<Header title={"Places"} backTo={"/"} />
-			<S.Container>
+			<S.Places>
 				{!loading && places && placeRender(places)}
 				<S.LinkExtend to={"/add-place"}>Add some places!</S.LinkExtend>
-			</S.Container>
-		</React.Fragment>
+			</S.Places>
+		</S.Container>
 	);
 };
 

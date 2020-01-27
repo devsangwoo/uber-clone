@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
-    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.d.ts",
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
     "dev:types": "npm run types",
     "dev:server": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
     "dev:client": "npm start --prefix client",

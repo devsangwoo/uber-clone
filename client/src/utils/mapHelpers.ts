@@ -64,3 +64,41 @@ export const generateMarker = (
 		return false;
 	}
 };
+
+export const renderPath = (
+	map: google.maps.Map,
+	fromGeoCode: ICoords,
+	toGeoCode: ICoords,
+	onSuccessHandler?: (
+		routes: google.maps.DirectionsRoute[],
+		directionRenderer: google.maps.DirectionsRenderer
+	) => void
+) => {
+	const renderOption: google.maps.DirectionsRendererOptions = {
+		polylineOptions: {
+			strokeColor: "#000" // black
+		},
+		suppressMarkers: true
+	};
+	const newDirectionRenderer = new google.maps.DirectionsRenderer(
+		renderOption
+	);
+	const directionService = new google.maps.DirectionsService();
+	const destination = new google.maps.LatLng(fromGeoCode);
+	const origin = new google.maps.LatLng(toGeoCode);
+	const directionServiceOption: google.maps.DirectionsRequest = {
+		destination,
+		origin,
+		travelMode: google.maps.TravelMode.DRIVING
+	};
+	directionService.route(directionServiceOption, (result, status) => {
+		if (status === google.maps.DirectionsStatus.OK) {
+			const { routes } = result;
+			newDirectionRenderer.setDirections(result);
+			newDirectionRenderer.setMap(map);
+			if (onSuccessHandler) {
+				onSuccessHandler(routes, newDirectionRenderer);
+			}
+		}
+	});
+};

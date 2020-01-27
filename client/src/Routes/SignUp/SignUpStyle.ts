@@ -2,6 +2,10 @@ import styled from "styled-components";
 import Form from "../../Components/Form";
 import Input from "../../Components/Input";
 
+export const Container = styled.div`
+	margin-top: 100px;
+`;
+
 export const FromExtend = styled(Form)`
 	margin: 0px 20px;
 	height: 80%;
