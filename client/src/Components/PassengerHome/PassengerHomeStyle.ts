@@ -19,7 +19,7 @@ export const Center = styled.div`
 export const RequestButton = styled(Button)`
 	position: absolute;
 	bottom: 20px;
-	z-index: 1;
+	z-index: 2;
 	width: 50%;
 	right: 0;
 	left: 0;
