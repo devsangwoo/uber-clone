@@ -12,5 +12,5 @@ export const Button = styled.button`
 	border: none;
 	width: 40px;
 	height: 40px;
-	z-index: 2;
+	z-index: 3;
 `;

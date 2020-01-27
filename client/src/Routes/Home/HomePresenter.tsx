@@ -37,7 +37,7 @@ const HomePresenter: React.FC<IProps> = ({
 		zIndex: "10"
 	};
 
-	const menuIconStyle = { zIndex: "2", top: "15px", left: "1vw" };
+	const menuIconStyle = { top: "15px", left: "1vw" };
 
 	return (
 		<S.Contaier>
