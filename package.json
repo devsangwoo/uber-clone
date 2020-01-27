@@ -1,79 +1,67 @@
 {
-  "name": "nuber_client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@apollo/react-hooks": "^3.1.3",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/googlemaps": "^3.39.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.3",
-    "@types/styled-components": "^4.4.2",
-    "apollo-boost": "^0.4.7",
-    "apollo-link-state": "^0.4.2",
-    "apollo-link-ws": "^1.0.19",
-    "axios": "^0.19.1",
-    "gh-pages": "^2.2.0",
-    "google-maps-react": "^2.0.2",
-    "graphql": "^14.5.8",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "react-sidebar": "^3.0.2",
-    "react-toastify": "^5.5.0",
-    "styled-components": "^4.4.1",
-    "styled-reset": "^4.0.9",
-    "subscriptions-transport-ws": "^0.9.16",
-    "typescript": "~3.7.2"
+  "name": "nuber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.d.ts",
+    "dev:types": "npm run types",
+    "dev:server": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
+    "dev:client": "npm start --prefix client",
+    "dev": "concurrently npm:dev:*",
+    "tsc": "tsc",
+    "prebuild": "rm -rf dist",
+    "postinstall": "npm run tsc",
+    "build:server": "tsc",
+    "build": "concurrently npm:build:*",
+    "build:client": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "postbuild": "cp ./src/api/**/**/*.graphql ./dist/api/ && mkdir ./dist/client && cp -av ./client/build ./dist/client/",
+    "start:server": "node ./dist/index.js",
+    "start": "concurrently npm:start:*"
   },
   "husky": {
     "hooks": {
       "prepare-commit-msg": "./scripts/add_issue_number_into_commit.sh $HUSKY_GIT_PARAMS"
     }
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "codegen": "apollo codegen:generate src/types/api.d.ts --queries='src/**/!(*.local).ts' --addTypename --endpoint=http://localhost:4000/graphql --target typescript --outputFlat",
-    "predeploy" : "npm run build",
-    "deploy": "gh-pages -d build",
-    "postdeploy": "rm -rf build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "@types/google-maps": "^3.2.1",
-    "@types/google-maps-react": "^2.0.3",
-    "@types/react-facebook-login": "^4.1.1",
-    "@types/react-sidebar": "^3.0.0",
-    "husky": "^4.0.7",
-    "react-facebook-login": "^4.1.1",
-    "tslint": "^5.20.1",
+    "@types/cors": "^2.8.6",
+    "@types/helmet": "0.0.45",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/morgan": "^1.7.37",
+    "@types/node": "^13.1.1",
+    "@types/nodemailer": "^6.4.0",
+    "@types/twilio": "^2.11.0",
+    "babel-runtime": "^6.26.0",
+    "gql-merge": "0.0.6",
+    "graphql-to-typescript": "^0.1.2",
+    "husky": "^3.1.0",
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.5.4",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^4.1.0"
+    "typescript": "^3.7.4"
   },
-  "homepage":"https://naamoonoo.github.io/nuber_client"
+  "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "axios": "^0.19.1",
+    "bcrypt": "^3.0.7",
+    "class-validator": "^0.11.0",
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql-tools": "^4.0.6",
+    "graphql-yoga": "^1.18.3",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "merge-graphql-schemas": "^1.7.4",
+    "morgan": "^1.9.1",
+    "nodemailer": "^6.4.2",
+    "pg": "^7.16.0",
+    "twilio": "^3.39.1",
+    "typeorm": "^0.2.22"
+  }
 }

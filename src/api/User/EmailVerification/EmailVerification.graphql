@@ -1,0 +1,14 @@
+type EmailVerificationResponse {
+	res: Boolean!
+	error: String
+}
+
+type ValidateEmailVerificationResponse {
+	res: Boolean!
+	error: String
+}
+
+type Mutation {
+	EmailVerification: EmailVerificationResponse!
+	ValidateEmailVerification(key: String!): ValidateEmailVerificationResponse!
+}

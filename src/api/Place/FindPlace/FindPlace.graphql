@@ -1,0 +1,9 @@
+type FindPlaceResponse {
+	res: Boolean!
+	error: String
+	place: Place
+}
+
+type Query {
+	FindPlace(name: String!, lat: Float!, lng: Float!): FindPlaceResponse!
+}

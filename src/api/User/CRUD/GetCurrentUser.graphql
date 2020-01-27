@@ -1,0 +1,9 @@
+type GetCurrentUserResponse {
+	res: Boolean!
+	error: String
+	user: User
+}
+
+type Query {
+	GetCurrentUser: GetCurrentUserResponse!
+}

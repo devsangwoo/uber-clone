@@ -1,0 +1,18 @@
+type PhoneVerificationResponse {
+	res: Boolean!
+	error: String
+}
+
+type ValidatePhoneVerificationResponse {
+	res: Boolean!
+	error: String
+	token: String
+}
+
+type Mutation {
+	PhoneVerification(phoneNumber: String!): PhoneVerificationResponse!
+	ValidatePhoneVerification(
+		phoneNumber: String!
+		key: String!
+	): ValidatePhoneVerificationResponse!
+}

@@ -1,0 +1,10 @@
+type Message {
+	id: Int!
+	text: String!
+	chatId: Int
+	chat: Chat!
+	userId: Int
+	user: User!
+	createAt: String!
+	updateAt: String!
+}
