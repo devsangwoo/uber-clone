@@ -29,6 +29,7 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 	const {
 		params: { chatId }
 	} = match;
+
 	const [rideId, setRideId] = useState<number>(-1);
 	const [message, onChangeMessage, setMessage] = useInput("");
 	const [messages, setMessages] = useState<any[]>();

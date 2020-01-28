@@ -1,6 +1,5 @@
 import React from "react";
 import Routes from "..";
-import Container from "../../Components/Container";
 import Header from "../../Components/Header";
 import Message from "../../Components/Message";
 import * as S from "./ChatStyle";
@@ -34,7 +33,7 @@ const ChatPresenter: React.FC<IProps> = ({
 	rideId
 }) => {
 	return (
-		<Container>
+		<S.Container>
 			<Header title="Chat" backTo={Routes.RIDE + `${rideId}`} />
 			<S.Chat>{messages && renderMessage(messages)}</S.Chat>
 			<S.Form onSubmit={sendMessageMutation}>
@@ -45,7 +44,7 @@ const ChatPresenter: React.FC<IProps> = ({
 				/>
 				<S.Button type={"submit"}>SEND</S.Button>
 			</S.Form>
-		</Container>
+		</S.Container>
 	);
 };
 

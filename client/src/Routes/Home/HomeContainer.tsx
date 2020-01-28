@@ -50,14 +50,6 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 		}
 	});
 
-	// const screenCapture = html2canvas(document.body).then(canvas => {
-	// 	// Export the canvas to its data URI representation
-	// 	const base64image = canvas.toDataURL("image/png");
-
-	// 	// Open the image in a new window
-	// 	window.open(base64image, "_blank");
-	// });
-
 	useEffect(() => {
 		if (map) {
 			const { lat: getLat, lng: getLng } = map.getCenter();
@@ -77,7 +69,7 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 
 	useEffect(() => {
 		if (userMarker && map) {
-			navigator.geolocation.watchPosition(
+			const watchId = navigator.geolocation.watchPosition(
 				position => {
 					const {
 						coords: { latitude: lat, longitude: lng }
@@ -91,6 +83,9 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 				},
 				{ enableHighAccuracy: true }
 			);
+			return () => {
+				navigator.geolocation.clearWatch(watchId);
+			};
 		}
 	}, [map, userMarker, setUserCoords, reportMovementMutation]);
 

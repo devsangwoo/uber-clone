@@ -53,7 +53,7 @@ class User extends BaseEntity {
 
 	@Column({
 		type: "text",
-		default: "http://simpleicon.com/wp-content/uploads/user1.svg",
+		default: "https://simpleicon.com/wp-content/uploads/user1.svg",
 		nullable: true
 	})
 	profilePhoto: string;

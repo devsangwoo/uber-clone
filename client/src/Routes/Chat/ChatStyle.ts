@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+	margin-top: 100px;
+`;
+
 export const Chat = styled.div`
 	height: 80vh;
 	overflow: scroll;

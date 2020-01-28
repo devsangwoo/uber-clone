@@ -6,7 +6,9 @@ export const RideContainer = styled.div`
 	padding: 30px 40px;
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+	margin-top: 100px;
+`;
 
 export const Title = styled.h4`
 	font-weight: 800;

@@ -1,5 +1,7 @@
 import React from "react";
 import PopUp from "../PopUp";
+import SideBarMenu from "../SideBarMenu";
+
 import { IRequest } from "./DriverHomeContainer";
 
 import * as S from "./DriverHomeStyle";
@@ -17,6 +19,7 @@ const DriverHomePresenter: React.FC<IProps> = ({
 }) => {
 	return (
 		<S.Container>
+			<SideBarMenu />
 			{ride && ride.price && ride.distance && ride.duration && (
 				<PopUp
 					isDriver={true}

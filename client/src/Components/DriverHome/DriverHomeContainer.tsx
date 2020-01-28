@@ -85,7 +85,7 @@ const DriverHomeContainer: React.FC<IProps> = ({ history }) => {
 	// even ride queue updated, it still showing ride popup
 	return (
 		<DriverHomePresenter
-			ride={rideQueue[0]}
+			ride={currentRide}
 			onCancelHandler={onCancelHandler}
 			onAcceptHandler={onAcceptHandler}
 		/>

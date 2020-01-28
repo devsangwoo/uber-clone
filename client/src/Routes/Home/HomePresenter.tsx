@@ -1,10 +1,10 @@
 import React from "react";
-import SideBar from "react-sidebar";
-import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
+// import SideBar from "react-sidebar";
+// import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import DriverHome from "../../Components/DriverHome";
-import IconButton from "../../Components/IconButton";
+// import IconButton from "../../Components/IconButton";
 import Maps from "../../Components/Maps";
-import Menu from "../../Components/Menu";
+// import Menu from "../../Components/Menu";
 import PassengerHome from "../../Components/PassengerHome";
 import { GetCurrentUser } from "../../types/api";
 import { ICoords } from "../../utils/mapHelpers";
@@ -31,22 +31,22 @@ const HomePresenter: React.FC<IProps> = ({
 	toggleSideBar,
 	setMap
 }) => {
-	const sidebarStyle = {
-		backgroundColor: "white",
-		width: "70%",
-		zIndex: "10"
-	};
+	// const sidebarStyle = {
+	// 	backgroundColor: "white",
+	// 	width: "70%",
+	// 	zIndex: "10"
+	// };
 
-	const menuIconStyle = {
-		left: "1vw",
-		position: "relative",
-		top: "15px",
-		zIndex: "5"
-	};
+	// const menuIconStyle = {
+	// 	left: "1vw",
+	// 	position: "relative",
+	// 	top: "15px",
+	// 	zIndex: "5"
+	// };
 
 	return (
 		<S.Contaier>
-			<SideBar
+			{/* <SideBar
 				sidebar={<Menu />}
 				open={openStatus}
 				onSetOpen={toggleSideBar}
@@ -55,7 +55,7 @@ const HomePresenter: React.FC<IProps> = ({
 				<IconButton onClick={toggleSideBar} style={menuIconStyle}>
 					<MenuIcon />
 				</IconButton>
-			</SideBar>
+			</SideBar> */}
 			{user!.isDriving ? (
 				<DriverHome />
 			) : (

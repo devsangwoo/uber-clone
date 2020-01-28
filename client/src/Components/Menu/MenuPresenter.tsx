@@ -24,7 +24,7 @@ const MenuPresenter: React.FC<IProps> = ({
 								<S.Image
 									src={
 										user.profilePhoto ||
-										"https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
+										"https://simpleicon.com/wp-content/uploads/user1.svg"
 									}
 								/>
 							</Link>

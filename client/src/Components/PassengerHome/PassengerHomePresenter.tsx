@@ -1,15 +1,16 @@
+import html2canvas from "html2canvas";
 import React from "react";
 import { ReactComponent as AddIcon } from "../../assets/icons/add.svg";
 import { ReactComponent as AddEmptyIcon } from "../../assets/icons/addEmpty.svg";
-import AddressBar from "../../Components/AddressBar";
-import Form from "../../Components/Form";
-import IconButton from "../../Components/IconButton";
-import PopUp from "../../Components/PopUp";
 import { StatusOptions } from "../../types/enums"; // import enum from declaration file cause fater error, kind of bug
+import { base64Uploader } from "../../utils/fileUploader";
+import AddressBar from "../AddressBar";
+import Form from "../Form";
+import IconButton from "../IconButton";
+import PopUp from "../PopUp";
+import SideBarMenu from "../SideBarMenu";
 import { IRideVariables } from "./PassengerHomeContainer";
 import * as S from "./PassengerHomeStyle";
-import { base64Uploader } from "../../utils/fileUploader";
-import html2canvas from "html2canvas";
 
 interface IProps {
 	address: string;
@@ -59,7 +60,6 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 			if (res) {
 				setRideVariables({ rideImage: res, price, duration, distance });
 			}
-			// window.URL.revokeObjectURL(url);
 		}
 		requestRideMutation();
 	};
@@ -67,6 +67,7 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 	const addIconStyle = { top: "15px", right: "1vw" };
 	return (
 		<React.Fragment>
+			<SideBarMenu />
 			<IconButton onClick={onClickHandlerByAddMode} style={addIconStyle}>
 				{addMode ? <AddIcon /> : <AddEmptyIcon />}
 			</IconButton>
