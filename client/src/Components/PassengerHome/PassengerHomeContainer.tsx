@@ -38,6 +38,7 @@ export interface IRideVariables {
 	distance: string;
 	duration: string;
 	price: number;
+	rideImage: string;
 }
 
 const PassengerHomeContainer: React.FC<IProps> = ({
@@ -60,7 +61,8 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 	const [rideVariables, setRideVariables] = useState<IRideVariables>({
 		distance: "",
 		duration: "",
-		price: 0
+		price: 0,
+		rideImage: ""
 	});
 	const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
 	const [addMode, setAddMode] = useState(false);
@@ -144,6 +146,7 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 	>(REQUEST_RIDE, {
 		onCompleted: ({ RequestRide }) => {
 			const { ride } = RequestRide;
+			console.log(ride);
 			if (ride) {
 				setRideId(ride.id);
 				fetchRideStatus();
@@ -234,47 +237,10 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 			duration: { text: duration }
 		} = routes[0].legs[0];
 		const price = parseFloat(distance.split(" ")[0]) * 2;
-		setRideVariables({ distance, duration, price });
+		setRideVariables({ ...rideVariables, distance, duration, price });
 		setReqButtonShow(true);
 		setDirectionRender(directionRenderer);
 	};
-
-	// const renderPath = (targetGeoCode: ICoords) => {
-	// 	const renderOption: google.maps.DirectionsRendererOptions = {
-	// 		polylineOptions: {
-	// 			strokeColor: "#000" // black
-	// 		},
-	// 		suppressMarkers: true
-	// 	};
-	// 	const newDirectionRenderer = new google.maps.DirectionsRenderer(
-	// 		renderOption
-	// 	);
-	// 	const directionService = new google.maps.DirectionsService();
-	// 	const destination = new google.maps.LatLng(userCoords);
-	// 	const origin = new google.maps.LatLng(targetGeoCode);
-	// 	const directionServiceOption: google.maps.DirectionsRequest = {
-	// 		destination,
-	// 		origin,
-	// 		travelMode: google.maps.TravelMode.DRIVING
-	// 	};
-	// 	directionService.route(directionServiceOption, (result, status) => {
-	// 		if (status === google.maps.DirectionsStatus.OK) {
-	// 			const { routes } = result;
-	// 			const {
-	// 				distance: { text: distance },
-	// 				duration: { text: duration }
-	// 			} = routes[0].legs[0];
-	// 			const price = parseFloat(distance.split(" ")[0]) * 2;
-	// 			setRideVariables({ distance, duration, price });
-	// 			newDirectionRenderer.setDirections(result);
-	// 			if (map) {
-	// 				newDirectionRenderer.setMap(map);
-	// 				setReqButtonShow(true);
-	// 				setDirectionRender(newDirectionRenderer);
-	// 			}
-	// 		}
-	// 	});
-	// };
 
 	const onClickHandlerByAddMode = async () => {
 		setReqButtonShow(false);
@@ -301,6 +267,7 @@ const PassengerHomeContainer: React.FC<IProps> = ({
 			rideId={rideId}
 			stopPolling={stopPolling}
 			cancelRideMutation={cancelRideMutation}
+			setRideVariables={setRideVariables}
 		/>
 	);
 };

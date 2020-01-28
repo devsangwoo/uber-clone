@@ -50,6 +50,14 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 		}
 	});
 
+	// const screenCapture = html2canvas(document.body).then(canvas => {
+	// 	// Export the canvas to its data URI representation
+	// 	const base64image = canvas.toDataURL("image/png");
+
+	// 	// Open the image in a new window
+	// 	window.open(base64image, "_blank");
+	// });
+
 	useEffect(() => {
 		if (map) {
 			const { lat: getLat, lng: getLng } = map.getCenter();

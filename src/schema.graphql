@@ -36,7 +36,7 @@ type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(id: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse
-  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, duration: String!, distance: String!, price: Float!): RequestRideResponse!
+  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, duration: String!, distance: String!, price: Float!, rideImage: String!): RequestRideResponse!
   TakeRequestedRide(rideId: Int!): TakeRequestedRideResponse!
   UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!
   UpdateCurrentUser(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int, phoneNumber: String): UpdateCurrentUserRespone!
@@ -158,6 +158,7 @@ type Ride {
   driverId: Int
   chat: Chat
   chatId: Int
+  rideImage: String
   currentUsers: [User]
   createAt: String!
   updateAt: String!

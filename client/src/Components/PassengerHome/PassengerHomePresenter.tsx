@@ -8,6 +8,8 @@ import PopUp from "../../Components/PopUp";
 import { StatusOptions } from "../../types/enums"; // import enum from declaration file cause fater error, kind of bug
 import { IRideVariables } from "./PassengerHomeContainer";
 import * as S from "./PassengerHomeStyle";
+import { base64Uploader } from "../../utils/fileUploader";
+import html2canvas from "html2canvas";
 
 interface IProps {
 	address: string;
@@ -23,6 +25,7 @@ interface IProps {
 	rideId?: number;
 	cancelRideMutation: any;
 	stopPolling: any;
+	setRideVariables: any;
 }
 
 const PassengerHomePresenter: React.FC<IProps> = ({
@@ -38,8 +41,29 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 	pickUpAddress,
 	rideId,
 	cancelRideMutation,
-	stopPolling
+	stopPolling,
+	setRideVariables
 }) => {
+	const onRequestRide = async () => {
+		const map = document.getElementById("googleMap");
+		if (map) {
+			const canvas = await html2canvas(map, {
+				allowTaint: false,
+				ignoreElements: node => {
+					return node.nodeName === "IFRAME";
+				},
+				useCORS: true
+			});
+			const url = canvas.toDataURL("image/png");
+			const res = await base64Uploader(url);
+			if (res) {
+				setRideVariables({ rideImage: res, price, duration, distance });
+			}
+			// window.URL.revokeObjectURL(url);
+		}
+		requestRideMutation();
+	};
+
 	const addIconStyle = { top: "15px", right: "1vw" };
 	return (
 		<React.Fragment>
@@ -58,7 +82,7 @@ const PassengerHomePresenter: React.FC<IProps> = ({
 			)}
 			{reqButtonShow && (
 				<S.RequestButton
-					onClick={requestRideMutation}
+					onClick={onRequestRide}
 					value={`Request a Ride($${price})`}
 				/>
 			)}

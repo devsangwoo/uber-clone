@@ -39,9 +39,9 @@ const HomePresenter: React.FC<IProps> = ({
 
 	const menuIconStyle = {
 		left: "1vw",
-		position: "absolute",
+		position: "relative",
 		top: "15px",
-		zIndex: "3"
+		zIndex: "5"
 	};
 
 	return (

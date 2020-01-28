@@ -53,6 +53,9 @@ class Ride extends BaseEntity {
 	@Column({ type: "text", default: "null" })
 	duration: string;
 
+	@Column({ type: "text", nullable: true, default: "" }) // should fix
+	rideImage: string;
+
 	@ManyToOne(
 		type => User,
 		user => user.rideAsPassenger

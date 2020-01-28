@@ -10,11 +10,8 @@ export const GET_RIDES_HISTORY = gql`
 				dropOffAddress
 				price
 				updateAt
-				pickUpLat
-				pickUpLng
-				dropOffLat
-				dropOffLng
 				status
+				rideImage
 			}
 		}
 	}

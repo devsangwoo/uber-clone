@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const MapsPresenter: React.FC<IProps> = ({ mapRef, isHome }) => {
-	return <S.Map ref={mapRef} isHome={isHome} />;
+	return <S.Map id={"googleMap"} ref={mapRef} isHome={isHome} />;
 };
 
 export default MapsPresenter;

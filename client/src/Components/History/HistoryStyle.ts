@@ -9,6 +9,15 @@ export const Container = styled.div`
 	height: 600px;
 `;
 
+export const Image = styled.img`
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: block;
+	justify-content: center;
+	align-items: center;
+`;
+
 export const MapContainer = styled.div`
 	display: block;
 	justify-content: center;
