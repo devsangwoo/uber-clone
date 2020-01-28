@@ -21,19 +21,20 @@ const SideBarMenuPresenter: React.FC<IProps> = () => {
 	};
 
 	return (
-		<SideBar
-			sidebar={<Menu />}
-			open={openStatus}
-			onSetOpen={() => setOpenStatus(!openStatus)}
-			styles={{ sidebar: sidebarStyle }}
-		>
+		<React.Fragment>
+			<SideBar
+				sidebar={<Menu />}
+				open={openStatus}
+				onSetOpen={() => setOpenStatus(!openStatus)}
+				styles={{ sidebar: sidebarStyle }}
+			/>
 			<IconButton
 				onClick={() => setOpenStatus(!openStatus)}
 				style={menuIconStyle}
 			>
 				<MenuIcon />
 			</IconButton>
-		</SideBar>
+		</React.Fragment>
 	);
 };
 
