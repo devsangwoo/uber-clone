@@ -3,7 +3,6 @@ import SideBar from "react-sidebar";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import IconButton from "../IconButton";
 import Menu from "../Menu";
-import * as S from "./SideBarMenuStyle";
 
 interface IProps {}
 

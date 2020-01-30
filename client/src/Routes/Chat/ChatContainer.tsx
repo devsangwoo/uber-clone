@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useSubscription } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { animateScroll } from "react-scroll";
 import { toast } from "react-toastify";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
@@ -44,6 +45,7 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 			const { res, error, chat } = GetChatById;
 			if (res && chat && chat.rideId) {
 				setRideId(chat.rideId);
+				animateScroll.scrollToBottom();
 			} else {
 				toast.error(error);
 			}
