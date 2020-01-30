@@ -2,40 +2,56 @@ import React from "react";
 import Routes from "..";
 import Header from "../../Components/Header";
 import Message from "../../Components/Message";
+import {
+	GetChatById,
+	GetChatById_GetChatById_chat,
+	GetCurrentUser,
+	GetCurrentUser_GetCurrentUser_user
+} from "../../types/api";
 import * as S from "./ChatStyle";
 
 interface IProps {
-	messages?: any[];
+	chatData?: GetChatById;
+	currentUser?: GetCurrentUser;
 	message: string;
 	onChangeMessage: (event: React.ChangeEvent<Element>) => any;
 	sendMessageMutation: any;
-	backFn: () => any;
 	rideId: number;
 }
 
-const renderMessage = (messages: any[]) => {
-	return messages.map((message, idx) => {
-		return (
-			<Message
-				key={`${idx * message.userId * message.text.length}`}
-				{...message}
-			/>
-		);
-	});
+const renderMessage = (
+	chat: GetChatById_GetChatById_chat,
+	user: GetCurrentUser_GetCurrentUser_user
+) => {
+	if (chat.messages) {
+		const { messages } = chat;
+		return messages.map(message => {
+			if (message) {
+				return (
+					<Message
+						key={`${Math.random().toString()}`}
+						{...message}
+						mine={user.id === message.userId}
+					/>
+				);
+			}
+			return null;
+		});
+	}
 };
 
 const ChatPresenter: React.FC<IProps> = ({
-	messages,
+	chatData: { GetChatById: { chat = null } = {} } = {},
+	currentUser: { GetCurrentUser: { user = null } = {} } = {},
 	message,
 	onChangeMessage,
 	sendMessageMutation,
-	backFn,
 	rideId
 }) => {
 	return (
 		<S.Container>
 			<Header title="Chat" backTo={Routes.RIDE + `${rideId}`} />
-			<S.Chat>{messages && renderMessage(messages)}</S.Chat>
+			<S.Chat>{chat && user && renderMessage(chat, user)}</S.Chat>
 			<S.Form onSubmit={sendMessageMutation}>
 				<S.Input
 					value={message}

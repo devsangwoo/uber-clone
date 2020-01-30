@@ -32,29 +32,18 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 
 	const [rideId, setRideId] = useState<number>(-1);
 	const [message, onChangeMessage, setMessage] = useInput("");
-	const [messages, setMessages] = useState<any[]>();
 	const { data: userData } = useQuery<GetCurrentUser>(GET_CURRENT_USER, {
 		fetchPolicy: "network-only"
 	});
 
-	useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
+	const { data: chatData, refetch } = useQuery<
+		GetChatById,
+		GetChatByIdVariables
+	>(GET_CHAT_BY_ID, {
 		onCompleted: ({ GetChatById }) => {
 			const { res, error, chat } = GetChatById;
-			if (res && chat && chat.rideId && chat.messages && userData) {
+			if (res && chat && chat.rideId) {
 				setRideId(chat.rideId);
-				const messages = chat.messages.map(message => {
-					if (message) {
-						return {
-							...message,
-							mine:
-								userData.GetCurrentUser.user?.id ===
-								message.userId
-						};
-					} else {
-						return null;
-					}
-				});
-				setMessages(messages);
 			} else {
 				toast.error(error);
 			}
@@ -68,23 +57,7 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 		onSubscriptionComplete: () => {
 			console.log("listening new message");
 		},
-		onSubscriptionData: ({ subscriptionData }) => {
-			const { data } = subscriptionData;
-			if (data && messages && userData) {
-				const { MessageSubscription } = data;
-				if (MessageSubscription) {
-					setMessages([
-						...messages,
-						{
-							...MessageSubscription,
-							mine:
-								userData.GetCurrentUser.user!.id ===
-								MessageSubscription.userId
-						}
-					]);
-				}
-			}
-		}
+		onSubscriptionData: () => refetch()
 	});
 
 	const [sendMessageMutation] = useMutation<
@@ -92,17 +65,10 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 		SendMessageVariables
 	>(SEND_MESSAGE, {
 		onCompleted: ({ SendChatMessage }) => {
-			const { res, error, message } = SendChatMessage;
-			if (res && message && messages && userData) {
-				setMessages([
-					...messages,
-					{
-						...message,
-						mine:
-							userData.GetCurrentUser.user?.id === message.userId
-					}
-				]);
+			const { res, error } = SendChatMessage;
+			if (res) {
 				setMessage("");
+				refetch();
 			} else {
 				toast.error(error);
 			}
@@ -115,11 +81,11 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 
 	return (
 		<ChatPresenter
-			messages={messages}
+			chatData={chatData}
+			currentUser={userData}
 			message={message}
 			onChangeMessage={onChangeMessage}
 			sendMessageMutation={sendMessageMutation}
-			backFn={history.goBack}
 			rideId={rideId}
 		/>
 	);

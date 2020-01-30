@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { generateMarker, renderPath } from "../../utils/mapHelpers";
-import Maps from "../Maps";
+import React from "react";
 import * as S from "./HistoryStyle";
 
 interface IProps {
@@ -10,16 +8,6 @@ interface IProps {
 const HistoryPresenter: React.FC<IProps> = ({
 	rideData: { pickUpAddress, dropOffAddress, status, updateAt, rideImage }
 }) => {
-	// const [map, setMap] = useState<google.maps.Map>();
-
-	// if (map) {
-	// 	const pickUpGeoCode = { lat: pickUpLat, lng: pickUpLng };
-	// 	const dropOffGeoCode = { lat: dropOffLat, lng: dropOffLng };
-	// 	generateMarker(map, pickUpGeoCode);
-	// 	generateMarker(map, dropOffGeoCode);
-	// 	renderPath(map, pickUpGeoCode, dropOffGeoCode);
-	// }
-
 	return (
 		<S.Container>
 			<S.Status>{status}</S.Status>
