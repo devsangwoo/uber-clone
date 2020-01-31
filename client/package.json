@@ -32,6 +32,7 @@
     "react-scripts": "3.3.0",
     "react-sidebar": "^3.0.2",
     "react-toastify": "^5.5.0",
+    "serialize-javascript": "^2.1.2",
     "styled-components": "^4.4.1",
     "styled-reset": "^4.0.9",
     "subscriptions-transport-ws": "^0.9.16",
