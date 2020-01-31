@@ -30,7 +30,6 @@
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-    "react-scroll": "^1.7.16",
     "react-sidebar": "^3.0.2",
     "react-toastify": "^5.5.0",
     "styled-components": "^4.4.1",

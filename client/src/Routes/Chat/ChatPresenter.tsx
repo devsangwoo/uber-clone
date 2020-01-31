@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Routes from "..";
 import Header from "../../Components/Header";
 import Message from "../../Components/Message";
@@ -48,12 +48,22 @@ const ChatPresenter: React.FC<IProps> = ({
 	sendMessageMutation,
 	rideId
 }) => {
+	const ref = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		if (ref && ref.current) {
+			ref.current.scrollTop = ref.current.scrollHeight;
+		}
+	}, [chat]);
+
 	return (
 		<S.Container>
 			<Header title="Chat" backTo={Routes.RIDE + `${rideId}`} />
-			<S.Chat>{chat && user && renderMessage(chat, user)}</S.Chat>
+			<S.Chat ref={ref}>
+				{chat && user && renderMessage(chat, user)}
+			</S.Chat>
 			<S.Form onSubmit={sendMessageMutation}>
 				<S.Input
+					id="char_input"
 					value={message}
 					onChange={onChangeMessage}
 					placeholder={"Send a message"}
