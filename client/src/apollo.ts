@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const isDev = process.env.NODE_ENV === "development";
 
 const getToken = () => {
-	const token = sessionStorage.getItem("X-JWT");
+	const token = localStorage.getItem("X-JWT");
 	if (token) {
 		return token;
 	} else {
@@ -68,20 +68,20 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 	}
 });
 
-// should fix sessionStorage => localStorage
+// should fix localStorage => localStorage
 // only for test purpose
 const localStateLink = withClientState({
 	cache,
 	defaults: {
 		auth: {
 			__typename: "Auth",
-			isLoggedIn: Boolean(sessionStorage.getItem("X-JWT"))
+			isLoggedIn: Boolean(localStorage.getItem("X-JWT"))
 		}
 	},
 	resolvers: {
 		Mutation: {
 			userLogIn: (_: any, { token }: any, { cache: appCache }: any) => {
-				sessionStorage.setItem("X-JWT", token);
+				localStorage.setItem("X-JWT", token);
 				appCache.writeData({
 					data: {
 						auth: {
@@ -93,7 +93,7 @@ const localStateLink = withClientState({
 				return null;
 			},
 			userLogOut: (_: any, __: any, { cache: appCache }: any) => {
-				sessionStorage.removeItem("X-JWT");
+				localStorage.removeItem("X-JWT");
 				appCache.writeData({
 					data: {
 						auth: {

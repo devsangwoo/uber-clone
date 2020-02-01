@@ -22,7 +22,11 @@ const VerifyPhonePresenter: React.FC<IProps> = ({
 		<S.Container>
 			<Header backTo="/phone-login" title={"Verify Phone Number"} />
 			<S.FormExtended submitFn={submitFn}>
-				<S.InputExtended value={value} onChange={onChange} />
+				<S.InputExtended
+					value={value}
+					onChange={onChange}
+					autoFocus={true}
+				/>
 				<Button
 					value={loading ? "verifying..." : "submit"}
 					disabled={loading}

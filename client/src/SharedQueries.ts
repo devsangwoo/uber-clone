@@ -18,6 +18,7 @@ export const GET_CURRENT_USER = gql`
 				verifiedPhoneNumber
 				profilePhoto
 				currentRideId
+				createAt
 			}
 		}
 	}
@@ -26,6 +27,15 @@ export const GET_CURRENT_USER = gql`
 export const UPDATE_RIDE = gql`
 	mutation UpdateRideStatus($rideId: Int!, $status: StatusOptions!) {
 		UpdateRideStatus(rideId: $rideId, status: $status) {
+			res
+			error
+		}
+	}
+`;
+
+export const REQUEST_EMAIL_VERIFICATION = gql`
+	mutation EmailVerification {
+		EmailVerification {
 			res
 			error
 		}

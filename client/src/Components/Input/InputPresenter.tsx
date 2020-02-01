@@ -9,6 +9,7 @@ interface IProps {
 	name?: string;
 	onChange: any;
 	className?: string;
+	autoFocus?: boolean;
 }
 
 const InputPresenter: React.SFC<IProps> = ({
@@ -18,7 +19,8 @@ const InputPresenter: React.SFC<IProps> = ({
 	value,
 	name = "",
 	onChange,
-	className
+	className,
+	autoFocus
 }) => (
 	<S.Input
 		className={className}
@@ -28,6 +30,7 @@ const InputPresenter: React.SFC<IProps> = ({
 		required={required}
 		value={value}
 		placeholder={placeholder}
+		autoFocus={autoFocus}
 	/>
 );
 

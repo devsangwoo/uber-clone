@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Routes from "..";
 import { useTitle } from "../../utils/hooks";
+import Routes from "../routes";
 import * as S from "./LoginStyle";
 
 const LoginPresenter: React.FC = () => {

@@ -50,6 +50,7 @@ const PhoneLoginPresenter: React.FC<IProps> = ({
 					value={phoneNumber}
 					name={"phoneNumber"}
 					onChange={onInputChange}
+					autoFocus={true}
 				/>
 				<S.Button>{loading ? <Loading /> : <NextArrow />}</S.Button>
 			</Form>

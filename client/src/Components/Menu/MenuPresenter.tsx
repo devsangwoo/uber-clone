@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Routes from "../../Routes";
+import Routes from "../../Routes/routes";
 import * as S from "./MenuStyle";
 
 interface IProps {

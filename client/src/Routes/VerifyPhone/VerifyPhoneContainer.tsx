@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import Routes from "..";
 import { USER_LOG_IN } from "../../SharedQueries.local";
 import {
 	ValidatePhoneVerification,
@@ -10,6 +9,7 @@ import {
 } from "../../types/api";
 import { forceHistory } from "../../utils/forceHistory";
 import { useInput } from "../../utils/hooks";
+import Routes from "../routes";
 import VerifyPhonePresenter from "./VerifyPhonePresenter";
 import { VALIDATE_PHONE_VERIFICATION } from "./VerifyPhoneQueries";
 
@@ -35,7 +35,7 @@ const VerifyPhoneContainer: React.FC<IProps> = ({ history, location }) => {
 				if (token) {
 					toast.success("verified");
 					userLogInMutation({ variables: { token } });
-					forceHistory.push(Routes.HOME);
+					forceHistory.push(Routes.NUBER);
 				} else {
 					toast.success("verified, but should sign up first");
 					history.push({

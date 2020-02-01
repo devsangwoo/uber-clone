@@ -9,7 +9,7 @@
     "dev:types": "npm run types",
     "dev:server": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
     "dev:client": "npm start --prefix client",
-    "dev": "concurrently npm:dev:*",
+    "dev": "NODE_ENV=development concurrently npm:dev:*",
     "tsc": "tsc",
     "prebuild": "rm -rf dist",
     "postinstall": "npm run tsc",

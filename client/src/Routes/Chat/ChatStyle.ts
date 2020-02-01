@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Form from "../../Components/Form";
 
 export const Container = styled.div`
 	margin-top: 100px;
@@ -17,7 +18,7 @@ export const InputCont = styled.div`
 	padding: 0 20px;
 `;
 
-export const Form = styled.form`
+export const FormExtend = styled(Form)`
 	position: absolute;
 	bottom: 0px;
 	display: inline-flex;

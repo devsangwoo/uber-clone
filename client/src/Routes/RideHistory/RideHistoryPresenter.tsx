@@ -1,5 +1,5 @@
 import React from "react";
-import Routes from "..";
+import Routes from "../routes";
 import Container from "../../Components/Container";
 import Header from "../../Components/Header";
 import History from "../../Components/History";
@@ -44,7 +44,7 @@ const RideHistoryPresenter: React.FC<IProps> = ({
 		<Container>
 			<Header
 				title="Ride History"
-				backFn={() => forceHistory.push(Routes.HOME)}
+				backFn={() => forceHistory.push(Routes.NUBER)}
 			/>
 			<S.Container>{renderRideHistory()}</S.Container>
 			<S.ToggleSwitch>

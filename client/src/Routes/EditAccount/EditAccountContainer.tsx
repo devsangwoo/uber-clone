@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import Routes from "..";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetCurrentUser,
@@ -11,6 +10,7 @@ import {
 } from "../../types/api";
 import { fileUploader } from "../../utils/fileUploader";
 import { forceHistory } from "../../utils/forceHistory";
+import Routes from "../routes";
 import EditAccountPresenter from "./EditAccountPresenter";
 import { EDIT_USER } from "./EditAccountQueries";
 
@@ -44,6 +44,8 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 	// useState way
 	const [inputState, setInputState] = useState(initialState);
 	const [uploading, setUploading] = useState(false);
+	const [emailVerified, setEmailVerified] = useState(false);
+	const [phoneVerified, setPhoneVerified] = useState(false);
 
 	useQuery<GetCurrentUser>(GET_CURRENT_USER, {
 		fetchPolicy: "cache-and-network",
@@ -65,6 +67,10 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 					phoneNumber: phoneNumber || "",
 					profilePhoto: profilePhoto || ""
 				});
+
+				setEmailVerified(user.verifiedEmail || false);
+				console.log(user.verifiedPhoneNumber);
+				setPhoneVerified(user.verifiedPhoneNumber || false);
 			}
 		}
 	});
@@ -77,7 +83,7 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 			const { res, error } = UpdateCurrentUserResult;
 			if (res) {
 				toast.success("Your accout info has been updated");
-				forceHistory.push(Routes.HOME);
+				forceHistory.push(Routes.NUBER);
 			} else {
 				toast.error(error);
 			}
@@ -132,6 +138,8 @@ const EditAccountContainer: React.FC<IProps> = ({ history }) => {
 			inputProps={inputState}
 			onChangeHandler={onHandleChange}
 			uploading={uploading}
+			emailVerified={emailVerified}
+			phoneVerified={phoneVerified}
 		/>
 	);
 };

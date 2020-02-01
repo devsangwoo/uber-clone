@@ -1,5 +1,5 @@
 import React from "react";
-import Routes from "..";
+import Routes from "../routes";
 import { ReactComponent as ChatIcon } from "../../assets/icons/chat.svg";
 import Button from "../../Components/Button";
 import Header from "../../Components/Header";
@@ -41,7 +41,7 @@ const RidePresenter: React.FC<IProps> = ({
 	return (
 		<S.Container>
 			<React.Fragment>
-				<Header title={"Ride"} backTo={Routes.HOME} />
+				<Header title={"Ride"} backTo={Routes.NUBER} />
 				<S.RideContainer>
 					<S.Img
 						src={

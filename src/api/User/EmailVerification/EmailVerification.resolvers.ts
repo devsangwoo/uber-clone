@@ -30,6 +30,9 @@ const resolvers: Resolvers = {
 							newVerification.payload,
 							newVerification.key
 						);
+						user.email = newVerification.payload;
+						user.verifiedEmail = false;
+						user.save();
 						return {
 							res: true,
 							error: null
@@ -55,8 +58,10 @@ const resolvers: Resolvers = {
 			): Promise<ValidateEmailVerificationResponse> => {
 				const { key } = args;
 				const user: User = req.user;
-				if (user.email && !user.verifiedEmail) {
+				if (user.email) {
 					try {
+						console.log(user.email);
+						console.log(key);
 						const requestedVerification = await Verification.findOne(
 							{
 								payload: user.email,

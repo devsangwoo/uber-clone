@@ -24,7 +24,6 @@ const resolvers: Resolvers = {
 						token: null
 					};
 				}
-				console.log(password, user.password);
 				const checkPassword = await user.comparePassword(password);
 				if (checkPassword === true) {
 					const token = createJWT(user.id);
@@ -61,7 +60,10 @@ const resolvers: Resolvers = {
 						token: null
 					};
 				} else {
-					const newUser = await User.create({ ...args }).save();
+					const newUser = await User.create({
+						...args,
+						verifiedPhoneNumber: true
+					}).save();
 					const token = createJWT(newUser.id);
 					return {
 						res: true,

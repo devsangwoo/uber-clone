@@ -26,7 +26,9 @@ const SideBarMenuPresenter: React.FC<IProps> = () => {
 				open={openStatus}
 				onSetOpen={() => setOpenStatus(!openStatus)}
 				styles={{ sidebar: sidebarStyle }}
-			/>
+			>
+				<React.Fragment />
+			</SideBar>
 			<IconButton
 				onClick={() => setOpenStatus(!openStatus)}
 				style={menuIconStyle}

@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import Routes from "..";
 import { GET_CURRENT_USER } from "../../SharedQueries";
 import {
 	GetCurrentUser,
@@ -10,6 +9,7 @@ import {
 	ReportMovementVariables
 } from "../../types/api";
 import { generateMarker, ICoords } from "../../utils/mapHelpers";
+import Routes from "../routes";
 import HomePresenter from "./HomePresenter";
 import { REPORT_MOVEMENT } from "./HomeQueries";
 
@@ -21,11 +21,25 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 	const [userCoords, setUserCoords] = useState<ICoords>({ lat: 0, lng: 0 });
 
 	const { data: userData } = useQuery<GetCurrentUser>(GET_CURRENT_USER, {
-		fetchPolicy: "network-only",
+		fetchPolicy: "cache-and-network",
 		onCompleted: ({ GetCurrentUser }) => {
 			const { res, user } = GetCurrentUser;
-			if (res && user && user.currentRideId) {
-				history.push(Routes.RIDE + `${user.currentRideId}`);
+			if (res && user) {
+				if (!user.verifiedEmail) {
+					const min = Math.floor(minAfterSignUp(user.createAt));
+					if (min > 60) {
+						history.push(Routes.EMAIL_VERIFY);
+						toast.error("Verify Your Email first");
+					} else {
+						toast.error(
+							`after ${60 -
+								min}minuets, unable to use service without email verification`
+						);
+					}
+				}
+				if (user.currentRideId) {
+					history.push(Routes.RIDE + `${user.currentRideId}`);
+				}
 			}
 		}
 	});
@@ -83,6 +97,16 @@ const HomeContainer: React.FC<IProps> = ({ history }) => {
 			};
 		}
 	}, [map, userMarker, setUserCoords, reportMovementMutation]);
+
+	const minAfterSignUp = (createAt: string): number => {
+		const current = new Date();
+		const createdAt = new Date(parseInt(createAt, 10));
+		const diff = current.getTime() - createdAt.getTime();
+		const secDiff = diff / 1000;
+		const minDiff = secDiff / 60;
+		console.log(`after sign up past ${minDiff} minutes`);
+		return minDiff;
+	};
 
 	return (
 		<HomePresenter

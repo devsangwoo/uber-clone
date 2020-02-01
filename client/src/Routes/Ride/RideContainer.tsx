@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import Routes from "..";
 import { GET_CURRENT_USER, UPDATE_RIDE } from "../../SharedQueries";
 import {
 	GetCurrentUser,
@@ -15,6 +14,7 @@ import {
 } from "../../types/api";
 import { StatusOptions } from "../../types/enums"; // import enum from declaration file cause fater error, kind of bug
 import { forceHistory } from "../../utils/forceHistory";
+import Routes from "../routes";
 import RidePresenter from "./RidePresenter";
 import { GET_RIDE_BY_ID_RIDE } from "./RideQueries";
 
@@ -23,7 +23,7 @@ interface IRouteParams {
 }
 
 interface IProps extends RouteComponentProps<IRouteParams> {}
-const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
+const RideContainer: React.FC<IProps> = ({ history, match }) => {
 	const {
 		params: { rideId }
 	} = match;
@@ -50,7 +50,7 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 					ride.status === StatusOptions.FINISHED
 				) {
 					stopPolling();
-					forceHistory.push(Routes.HOME);
+					forceHistory.push(Routes.NUBER);
 				}
 			}
 		},
@@ -109,7 +109,7 @@ const RideContainer: React.FC<IProps> = ({ history, location, match }) => {
 				return {
 					onClick: () => {
 						onDriverButton(StatusOptions.FINISHED);
-						forceHistory.push(Routes.HOME);
+						forceHistory.push(Routes.NUBER);
 					},
 					value: "FINISHED"
 				};

@@ -34,6 +34,7 @@ const appOptions: Options = {
 	}
 };
 
+console.log(process.env.NODE_ENV);
 createConnection(ConnectionOptions).then(() => {
 	app.start(appOptions, () =>
 		console.log(`listening on http://localhost:${PORT}`)

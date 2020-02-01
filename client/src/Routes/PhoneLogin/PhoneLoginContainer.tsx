@@ -2,9 +2,9 @@ import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
-import Routes from "..";
 import { PhoneVerification, PhoneVerificationVariables } from "../../types/api";
 import { useInput } from "../../utils/hooks";
+import Routes from "../routes";
 import PhoneLoginPresenter from "./PhoneLoginPresenter";
 import { VERIFY_PHONE } from "./PhoneLoginQueries";
 
@@ -21,14 +21,14 @@ const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
 			const { res, error } = PhoneVerificationResult;
 			if (res) {
 				toast.success("SMS has been sent with verification code", {
-					autoClose: 1900
+					autoClose: 1000
 				});
 				setTimeout(() => {
 					history.push({
 						pathname: Routes.VERIFY_PHONE,
 						state: { phoneNumber: phoneNumberWithCode }
 					});
-				}, 2000);
+				}, 1000);
 			} else {
 				toast.error(error);
 				history.push(Routes.PHONE_LOGIN);

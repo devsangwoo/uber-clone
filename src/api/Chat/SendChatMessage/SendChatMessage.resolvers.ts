@@ -1,3 +1,4 @@
+import { SEND_MESSAGE } from "../../../constants";
 import Chat from "../../../entities/Chat";
 import Message from "../../../entities/Message";
 import User from "../../../entities/User";
@@ -7,7 +8,6 @@ import {
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
 import { authResolverProtector } from "../../../utils/resolverProtector";
-import { SEND_MESSAGE } from "../../../constants";
 
 const resolvers: Resolvers = {
 	Mutation: {

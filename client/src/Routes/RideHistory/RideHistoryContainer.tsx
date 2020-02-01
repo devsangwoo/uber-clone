@@ -1,15 +1,15 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import Routes from "..";
 import { GetRideHistory, GetRideHistoryVariables } from "../../types/api";
+import Routes from "../routes";
 import RideHistoryPresenter from "./RideHistoryPresenter";
 import { GET_RIDES_HISTORY } from "./RideHistoryQueries";
 
 interface IProps extends RouteComponentProps {}
 const RideHistoryContainer: React.FC<IProps> = ({ history, location }) => {
 	if (location.state.isDriver === undefined) {
-		history.push(Routes.HOME);
+		history.push(Routes.NUBER);
 	}
 
 	const [paging, setPaging] = useState(1);

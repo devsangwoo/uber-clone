@@ -7,6 +7,7 @@ export const GET_CHAT_BY_ID = gql`
 			error
 			chat {
 				messages {
+					id
 					userId
 					text
 				}
@@ -19,6 +20,7 @@ export const GET_CHAT_BY_ID = gql`
 export const MESSAGE_SUBSCRIPTION = gql`
 	subscription MessageSubscription {
 		MessageSubscription {
+			id
 			text
 			userId
 		}
@@ -31,6 +33,7 @@ export const SEND_MESSAGE = gql`
 			res
 			error
 			message {
+				id
 				text
 				userId
 			}

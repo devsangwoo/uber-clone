@@ -25,25 +25,36 @@ interface IRouteParams {
 interface IProps extends RouteComponentProps<IRouteParams> {}
 
 // refactor with refetch form like places
-const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
+const ChatContainer: React.FC<IProps> = ({ match }) => {
 	const {
 		params: { chatId }
 	} = match;
 
 	const [rideId, setRideId] = useState<number>(-1);
 	const [message, onChangeMessage, setMessage] = useInput("");
+	const [messages, setMessages] = useState<any[]>();
 	const { data: userData } = useQuery<GetCurrentUser>(GET_CURRENT_USER, {
-		fetchPolicy: "network-only"
+		fetchPolicy: "cache-and-network"
 	});
 
-	const { data: chatData, refetch } = useQuery<
-		GetChatById,
-		GetChatByIdVariables
-	>(GET_CHAT_BY_ID, {
+	useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
 		onCompleted: ({ GetChatById }) => {
 			const { res, error, chat } = GetChatById;
-			if (res && chat && chat.rideId) {
+			if (res && chat && chat.rideId && chat.messages && userData) {
 				setRideId(chat.rideId);
+				const messages = chat.messages.map(message => {
+					if (message) {
+						return {
+							...message,
+							mine:
+								userData.GetCurrentUser.user?.id ===
+								message.userId
+						};
+					} else {
+						return null;
+					}
+				});
+				setMessages(messages);
 			} else {
 				toast.error(error);
 			}
@@ -57,22 +68,30 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 		onSubscriptionComplete: () => {
 			console.log("listening new message");
 		},
-		onSubscriptionData: () => refetch()
+		onSubscriptionData: ({ subscriptionData }) => {
+			const { data } = subscriptionData;
+			if (data && messages && userData) {
+				setMessage("");
+				const { MessageSubscription } = data;
+				if (MessageSubscription) {
+					setMessages([
+						...messages,
+						{
+							...MessageSubscription,
+							mine:
+								userData.GetCurrentUser.user!.id ===
+								MessageSubscription.userId
+						}
+					]);
+				}
+			}
+		}
 	});
 
 	const [sendMessageMutation] = useMutation<
 		SendMessage,
 		SendMessageVariables
 	>(SEND_MESSAGE, {
-		onCompleted: ({ SendChatMessage }) => {
-			const { res, error } = SendChatMessage;
-			if (res) {
-				setMessage("");
-				refetch();
-			} else {
-				toast.error(error);
-			}
-		},
 		variables: {
 			chatId: parseInt(chatId, 10),
 			text: message
@@ -81,8 +100,7 @@ const ChatContainer: React.FC<IProps> = ({ history, location, match }) => {
 
 	return (
 		<ChatPresenter
-			chatData={chatData}
-			currentUser={userData}
+			messages={messages}
 			message={message}
 			onChangeMessage={onChangeMessage}
 			sendMessageMutation={sendMessageMutation}

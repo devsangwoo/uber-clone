@@ -2,7 +2,7 @@ import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
-import Routes from "../../Routes";
+import Routes from "../../Routes/routes";
 import { UPDATE_RIDE } from "../../SharedQueries";
 import {
 	GetNearbyDrivers,
