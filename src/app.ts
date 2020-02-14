@@ -31,7 +31,7 @@ class App {
 		const url =
 			process.env.NODE_ENV === "development"
 				? "http://localhost:3000"
-				: "https://project-ninstagram.herokuapp.com";
+				: "https://project-nuber.herokuapp.com";
 
 		this.app.get("/api/auth/facebook", passport.authenticate("facebook"));
 
