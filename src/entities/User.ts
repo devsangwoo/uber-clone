@@ -23,9 +23,9 @@ const BCRYPT_ROUNDS = 10;
 class User extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number;
 
-	@Column({ type: "text", unique: true })
+	@Column({ type: "text", unique: true, nullable: true })
 	@IsEmail()
-	email: string | null;
+	email: string;
 
 	@Column({ type: "boolean", default: false })
 	verifiedEmail: boolean;
@@ -33,11 +33,14 @@ class User extends BaseEntity {
 	@Column({ type: "text" })
 	firstName: string;
 
-	@Column({ type: "text" })
+	@Column({ type: "text", nullable: true })
 	lastName: string;
 
 	@Column({ type: "text", nullable: true })
 	fbId: string;
+
+	@Column({ type: "text", nullable: true })
+	googleId: string;
 
 	@Column({ type: "int", nullable: true })
 	age: number;

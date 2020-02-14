@@ -44,7 +44,6 @@ type Mutation {
   EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!): EmailSignUpResponse!
   EmailVerification: EmailVerificationResponse!
   ValidateEmailVerification(key: String!): ValidateEmailVerificationResponse!
-  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
   PhoneVerification(phoneNumber: String!): PhoneVerificationResponse!
   ValidatePhoneVerification(phoneNumber: String!, key: String!): ValidatePhoneVerificationResponse!
   ReportMovement(lastLng: Float, lastLat: Float, lastOrientation: Float): ReportMovementResponse!
@@ -215,12 +214,6 @@ type ValidateEmailVerificationResponse {
   error: String
 }
 
-type FacebookConnectResponse {
-  res: Boolean!
-  error: String
-  token: String
-}
-
 type GetNearbyDriversResponse {
   res: Boolean!
   error: String
@@ -260,8 +253,9 @@ type User {
   email: String
   verifiedEmail: Boolean!
   firstName: String!
-  lastName: String!
+  lastName: String
   fbId: String
+  googleId: String
   age: Int
   password: String
   phoneNumber: String

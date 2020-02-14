@@ -26,3 +26,19 @@ export const BackArrowExtended = styled(BackArrow)`
 	top: 20px;
 	left: 20px;
 `;
+
+interface IButton {
+	color: string;
+}
+
+export const Button = styled.button<IButton>`
+	display: block;
+	height: 30px;
+	width: 200px;
+	color: white;
+	background-color: ${props => props.color};
+	margin: 10px auto 0 auto;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+`;

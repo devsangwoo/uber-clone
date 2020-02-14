@@ -1,0 +1,33 @@
+type User {
+	id: Int!
+	email: String
+	verifiedEmail: Boolean!
+	firstName: String!
+	lastName: String!
+	fbId: String
+	age: Int
+	password: String
+	phoneNumber: String
+	verifiedPhoneNumber: Boolean!
+	profilePhoto: String
+	fullName: String
+	isDriving: Boolean!
+	isTaken: Boolean!
+	lastLng: Float
+	lastLat: Float
+	lastOrientation: Float
+	chatAsDriver: [Chat]
+	chatAsPassenger: [Chat]
+	messages: [Message]
+	rideAsDriver: [Ride]
+	rideAsPassenger: [Ride]
+	places: [Place]
+	currentRide: Ride
+	currentRideId: Int
+	createAt: String!
+	updateAt: String
+}
+
+type Query {
+	users: [User]
+}

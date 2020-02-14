@@ -76,6 +76,7 @@ const LoggedOutRoutes: React.FC = () => (
 		<Route path={Routes.PHONE_LOGIN} component={PhoneLogin} />
 		<Route path={Routes.VERIFY_PHONE} component={VerifyPhone} />
 		<Route path={Routes.SIGN_UP} component={SignUp} />
+		<Route path={Routes.AUTH} component={SocialLogin} />
 		<Route path={Routes.SOCIAL_LOGIN} component={SocialLogin} />
 		<Redirect path={"*"} to={Routes.HOME} />
 	</Switch>

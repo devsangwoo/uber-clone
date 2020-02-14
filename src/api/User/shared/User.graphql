@@ -3,8 +3,9 @@ type User {
 	email: String
 	verifiedEmail: Boolean!
 	firstName: String!
-	lastName: String!
+	lastName: String
 	fbId: String
+	googleId: String
 	age: Int
 	password: String
 	phoneNumber: String

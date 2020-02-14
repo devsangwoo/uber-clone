@@ -63,9 +63,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 			toast.error(`Unexpected error: ${message}`)
 		);
 	}
-	if (networkError) {
-		toast.error(`Network error: ${networkError}`);
-	}
 });
 
 // should fix localStorage => localStorage

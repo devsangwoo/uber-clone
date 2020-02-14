@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PORT = process.env.PORT || 4000;
+exports.PLAYGROUND = "/playground";
+exports.GRAPHQL_ENDPOINT = "/graphql";
+exports.SUBSCRIPTION_ENDPOINT = "/subscription";
+exports.PHONE = "PHONE";
+exports.EMAIL = "EMAIL";
+exports.ACCEPTED = "ACCEPTED";
+exports.FINISHED = "FINISHED";
+exports.CANCELED = "CANCELED";
+exports.REQUESTED = "REQUESTED";
+exports.ONROUTE = "ONROUTE";
+exports.X_JWT = "X-JWT";
+exports.RANGE_0_5 = 0.5;
+exports.DRIVER_UPDATE = "DRIVER_UPDATE";
+exports.RIDE_REQUEST = "RIDE_REQUEST";
+exports.UPDATE_RIDE_STATUS = "UPDATE_RIDE_STATUS";
+exports.SEND_MESSAGE = "SEND_MESSAGE";
+//# sourceMappingURL=constants.js.map

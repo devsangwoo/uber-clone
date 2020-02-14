@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.js": "/static/js/main.89476d1e.chunk.js",
+    "main.js.map": "/static/js/main.89476d1e.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.36daf670.js",
+    "runtime-main.js.map": "/static/js/runtime-main.36daf670.js.map",
+    "static/css/2.c829125e.chunk.css": "/static/css/2.c829125e.chunk.css",
+    "static/js/2.2c5cbe82.chunk.js": "/static/js/2.2c5cbe82.chunk.js",
+    "static/js/2.2c5cbe82.chunk.js.map": "/static/js/2.2c5cbe82.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.79905d211105d68e55bb98261598e028.js": "/precache-manifest.79905d211105d68e55bb98261598e028.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.c829125e.chunk.css.map": "/static/css/2.c829125e.chunk.css.map",
+    "static/js/2.2c5cbe82.chunk.js.LICENSE": "/static/js/2.2c5cbe82.chunk.js.LICENSE",
+    "static/media/add.ce98de71.svg": "/static/media/add.ce98de71.svg",
+    "static/media/addEmpty.e39814da.svg": "/static/media/addEmpty.e39814da.svg",
+    "static/media/backArrow.0c50775d.svg": "/static/media/backArrow.0c50775d.svg",
+    "static/media/bg.png": "/static/media/bg.f1662d11.png",
+    "static/media/chat.47e28e6e.svg": "/static/media/chat.47e28e6e.svg",
+    "static/media/facebook.616417cd.svg": "/static/media/facebook.616417cd.svg",
+    "static/media/loading.5d1bbb33.svg": "/static/media/loading.5d1bbb33.svg",
+    "static/media/menu.00b27c6b.svg": "/static/media/menu.00b27c6b.svg",
+    "static/media/nextArrow.d966831b.svg": "/static/media/nextArrow.d966831b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.36daf670.js",
+    "static/css/2.c829125e.chunk.css",
+    "static/js/2.2c5cbe82.chunk.js",
+    "static/js/main.89476d1e.chunk.js"
+  ]
+}

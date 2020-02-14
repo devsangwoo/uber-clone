@@ -1,0 +1,8 @@
+type DeletePlaceResponse {
+	res: Boolean!
+	error: String
+}
+
+type Mutation {
+	DeletePlace(id: Int!): DeletePlaceResponse
+}

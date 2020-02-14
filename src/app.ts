@@ -7,6 +7,7 @@ import path from "path";
 import { X_JWT } from "./constants";
 import schema from "./schema";
 import { verifyJWT } from "./utils/JWT";
+import passport from "./utils/passport";
 
 class App {
 	public app: GraphQLServer;
@@ -27,6 +28,35 @@ class App {
 			}
 		});
 		this.middlewares();
+		const url =
+			process.env.NODE_ENV === "development"
+				? "http://localhost:3000"
+				: "https://project-ninstagram.herokuapp.com";
+
+		this.app.get("/api/auth/facebook", passport.authenticate("facebook"));
+
+		this.app.get(
+			"/api/auth/facebook/callback",
+			passport.authenticate("facebook", {
+				session: false
+			}),
+			(req, res) => {
+				res.redirect(`${url}/auth/${req.authInfo}`);
+			}
+		);
+
+		this.app.get("/api/auth/google", passport.authenticate("google"));
+
+		this.app.get(
+			"/api/auth/google/callback",
+			passport.authenticate("google", {
+				session: false,
+				failureRedirect: "/api/auth/google"
+			}),
+			(req, res) => {
+				res.redirect(`${url}/auth/${req.authInfo}`);
+			}
+		);
 		this.app.get("*", (req, res) => {
 			res.sendFile(path.join(__dirname + "/client/build/index.html"));
 		});
