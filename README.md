@@ -12,6 +12,8 @@ Create uber like server with `express`, `graphql`, and `react` written in `types
 - Get direction, and render on map with `Google Map` Api
 - Email and Phone verification
 
+---
+
 ## What I Used
 
 ### backend
@@ -21,13 +23,14 @@ Create uber like server with `express`, `graphql`, and `react` written in `types
 - [passport](http://www.passportjs.org/) for social-login
 - [twilio](https://www.twilio.com/) for sms
 - [nodemailer](https://nodemailer.com/about/) for email
----
 ### frontend
 - [react](https://ko.reactjs.org/) for client
 - [apollo](https://www.apollographql.com/docs/react/api/react-hooks/) for client management
 - [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start) for routes
 - [googlemaps](https://developers.google.com/maps/documentation/javascript/tutorial) for map api
 - [styled-components](https://styled-components.com/) for style 
+
+---
 
 ## What I Learned
 
